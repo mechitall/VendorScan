@@ -6,6 +6,10 @@
       "oauth": {
         "callbackPort": 6274
       }
+    },
+    "norma": {
+      "type": "http",
+      "url": "https://api.qualityclouds.ai/mcp"
     }
   }
 }

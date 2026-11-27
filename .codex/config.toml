@@ -1,0 +1,10 @@
+# Project-scoped Codex config. Codex loads it once this folder is trusted.
+# First run: `codex mcp login idealo` and `codex mcp login norma` for OAuth.
+
+# Commerce data for the app (read-only).
+[mcp_servers.idealo]
+url = "https://mcp.idealo.com/mcp"
+
+# Norma checks code as agents write it (hackathon Norma track).
+[mcp_servers.norma]
+url = "https://api.qualityclouds.ai/mcp"
