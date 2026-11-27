@@ -33,7 +33,7 @@
 #vendorscan-panel .vs-meta { display: flex; gap: 8px; align-items: center; color: var(--vs-muted); font-size: 12px; margin-top: 2px; }
 #vendorscan-panel .vs-badge { background: var(--vs-orange-soft); color: var(--vs-orange); border-radius: 99px; padding: 0 8px; font-weight: 600; }
 #vendorscan-panel .vs-note { margin-top: 6px; font-size: 12px; color: var(--vs-warn); background: var(--vs-warn-soft); border-radius: 8px; padding: 6px 8px; }
-#vendorscan-panel .vs-seg { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--vs-white);
+#vendorscan-panel .vs-seg { display: grid; grid-template-columns: repeat(2, 1fr); background: var(--vs-white);
   border: 1px solid var(--vs-line); border-radius: 10px; padding: 3px; gap: 3px; }
 #vendorscan-panel .vs-seg button { border: 0; background: transparent; border-radius: 8px; padding: 6px 4px; font-size: 12px; color: var(--vs-muted); font-weight: 600; }
 #vendorscan-panel .vs-seg button.vs-seg-on { background: var(--vs-navy); color: #fff; }

@@ -3,9 +3,9 @@
 (() => {
   if (document.getElementById("vendorscan-panel")) return;
 
+  // Small businesses under § 19 UStG can't reclaim VAT either, so they see the same as private buyers.
   const BUYERS = [
     ["private", "Private"],
-    ["small_business", "Small business"],
     ["business_vat", "Business (VAT)"],
   ];
   const VERDICT = {
