@@ -6,7 +6,7 @@ evidence, and lets a model on Nebius Token Factory choose the next step. It neve
 
 ## See it in action
 
-![VendorScan demo](docs/demo/02-business-vs-private.gif)
+![VendorScan demo](docs/demo/vendorscan-demo.gif)
 
 | Results stream in while it checks every seller | A VAT-registered business gets a different winner |
 |---|---|
