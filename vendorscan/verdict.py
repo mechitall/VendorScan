@@ -36,16 +36,20 @@ def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
         premium = price_premium(cost.total_gross, listed_lowest)
 
     if premium is not None and premium >= SCARCITY_PREMIUM:
-        reasons.append(f"Best available offer is {premium:.0%} above idealo's lowest listed "
-                       f"price (€{listed_lowest}); that cheaper offer is not available here.")
+        # idealo's "from" price is normally a live offer on the same page, just from a shop
+        # the idealo MCP does not share (Amazon, eBay, Otto). So the advice is: skip this one.
+        reasons.append(f"Don't buy at €{cost.total_gross}: idealo lists this product from "
+                       f"€{listed_lowest}, {premium:.0%} less.")
+        reasons.append("That cheaper listing comes from a shop the idealo data feed doesn't share "
+                       "(Amazon, eBay or Otto). Check it in idealo's offer list on this page.")
         if offer.seller.is_marketplace:
-            reasons.append(f"Only a marketplace seller ({offer.seller.name}) is left.")
-        if restock_signal:
-            reasons.append("Web sources point to a restock or pre-order at the normal price.")
+            reasons.append(f"The offer we can see is from a marketplace reseller ({offer.seller.name}).")
         if buyer is BuyerType.BUSINESS_VAT and offer.tax_status is TaxStatus.UNKNOWN:
-            reasons.append("If you buy anyway: the seller's VAT treatment is unknown, so it costs your "
+            reasons.append("If you buy it anyway: the seller's VAT treatment is unknown, so it costs your "
                            f"business €{cost.effective_cost_low}–€{cost.effective_cost_high} after VAT.")
-        return Verdict(recommendation=Recommendation.WAIT, best_offer_id=offer.offer_id,
+        if restock_signal:
+            reasons.append("Web sources also point to a restock or pre-order at the normal price.")
+        return Verdict(recommendation=Recommendation.AVOID, best_offer_id=offer.offer_id,
                        premium=premium, reasons=reasons)
 
     if budget is not None and cost.effective_cost_low > budget:

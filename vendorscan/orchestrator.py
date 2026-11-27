@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import re
 from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
@@ -133,9 +134,15 @@ async def _none():
     return None
 
 
+def product_id_from_url(url: str | None) -> str | None:
+    """idealo product id from a product URL: ".../OffersOfProduct/214218295_-astra-2..." -> "214218295"."""
+    match = re.search(r"OffersOfProduct/(\d+)", url or "")
+    return match.group(1) if match else None
+
+
 async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
                with_restock: bool = True, with_vendors: bool = True,
-               save: Path | None = None) -> ScanResult:
+               save: Path | None = None, product_id: str | None = None) -> ScanResult:
     from idealo_client import connect
 
     load_env()
@@ -143,9 +150,16 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
         found = (await idealo.search(query)).get("results", [])
         if not found:
             raise LookupError(f"idealo found no product for {query!r}")
-        if not 0 <= variant < len(found):
+        if product_id:
+            # The extension knows the exact product from the idealo page URL.
+            matches = [p for p in found if product_id_from_url(p.get("url")) == product_id]
+            if not matches:
+                raise LookupError(f"idealo search for {query!r} did not return product {product_id}")
+            product = matches[0]
+        elif not 0 <= variant < len(found):
             raise ValueError(f"variant must be between 0 and {len(found) - 1}")
-        product = found[variant]
+        else:
+            product = found[variant]
         offers = (await idealo.offers(product))["offers"]
 
     # Restock research and seller VAT research are independent: run them together.

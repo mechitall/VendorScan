@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "VendorScan for idealo",
+  "version": "0.1.0",
+  "description": "Know the deal before you buy: real cost per buyer type, seller VAT checks and wait-or-buy advice on idealo product pages.",
+  "host_permissions": ["http://127.0.0.1:8765/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://www.idealo.de/preisvergleich/OffersOfProduct/*"],
+      "js": ["content.js"],
+      "css": ["panel.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

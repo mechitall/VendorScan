@@ -48,9 +48,9 @@ class VerdictTests(unittest.TestCase):
     def test_no_offers_means_wait(self):
         self.assertEqual(decide([], BuyerType.PRIVATE).recommendation, Recommendation.WAIT)
 
-    def test_scarcity_premium_means_wait(self):
+    def test_premium_over_listed_price_means_avoid_this_offer(self):
         verdict = self.decide_for(raw_offer("1.300,00 €", marketplace=True), listed_lowest=D("900"))
-        self.assertEqual(verdict.recommendation, Recommendation.WAIT)
+        self.assertEqual(verdict.recommendation, Recommendation.AVOID)
         self.assertEqual(verdict.premium, D("0.4444"))
 
     def test_normal_price_from_rated_shop_means_buy_for_private(self):
@@ -78,10 +78,10 @@ class HistoryTests(unittest.TestCase):
 class LiveSnapshotTests(unittest.TestCase):
     """Replays the real RedMagic Astra 2 capture from 27 Nov 2026."""
 
-    def test_every_buyer_is_told_to_wait(self):
+    def test_every_buyer_is_told_to_skip_the_reseller(self):
         result = replay(SNAPSHOT)
         for buyer in BuyerType:
-            self.assertEqual(result.verdicts[buyer].recommendation, Recommendation.WAIT, buyer)
+            self.assertEqual(result.verdicts[buyer].recommendation, Recommendation.AVOID, buyer)
 
     def test_business_sees_vat_range(self):
         cost = replay(SNAPSHOT).by_buyer[BuyerType.BUSINESS_VAT][0].cost
