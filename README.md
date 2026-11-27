@@ -6,8 +6,7 @@ evidence, and lets a model on Nebius Token Factory choose the next step. It neve
 
 ## See it in action
 
-▶️ **[Demo video (53 s)](docs/demo/vendorscan-demo.mp4)**: four real idealo product pages, recorded with the
-extension's own panel code fed by live scans from our server.
+![VendorScan demo](docs/demo/02-business-vs-private.gif)
 
 | Results stream in while it checks every seller | A VAT-registered business gets a different winner |
 |---|---|
