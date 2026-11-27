@@ -1,0 +1,80 @@
+VendorScan: Nebius Token Factory call log, 27 November 2026
+Excerpt from the local API server log (python -m vendorscan.api). The lines are unchanged;
+only Nebius decision calls and the API requests around them are kept. Includes test runs.
+
+"nebius call ..." = one live Token Factory chat completion that chooses the next step
+(vendorscan/next_action.py).
+  model       model id on Token Factory
+  buyer       buyer type the decision is for
+  asked       action the model chose
+  status      "model" = accepted by the safety rules; "rejected" = blocked
+  latency_ms  duration of the call
+
+Not in this log: the calls that read web sources (seller VAT, reputation, restock).
+Lines have no timestamps and the Nebius lines do not name the product.
+
+INFO:     127.0.0.1:60254 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=PREPARE_PURCHASE status=model latency_ms=1267
+INFO:     127.0.0.1:60254 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=2050
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=2199
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=2048
+INFO:     127.0.0.1:60254 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60254 - "GET /api/demo/redmagic HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=1749
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1864
+INFO:     127.0.0.1:60254 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60254 - "GET /api/demo/iphone HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1251
+INFO:     127.0.0.1:60254 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54042 - "POST /api/scan/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54052 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=PREPARE_PURCHASE status=model latency_ms=1364
+INFO:     127.0.0.1:54052 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=1881
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=1818
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1643
+INFO:     127.0.0.1:54052 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59486 - "POST /api/scan/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38070 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=INVESTIGATE status=model latency_ms=1991
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=INVESTIGATE status=model latency_ms=1757
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=REQUEST_CLARIFICATION status=model latency_ms=1916
+INFO:     127.0.0.1:38070 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=2057
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1693
+INFO:     127.0.0.1:38070 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39594 - "POST /api/scan/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39606 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=REQUEST_CLARIFICATION status=model latency_ms=1683
+INFO:     127.0.0.1:39606 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=1795
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1859
+INFO:     127.0.0.1:39606 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33752 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=PREPARE_PURCHASE status=model latency_ms=1622
+INFO:     127.0.0.1:33752 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=1826
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=2566
+INFO:     127.0.0.1:33752 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33712 - "POST /api/scan/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53900 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=INVESTIGATE status=model latency_ms=1608
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=INVESTIGATE status=model latency_ms=2181
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=REQUEST_CLARIFICATION status=model latency_ms=2649
+INFO:     127.0.0.1:53900 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1560
+INFO:     127.0.0.1:53900 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51588 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=PREPARE_PURCHASE status=model latency_ms=1227
+INFO:     127.0.0.1:51588 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=INVESTIGATE status=model latency_ms=2083
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1808
+INFO:     127.0.0.1:51588 - "POST /api/decide HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43364 - "POST /api/scan/stream HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=INVESTIGATE status=model latency_ms=1796
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=INVESTIGATE status=model latency_ms=2069
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=private asked=REQUEST_CLARIFICATION status=model latency_ms=1863
+INFO:     127.0.0.1:43364 - "POST /api/decide HTTP/1.1" 200 OK
+nebius call model=Qwen/Qwen3-30B-A3B-Instruct-2507 buyer=business_vat asked=REQUEST_CLARIFICATION status=model latency_ms=1850
+INFO:     127.0.0.1:43364 - "POST /api/decide HTTP/1.1" 200 OK

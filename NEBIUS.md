@@ -9,6 +9,7 @@ PREPARE_PURCHASE or WAIT. INVESTIGATE lets the model write a search query; the s
 through Tavily and the model is asked again (at most two rounds). **Evidence:** calls read
 Tavily sources about seller VAT, reputation, restocks and missing cheaper offers, and must
 quote them word for word (`vendor_vat.py`, `gaps.py`, `restock.py`).
+The decision calls are logged in [docs/nebius/serverlog.txt](docs/nebius/serverlog.txt).
 
 ## What limits the model
 
@@ -36,10 +37,12 @@ Price history informs the model; no rule changes a verdict because of it.
 
 ## Showing the calls
 
-- Panel: **Next step → Model calls** lists every call with action, status, latency, search
-  query, model id and provider.
-- Server terminal: one `nebius call model=... asked=... status=... latency_ms=...` line per call.
-  This covers the decision calls, not the evidence calls.
+- **Log from live runs:** [docs/nebius/serverlog.txt](docs/nebius/serverlog.txt), one line per
+  decision call with model id, buyer type, chosen action, status and latency.
+- Server terminal: the same `nebius call model=... asked=... status=... latency_ms=...` line
+  appears for each new decision call. The evidence calls are not logged.
+- The panel shows the result as **Advice** (action, reason and a question for the seller).
+  It does not show model ids or the call trace; `POST /api/decide` returns the full trace.
 
 ## Observed on 27 November 2026 (live calls)
 
