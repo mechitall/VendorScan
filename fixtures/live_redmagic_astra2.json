@@ -76,27 +76,32 @@
  ],
  "restock": {
   "product_name": "Redmagic Astra 2 Gaming 512GB silber",
-  "normal_price": null,
-  "lowest_current_price": null,
-  "premium": null,
+  "normal_price": "899.00",
+  "lowest_current_price": "1307.98",
+  "premium": "0.4549",
   "restock_signal": false,
-  "successor_signal": true,
-  "summary": "The sources do not provide specific information about the restock status of the Redmagic Astra 2 Gaming 512GB silber model in the EU. They mention the product's specifications, availability in Korea, and general store information but do not detail any EU-specific restock events or current stock status.",
+  "successor_signal": false,
+  "official_price": "699.00",
+  "official_currency": "EUR",
+  "official_store_url": "https://eu.redmagic.gg/products/redmagic-astra-2-gaming-tablet",
+  "summary": "The Redmagic Astra 2 Gaming 512GB silber is currently priced at €699.00 on the official European store, which is significantly lower than the €1307.98 offered elsewhere. There is no indication that a successor has been announced. The product is available for pre-order with no mention of restock availability.",
+  "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507",
   "evidence": [
    {
-    "field": "successor",
-    "status": "ambiguous",
-    "url": "https://9to5google.com/2026/06/30/redmagic-astra-2-gaming-tablet-china-launch-specs-details",
-    "quote": "Redmagic Astra 2 gaming tablet launches globally on July 17 Rounding things out, Redmagic OS 11.5 runs the show, based on Android 16. There’s no word on software support timelines, but there’s a bunch of AI – woo!\n\nIn China, Redmagic Gaming Tablet 5 Pro starts at 5,299 RMB with 12/256GB, 16/512GB, a",
-    "retrieved_at": "2026-11-27T15:20:19.930634Z"
+    "field": "official_price",
+    "status": "confirmed",
+    "url": "https://eu.redmagic.gg/products/redmagic-astra-2-gaming-tablet",
+    "quote": "Regular price €699.00",
+    "retrieved_at": "2026-11-27T15:26:54.615771Z"
    },
    {
-    "field": "successor",
-    "status": "ambiguous",
-    "url": "https://finance.yahoo.com/news/redmagic-astra-gaming-tablet-arrives-120000013.html",
-    "quote": "a with Snapdragon 8 Elite and 165Hz OLED - 12GB+256GB: ₩799,000\n- 16GB+512GB: ₩999,000\n- Golden Saga model: ₩1,399,000\n\nLaunch Promotion (Jan 6–13, 2026, official store)\n\n- ₩50,000 off all models: ₩749,000 / ₩949,000 / ₩1,349,000\n- Free 80W charger (approx. ₩50,000 value) [...] With USB-C (USB 3.2 G",
-    "retrieved_at": "2026-11-27T15:20:19.930634Z"
+    "field": "official_price",
+    "status": "confirmed",
+    "url": "https://www.youtube.com/watch?v=JrREg85yaJk",
+    "quote": "it's $749 for the 12 GB version with 256 GB of storage",
+    "retrieved_at": "2026-11-27T15:26:54.615771Z"
    }
   ]
- }
+ },
+ "restock_captured_at": "2026-11-27T15:26:54+00:00"
 }
