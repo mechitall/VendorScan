@@ -154,3 +154,15 @@ class TokenRefreshTests(unittest.TestCase):
         payload = base64.urlsafe_b64encode(json.dumps({"exp": 1234}).encode()).decode().rstrip("=")
         self.assertEqual(_expires_at(f"h.{payload}.s"), 1234.0)
         self.assertIsNone(_expires_at("not-a-jwt"))
+
+
+class LiveIphoneSnapshotTests(unittest.TestCase):
+    """iPhone 17 Pro Max 1TB, 27 Nov: margin-scheme sellers are cheapest upfront."""
+
+    def test_private_and_business_get_different_winners(self):
+        result = replay(Path(__file__).parent.parent / "fixtures" / "live_iphone17_pro_max_1tb.json")
+        private = result.by_buyer[BuyerType.PRIVATE][0].offer
+        business = result.by_buyer[BuyerType.BUSINESS_VAT][0].offer
+        self.assertEqual(private.tax_status, TaxStatus.MARGIN_SCHEME)
+        self.assertEqual(business.tax_status, TaxStatus.STANDARD_VAT)
+        self.assertNotEqual(private.seller.name, business.seller.name)

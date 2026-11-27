@@ -63,12 +63,13 @@
   // Offer titles on idealo's page carry condition and VAT hints ("Neu - differenzbesteuert").
   // Each offer link has the same offer key the idealo MCP uses, so they match exactly.
   function offerTitles() {
+    // Each offer has ~20 links with the same offer key (price, "Zum Shop", shop name, title).
+    // Use the title link (.productOffers-listItemTitle); never fall back to button or price text.
     const titles = {};
-    for (const link of document.querySelectorAll('a[href*="offerKey="]')) {
+    for (const link of document.querySelectorAll('a.productOffers-listItemTitle[href*="offerKey="], .productOffers-listItemTitle a[href*="offerKey="]')) {
       const key = (link.getAttribute("href").match(/offerKey=([0-9a-f]{32})/) || [])[1];
       if (!key || titles[key]) continue;
-      const row = link.closest(".productOffers-listItemTitle, li, tr") || link;
-      const text = (row.innerText || "").replace(/\s+/g, " ").trim().slice(0, 200);
+      const text = (link.innerText || "").replace(/\s+/g, " ").trim().slice(0, 200);
       if (text) titles[key] = text;
       if (Object.keys(titles).length >= 80) break;
     }
@@ -104,7 +105,9 @@
       " · ",
       el("button", { class: "vs-link", onclick: () => load("/api/demo/macbook", "Loading demo…") }, "MacBook Air M4"),
       " · ",
-      el("button", { class: "vs-link", onclick: () => load("/api/demo/galaxy", "Loading demo…") }, "Galaxy S26 Ultra"));
+      el("button", { class: "vs-link", onclick: () => load("/api/demo/galaxy", "Loading demo…") }, "Galaxy S26 Ultra"),
+      " · ",
+      el("button", { class: "vs-link", onclick: () => load("/api/demo/iphone", "Loading demo…") }, "iPhone 17 Pro Max 1TB"));
   }
 
   function render() {

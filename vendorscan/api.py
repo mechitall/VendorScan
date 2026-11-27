@@ -20,7 +20,7 @@ from .orchestrator import ScanResult, replay, scan
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
 DEMOS = {"redmagic": "live_redmagic_astra2.json", "macbook": "live_macbook_air_m4.json",
-         "galaxy": "live_galaxy_s26_ultra.json"}
+         "galaxy": "live_galaxy_s26_ultra.json", "iphone": "live_iphone17_pro_max_1tb.json"}
 CACHE_SECONDS = 600
 
 app = FastAPI(title="VendorScan local API", docs_url=None, redoc_url=None)

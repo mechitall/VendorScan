@@ -36,7 +36,9 @@ from .vendor_vat import VendorVat
 
 STANDARD_RATE = Decimal("0.19")
 
-_MARGIN = re.compile(r"differenz\s*-?\s*besteuer|§\s*25\s*a|margin\s*scheme", re.I)
+# idealo cuts long titles, e.g. "... | NEU | originalverpackt (OVP) | differenz", so a trailing
+# "differenz" counts too.
+_MARGIN = re.compile(r"differenz\s*-?\s*besteuer|differenz\s*$|§\s*25\s*a|margin\s*scheme", re.I)
 _USED = re.compile(r"gebraucht|refurbished|generalüberholt|b-ware|wie neu|second hand|used\b|"
                    r"aufbereitet|renewed|zustand:\s*(sehr )?gut", re.I)
 _VAT_19 = re.compile(r"(inkl\.?|inklusive|incl\.?)\s*(der\s*)?(gesetzl\.?\s*)?19\s*%\s*(mwst|ust|mehrwertsteuer)", re.I)

@@ -27,6 +27,10 @@ class VatRuleTests(unittest.TestCase):
         self.check(offer("Galaxy S26 256GB Neu - dif\xadfe\xadrenz\xadbe\xadsteu\xadert"),
                    vendor(TaxStatus.STANDARD_VAT), TaxStatus.MARGIN_SCHEME, "confirmed")
 
+    def test_1_cut_off_title_ending_in_differenz(self):
+        self.check(offer("iPhone 17 Pro Max 1TB | NEU | ori\xadgi\xadnal\xadver\xadpackt (OVP) | dif\xadfe\xadrenz"),
+                   None, TaxStatus.MARGIN_SCHEME, "confirmed")
+
     def test_1b_title_with_19_percent_vat(self):
         d = self.check(offer("S26 Ultra 256GB Black inkl. 19% MwSt."), None, TaxStatus.STANDARD_VAT, "confirmed")
         self.assertEqual(d.vat_rate, Decimal("0.19"))
