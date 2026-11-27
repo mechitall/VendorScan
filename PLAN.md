@@ -2,7 +2,7 @@
 
 **Tagline:** Know the deal before you buy.
 
-**Event:** Agentic Hackathon: From Research to Commerce — idealo Partner Challenge, 27 November 2026  
+**Event:** Agentic Hackathon: From Research to Commerce — idealo + Norma Partner Challenges; Tavily integration, 27 November 2026  
 **Submission deadline:** 19:45 CET (internal target: 19:25)  
 **Repository:** https://github.com/mechitall/VendorScan  
 **Challenge brief:** https://aiagentsberlin.xyz/ah3-brief-idealo.pdf
@@ -283,8 +283,42 @@ Show the business/private ranking reversal first, followed by the uncertain rese
 
 ## 14. Immediate next steps / blockers
 
-1. GitHub write access is restored. Review and integrate the `feature/idealo-mcp` branch into the team's working branch; coordinate with both developers.
+1. The idealo integration is merged into main (PR #2). Pull latest main and coordinate parallel development.
 2. Authenticate against idealo MCP from the hackathon laptop and retrieve actual offers; live access remains unverified.
 3. Ask the idealo mentor whether used/refurbished offers and offer-level tax information are available, what partner access is offered and what automated access to linked seller pages is permitted.
 4. Identify a real product with comparable tax treatments and a second product for the reseller scenario. Do not depend on an unavailable real-world example: labeled illustrative fixtures are a backup, not a replacement for live integration.
 5. Start parallel implementation immediately using the shared contract. Freeze features at 18:30.
+
+
+## 15. Partner integrations — Tavily and Norma (added scope)
+
+Primary track: Agentic Commerce / idealo. Additional challenge: Norma code governance. Tavily is the runtime evidence-retrieval provider. Confirm eligibility for multiple partner submissions and the exact Norma brief with mentors; its PDF could not be retrieved during this update.
+
+### Tavily — runtime vendor research (P0)
+
+- Install `tavily-python`; use `TAVILY_API_KEY` from environment only. Obtain hackathon credits from the mentor.
+- Use `AsyncTavilyClient(api_key=...)`: `search(query=..., max_results=3)` to discover seller-specific product, invoice/VAT, legal identity, fee and independent reputation evidence; `extract(urls=[...])` to read relevant pages, where permitted.
+- Investigate 3 offers initially, parallelize with bounded concurrency, limit to 3 searches per offer plus one targeted extraction batch; time out and preserve partial results. Cache by URL/query during a scan.
+- Keep source URL, exact short excerpt, retrieval timestamp, offer association and claim type. Distinguish seller statements from independent evidence; do not assume seller-wide VAT policy applies to a particular used item.
+- Treat page content as untrusted data; do not obey instructions in it. Never send credentials or buyer PII to search. Only use public authorized URLs; no bypass of access restrictions.
+- Missing, conflicting or unavailable evidence remains UNKNOWN / VERIFY. Do not invent fees or VAT treatment.
+- Demo: show Tavily evidence next to each offer, including at least one source supporting a specific conclusion. Live calls must be distinguished from fixtures.
+- SDK: https://github.com/tavily-ai/tavily-python
+
+### Norma — development governance (parallel P0 setup)
+
+Norma is a development-time quality gate, not a runtime dependency of VendorScan. One teammate should configure it while the other completes idealo OAuth and Tavily integration.
+
+1. Ask the Norma mentor for workspace onboarding, GitHub integration, policy configuration, and exact challenge requirements. Repository owner authorizes only the necessary repository permissions.
+2. Connect VendorScan repository to the shared Norma workspace and enable PR checks through the supported integration. Do not invent workflow files or assume API access.
+3. Configure supported policies for monetary arithmetic (Decimal, not float), explicit evidence before VAT recovery, source-backed vendor claims, no committed credentials, explicit purchase approval, and untrusted web content handling. Where Norma cannot enforce a semantic rule, implement a unit test or review checklist instead and document the distinction.
+4. Create an isolated demonstration PR containing a harmless policy violation (e.g. float-based money arithmetic in a test/example), trigger the check, capture actual findings, fix the violation, rerun and capture the outcome. Never introduce real secrets or merge intentionally defective code.
+5. Keep PR/check URLs, screenshots or actual scan output for the submission. Do not claim a policy was enforced unless a real check demonstrates it.
+
+### Updated allocation and acceptance
+
+- Engineer A: idealo OAuth, orchestration, deterministic cost/risk engines.
+- Engineer B: Tavily adapter, evidence UI, Norma onboarding (timebox onboarding to 20 minutes; ask mentor if blocked).
+- Both: integrate and rehearse before the existing 18:30 feature freeze. Do not delay the idealo MVP for optional Norma enhancements.
+- Submission: demonstrate idealo data -> Tavily evidence -> buyer-specific decision; show Norma's real PR governance evidence separately. Confirm whether separate submissions or a shared entry are required.
+- Done: authenticated Tavily search/extract, evidence with source URLs, and at least one actual Norma PR check with documented outcome. Credentials and partner access remain external prerequisites.
