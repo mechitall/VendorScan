@@ -9,7 +9,7 @@
     ["business_vat", "Business (VAT)"],
   ];
   const TAX_LABEL = {
-    standard_vat: "VAT invoice confirmed",
+    standard_vat: "VAT invoice",
     margin_scheme: "Margin scheme: no VAT reclaim",
     small_business: "Seller charges no VAT",
     private_sale: "Private seller",
@@ -54,15 +54,30 @@
     body));
   document.body.append(panel);
 
-  function request(path) {
+  function request(path, payload) {
     return new Promise((resolve) =>
-      chrome.runtime.sendMessage({ type: "vendorscan:fetch", path }, (reply) =>
+      chrome.runtime.sendMessage({ type: "vendorscan:fetch", path, body: payload }, (reply) =>
         resolve(reply || { ok: false, error: "Extension error" })));
   }
 
-  async function load(path, label) {
+  // Offer titles on idealo's page carry condition and VAT hints ("Neu - differenzbesteuert").
+  // Each offer link has the same offer key the idealo MCP uses, so they match exactly.
+  function offerTitles() {
+    const titles = {};
+    for (const link of document.querySelectorAll('a[href*="offerKey="]')) {
+      const key = (link.getAttribute("href").match(/offerKey=([0-9a-f]{32})/) || [])[1];
+      if (!key || titles[key]) continue;
+      const row = link.closest(".productOffers-listItemTitle, li, tr") || link;
+      const text = (row.innerText || "").replace(/\s+/g, " ").trim().slice(0, 200);
+      if (text) titles[key] = text;
+      if (Object.keys(titles).length >= 80) break;
+    }
+    return titles;
+  }
+
+  async function load(path, label, payload) {
     body.replaceChildren(el("p", { class: "vs-muted" }, label));
-    const reply = await request(path);
+    const reply = await request(path, payload);
     if (!reply.ok) {
       body.replaceChildren(el("p", { class: "vs-error" }, reply.error), demoLinks());
       return;
@@ -72,12 +87,15 @@
   }
 
   function scanThisPage(fresh = false) {
-    const name = productName();
-    const params = new URLSearchParams({ name, title: document.title.slice(0, 300) });
-    if (productId) params.set("product_id", productId);
-    if (productSlug) params.set("slug", productSlug.slice(0, 300));
-    if (fresh) params.set("fresh", "true");
-    load(`/api/scan?${params}`, "Checking idealo offers, sellers' VAT and the web… (about 10 s)");
+    const payload = {
+      name: productName().slice(0, 200),
+      title: document.title.slice(0, 300),
+      product_id: productId || null,
+      slug: productSlug ? productSlug.slice(0, 300) : null,
+      fresh,
+      offer_titles: offerTitles(),
+    };
+    load("/api/scan", "Checking idealo offers, sellers' VAT and the web… (about 10 s)", payload);
   }
 
   function demoLinks() {
@@ -118,7 +136,9 @@
         el("td", {},
           safeLink(offer.offer_url, offer.seller.name),
           el("div", { class: "vs-tags" },
-            el("span", { class: `vs-tag vs-tax-${offer.tax_status}` }, TAX_LABEL[offer.tax_status] || offer.tax_status),
+            el("span", { class: `vs-tag vs-tax-${offer.tax_status}`, title: offer.tax_basis || "" },
+              (TAX_LABEL[offer.tax_status] || offer.tax_status) + (offer.tax_confidence === "likely" ? " (likely)" : "")),
+            offer.condition && el("span", { class: "vs-tag" }, offer.condition === "used" ? "Used" : "New"),
             offer.seller.is_marketplace && el("span", { class: "vs-tag" }, "Marketplace"),
             !offer.seller.rating_count && el("span", { class: "vs-tag" }, "No ratings"))),
         el("td", {}, euro(cost.total_gross)),

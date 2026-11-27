@@ -57,8 +57,8 @@ def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
                        reasons=[f"Even the best case (€{cost.effective_cost_low}) is over your budget (€{budget})."])
 
     if buyer is BuyerType.BUSINESS_VAT and offer.tax_status is TaxStatus.UNKNOWN:
-        reasons.append("VAT treatment unknown: ask the seller for an invoice with VAT shown "
-                       f"before buying (cost €{cost.effective_cost_low}–€{cost.effective_cost_high}).")
+        reasons.append(f"{offer.tax_basis or 'VAT treatment unknown.'} "
+                       f"Cost €{cost.effective_cost_low}–€{cost.effective_cost_high}.")
     if not cost.complete:
         reasons.append("Shipping or fees unknown: confirm the final price at checkout.")
     if not offer.seller.rating_count:
@@ -69,13 +69,18 @@ def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
 
     reasons = [f"Best offer for you: {offer.seller.name} at €{cost.effective_cost_high}."]
     if cost.recoverable_vat:
-        reasons.append(f"You pay €{cost.total_gross} upfront and can reclaim €{cost.recoverable_vat} VAT "
-                       "(the seller confirms VAT on its invoices).")
+        how = ("the seller confirms VAT on its invoices" if offer.tax_confidence == "confirmed"
+               else "expected, not confirmed: ask for an invoice with VAT shown")
+        reasons.append(f"You pay €{cost.total_gross} upfront and can reclaim €{cost.recoverable_vat} VAT ({how}).")
+        if offer.tax_confidence == "likely" and offer.tax_basis:
+            reasons.append(offer.tax_basis)
     cheaper_gross = [(o, c) for o, c in ranked[1:] if c.total_gross < cost.total_gross]
     if cheaper_gross:
         other_offer, other = min(cheaper_gross, key=lambda pair: pair[1].total_gross)
-        reasons.append(f"{other_offer.seller.name} is cheaper upfront (€{other.total_gross}) but does not "
-                       f"confirm VAT invoices: €{other.effective_cost_low} if it issues one, "
-                       f"€{other.effective_cost_high} if not. Ask them before choosing it.")
+        why = ("sells it under the margin scheme, so there is no VAT to reclaim"
+               if other_offer.tax_status is TaxStatus.MARGIN_SCHEME
+               else f"doesn't confirm VAT invoices: €{other.effective_cost_low} if it issues one, "
+                    f"€{other.effective_cost_high} if not")
+        reasons.append(f"{other_offer.seller.name} is cheaper upfront (€{other.total_gross}) but {why}.")
     return Verdict(recommendation=Recommendation.BUY, best_offer_id=offer.offer_id, premium=premium,
                    reasons=reasons)

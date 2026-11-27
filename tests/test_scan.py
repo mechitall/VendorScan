@@ -133,9 +133,24 @@ class GapFillingTests(unittest.TestCase):
         self.assertEqual(shop_domain("www.Galaxus.de"), "galaxus.de")
         self.assertIsNone(shop_domain("Galaxus"))
 
-    def test_galaxy_snapshot_flips_and_fills_ratings(self):
+    def test_galaxy_margin_scheme_offers_cost_a_business_more(self):
         result = replay(Path(__file__).parent.parent / "fixtures" / "live_galaxy_s26_ultra.json")
-        private = result.by_buyer[BuyerType.PRIVATE][0].offer.seller.name
-        business = result.by_buyer[BuyerType.BUSINESS_VAT][0].offer.seller.name
-        self.assertNotEqual(private, business)
+        rows = result.by_buyer[BuyerType.BUSINESS_VAT]
+        margin = [r for r in rows if r.offer.tax_status is TaxStatus.MARGIN_SCHEME]
+        standard = [r for r in rows if r.offer.tax_status is TaxStatus.STANDARD_VAT]
+        self.assertTrue(margin and standard)
+        # A margin-scheme offer cheaper upfront than some standard-VAT offer still costs a business more.
+        cheap_margin = min(margin, key=lambda r: r.cost.total_gross)
+        pricier_standard = [r for r in standard if r.cost.total_gross > cheap_margin.cost.total_gross]
+        self.assertTrue(pricier_standard)
+        self.assertGreater(cheap_margin.cost.effective_cost_high, pricier_standard[0].cost.effective_cost_high)
         self.assertFalse(any(g.finding == "Not searched: treat as an unrated seller." for g in result.gaps))
+
+
+class TokenRefreshTests(unittest.TestCase):
+    def test_reads_expiry_from_jwt(self):
+        import base64, json
+        from vendorscan.idealo_auth import _expires_at
+        payload = base64.urlsafe_b64encode(json.dumps({"exp": 1234}).encode()).decode().rstrip("=")
+        self.assertEqual(_expires_at(f"h.{payload}.s"), 1234.0)
+        self.assertIsNone(_expires_at("not-a-jwt"))

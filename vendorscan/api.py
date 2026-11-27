@@ -7,12 +7,14 @@ Start: python -m vendorscan.api   (then load the extension from ./extension)
 """
 from __future__ import annotations
 
+import re
 import time
 from decimal import Decimal
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 
 from .orchestrator import ScanResult, replay, scan
 
@@ -23,7 +25,7 @@ CACHE_SECONDS = 600
 
 app = FastAPI(title="VendorScan local API", docs_url=None, redoc_url=None)
 app.add_middleware(CORSMiddleware, allow_origin_regex=r"^chrome-extension://[a-p]{32}$",
-                   allow_methods=["GET"], allow_headers=[])
+                   allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 
 _cache: dict[tuple, tuple[float, ScanResult]] = {}
 
@@ -33,20 +35,29 @@ def health() -> dict:
     return {"ok": True}
 
 
-@app.get("/api/scan")
-async def scan_product(name: str = Query(default="", max_length=200),
-                       product_id: str | None = Query(default=None, pattern=r"^\d{1,15}$"),
-                       slug: str | None = Query(default=None, max_length=300, pattern=r"^[\w-]+$"),
-                       title: str | None = Query(default=None, max_length=300),
-                       budget: Decimal | None = Query(default=None, gt=0),
-                       fresh: bool = False) -> dict:
+class ScanRequest(BaseModel):
+    name: str = Field(default="", max_length=200)
+    title: str | None = Field(default=None, max_length=300)
+    slug: str | None = Field(default=None, max_length=300, pattern=r"^[\w-]+$")
+    product_id: str | None = Field(default=None, pattern=r"^\d{1,15}$")
+    budget: Decimal | None = Field(default=None, gt=0)
+    fresh: bool = False
+    # Offer key -> offer title, as shown on idealo's page (e.g. "Neu - differenzbesteuert").
+    offer_titles: dict[str, str] = Field(default_factory=dict, max_length=80)
+
+
+@app.post("/api/scan")
+async def scan_product(request: ScanRequest) -> dict:
     """Scan the idealo product the user is looking at."""
-    key = (name, product_id, slug, title, budget)
+    titles = {k: v[:200] for k, v in request.offer_titles.items() if re.fullmatch(r"[0-9a-f]{32}", k)}
+    key = (request.name, request.title, request.slug, request.product_id, request.budget,
+           tuple(sorted(titles.items())))
     cached = _cache.get(key)
-    if cached and not fresh and time.time() - cached[0] < CACHE_SECONDS:
+    if cached and not request.fresh and time.time() - cached[0] < CACHE_SECONDS:
         return cached[1].model_dump(mode="json")
     try:
-        result = await scan(name, product_id=product_id, slug=slug, title=title, budget=budget)
+        result = await scan(request.name, product_id=request.product_id, slug=request.slug,
+                            title=request.title, budget=request.budget, offer_titles=titles)
     except LookupError as error:
         raise HTTPException(status_code=404, detail=str(error)) from error
     _cache[key] = (time.time(), result)

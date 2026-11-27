@@ -23,7 +23,7 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(self.client.get("/api/demo/nope").status_code, 404)
 
     def test_scan_rejects_bad_product_id(self):
-        self.assertEqual(self.client.get("/api/scan", params={"name": "x y", "product_id": "abc"}).status_code, 422)
+        self.assertEqual(self.client.post("/api/scan", json={"name": "x y", "product_id": "abc"}).status_code, 422)
 
     def test_cors_allows_only_extensions(self):
         ok = self.client.get("/api/health", headers={"Origin": EXTENSION_ORIGIN})

@@ -1,6 +1,6 @@
 {
  "_label": "LIVE SNAPSHOT for demo replay. Captured from the idealo MCP, Tavily and Nebius; not edited.",
- "captured_at": "2026-11-27T16:08:03+00:00",
+ "captured_at": "2026-11-27T16:22:22+00:00",
  "query": "Samsung Galaxy S26 Ultra",
  "variants": [
   "Samsung Galaxy S26 Ultra 256GB Black",
@@ -77,7 +77,7 @@
    "minShippingCost": "0,00 €",
    "hasAlwaysFreeShipping": true,
    "cheapestTotalPriceOffer": true,
-   "freshness": "2026-11-27T15:07:53.405Z"
+   "freshness": "2026-11-27T15:22:07.437Z"
   },
   {
    "key": "1d08814febec26c2eba896b350daf7db",
@@ -124,7 +124,7 @@
    "minShippingCost": "0,00 €",
    "hasAlwaysFreeShipping": true,
    "cheapestTotalPriceOffer": false,
-   "freshness": "2026-11-27T15:07:53.405Z"
+   "freshness": "2026-11-27T15:22:07.437Z"
   },
   {
    "key": "0e488e6da6589b5d43f2126d97487f05",
@@ -171,7 +171,7 @@
    "minShippingCost": "0,00 €",
    "hasAlwaysFreeShipping": true,
    "cheapestTotalPriceOffer": false,
-   "freshness": "2026-11-27T15:07:53.405Z"
+   "freshness": "2026-11-27T15:22:07.438Z"
   },
   {
    "key": "91ede8e03e28d232130e4a7e3878cb5a",
@@ -218,7 +218,7 @@
    "minShippingCost": "6,00 €",
    "hasAlwaysFreeShipping": false,
    "cheapestTotalPriceOffer": false,
-   "freshness": "2026-11-27T15:07:53.405Z"
+   "freshness": "2026-11-27T15:22:07.438Z"
   },
   {
    "key": "3f5f7ee10ebb9b9a387f333c03587b50",
@@ -265,7 +265,7 @@
    "minShippingCost": "0,00 €",
    "hasAlwaysFreeShipping": true,
    "cheapestTotalPriceOffer": false,
-   "freshness": "2026-11-27T15:07:53.405Z"
+   "freshness": "2026-11-27T15:22:07.438Z"
   },
   {
    "key": "af697862766895f60b268b66a2d2ed25",
@@ -316,7 +316,7 @@
    "minShippingCost": "4,99 €",
    "hasAlwaysFreeShipping": false,
    "cheapestTotalPriceOffer": false,
-   "freshness": "2026-11-27T15:07:53.657Z"
+   "freshness": "2026-11-27T15:22:07.717Z"
   },
   {
    "key": "6d14561b5144c387386c57aac4f9b4a9",
@@ -367,7 +367,7 @@
    "minShippingCost": "6,99 €",
    "hasAlwaysFreeShipping": false,
    "cheapestTotalPriceOffer": false,
-   "freshness": "2026-11-27T15:07:53.657Z"
+   "freshness": "2026-11-27T15:22:07.717Z"
   },
   {
    "key": "6e0a6b19b1a1587e40540bfc2f5b6053",
@@ -418,7 +418,7 @@
    "minShippingCost": "0,00 €",
    "hasAlwaysFreeShipping": true,
    "cheapestTotalPriceOffer": false,
-   "freshness": "2026-11-27T15:07:53.657Z"
+   "freshness": "2026-11-27T15:22:07.717Z"
   }
  ],
  "restock": null,
@@ -436,36 +436,29 @@
    "seller": "smartport (via smartport.de (Marktplatzhändler))",
    "tax_status": "unknown",
    "company_name": "smartport GmbH",
-   "vat_id": "DE309104000",
-   "summary": "Die Quellen geben keine ausreichenden Hinweise darauf, ob die Rechnungen der smartport GmbH die Umsatzsteuer separat ausweisen, die Differenzbesteuerung anwenden oder als Kleinunternehmer keine Umsatzsteuer erheben.",
+   "vat_id": "HRB 309104",
+   "summary": "Die Quellen enthalten keine ausreichenden Informationen, um zu bestimmen, ob die Rechnungen der smartport GmbH die Umsatzsteuer gesondert ausweisen, die Differenzbesteuerung anwenden oder unter § 19 UStG als Kleinunternehmer tätig ist.",
    "evidence": [
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://smartport.com/de-de/impressum",
      "quote": "Vertreiber der Waren und Vertragspartner für alle Käufe im Shop ist die smartport GmbH, Lena-Christ-Straße 2, 82031 Grünwald, Deutschland, Amtsgericht München HRB 309104, vertreten durch den Geschäftsführer Michele Serra.",
-     "retrieved_at": "2026-11-27T16:08:03.659375Z"
+     "retrieved_at": "2026-11-27T16:22:22.296418Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://firmeneintrag.creditreform.de/63071/6210484711/SMARTPORT_GMBH",
      "quote": "Umsatzsteuer-ID des Unternehmens ist in den [...]",
-     "retrieved_at": "2026-11-27T16:08:03.659375Z"
+     "retrieved_at": "2026-11-27T16:22:22.296418Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://openregister.de/company/DE-HRB-M1114-56182",
-     "quote": "Amtsgericht München HRB 309104",
-     "retrieved_at": "2026-11-27T16:08:03.659375Z"
-    },
-    {
-     "field": "tax_status",
-     "status": "confirmed",
-     "url": "https://www.companyhouse.de/smartport-GmbH-Gruenwald",
-     "quote": "Gesellschaft mit beschränkter Haftung",
-     "retrieved_at": "2026-11-27T16:08:03.659375Z"
+     "quote": "Aktiv\nRegister\nAmtsgericht München HRB 309104",
+     "retrieved_at": "2026-11-27T16:22:22.296418Z"
     }
    ],
    "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -475,21 +468,14 @@
    "tax_status": "margin_scheme",
    "company_name": "Smartspitze UG (haftungsbeschränkt)",
    "vat_id": "DE460933908",
-   "summary": "Der Verkäufer verwendet die Differenzbesteuerung gemäß § 25a UStG, wodurch die Mehrwertsteuer im Kaufpreis enthalten ist, aber nicht gesondert auf der Rechnung ausgewiesen wird.",
+   "summary": "Der Verkäufer verwendet die Differenzbesteuerung nach § 25a UStG, weshalb die Rechnung die Mehrwertsteuer nicht gesondert ausweist und ein Vorsteuerabzug für Geschäftskunden nicht möglich ist.",
    "evidence": [
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://smartspitze.de/kaufen/google-pixel-10-128gb-obsidian",
      "quote": "Dieser Artikel unterliegt der Differenzbesteuerung gemäß § 25a UStG. Die Mehrwertsteuer ist im Kaufpreis enthalten, wird jedoch auf der Rechnung nicht gesondert ausgewiesen.",
-     "retrieved_at": "2026-11-27T16:08:02.563451Z"
-    },
-    {
-     "field": "tax_status",
-     "status": "confirmed",
-     "url": "https://smartspitze.de/impressum",
-     "quote": "Umsatzsteuer-Identifikationsnummer: DE460933908",
-     "retrieved_at": "2026-11-27T16:08:02.563451Z"
+     "retrieved_at": "2026-11-27T16:22:14.436020Z"
     }
    ],
    "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -506,14 +492,14 @@
      "status": "confirmed",
      "url": "https://www.zodis.de/versandinformationen",
      "quote": "Alle Preise inkl. MwSt angegeben.",
-     "retrieved_at": "2026-11-27T16:08:02.368722Z"
+     "retrieved_at": "2026-11-27T16:22:13.913179Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.zodis.de/impressum",
      "quote": "Umsatzsteuer-Identifikationsnummer: DE815193659",
-     "retrieved_at": "2026-11-27T16:08:02.368722Z"
+     "retrieved_at": "2026-11-27T16:22:13.913179Z"
     }
    ],
    "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -530,14 +516,14 @@
      "status": "confirmed",
      "url": "https://www.groupon.de/legal/termsofsale3pip",
      "quote": "Groupon bedeutet Groupon GmbH, ein Unternehmen, das nach den Gesetzen der Bundesrepublik Deutschland gegründet wurde, mit Sitz in Berlin und dessen Büro unter der Adresse c/o Mindspace, Krausenstrasse 9, 10117 Berlin registriert ist. Groupons Handelsregisternummer lautet HRB 123512 B und die Umsatzs",
-     "retrieved_at": "2026-11-27T16:07:59.798915Z"
+     "retrieved_at": "2026-11-27T16:22:14.438720Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.groupon.de/legal/termsofsalegoods",
      "quote": "Unsere Umsatzsteuer-Identifikationsnummer ist DE289935214.",
-     "retrieved_at": "2026-11-27T16:07:59.798915Z"
+     "retrieved_at": "2026-11-27T16:22:14.438720Z"
     }
    ],
    "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -553,22 +539,22 @@
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.alza.de/verlangerte-garantie-art2541",
-     "quote": "Als vorsteuerabzugsberechtigter Kunde zahlen Sie die MwSt. auf die Reparaturkosten (dies gilt auch für einen Austausch des Geräts). Diese Mehrwertsteuer können Sie jedoch wie gewohnt beim Finanzamt als Vorsteuer geltend machen.",
-     "retrieved_at": "2026-11-27T16:08:02.360105Z"
+     "quote": "Wenn Sie zum Vorsteuerabzug berechtigt sind, erfolgt die Gutschrift über den Nettobetrag (ohne Mehrwertsteuer).",
+     "retrieved_at": "2026-11-27T16:22:13.413677Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
-     "url": "https://www.alza.de/verlangerte-garantie-art2541",
+     "url": "https://m.alza.de/verlangerte-garantie-art2541",
      "quote": "Wenn Sie zum Vorsteuerabzug berechtigt sind, erfolgt die Gutschrift über den Nettobetrag (ohne Mehrwertsteuer).",
-     "retrieved_at": "2026-11-27T16:08:02.360105Z"
+     "retrieved_at": "2026-11-27T16:22:13.413677Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.alza.de/agb",
      "quote": "Kunden gelten jedenfalls als Unternehmer, sobald sie bei der Bestellung ihre Umsatzsteuer-Identifikationsnummer („USt-IdNr.“) angeben.",
-     "retrieved_at": "2026-11-27T16:08:02.360105Z"
+     "retrieved_at": "2026-11-27T16:22:13.413677Z"
     }
    ],
    "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -577,7 +563,7 @@
    "seller": "expert.de",
    "tax_status": "unknown",
    "company_name": "expert Arndt",
-   "vat_id": "DE280055077",
+   "vat_id": "DE 280055077",
    "summary": "Only generic statements found (e.g. prices 'inkl. MwSt.' or a VAT ID); a VAT invoice is not confirmed.",
    "evidence": [
     {
@@ -585,35 +571,21 @@
      "status": "confirmed",
      "url": "https://www.expert.de/block/Footer/Website/Impressum",
      "quote": "Umsatzsteuer-Identifikationsnummer: DE 280055077",
-     "retrieved_at": "2026-11-27T16:08:00.278981Z"
-    },
-    {
-     "field": "tax_status",
-     "status": "confirmed",
-     "url": "https://www.expert.de/badliebenwerda/Footer/Website/Impressum",
-     "quote": "Umsatzsteuer-Identifikationsnummer: DE 280055077",
-     "retrieved_at": "2026-11-27T16:08:00.278981Z"
-    },
-    {
-     "field": "tax_status",
-     "status": "confirmed",
-     "url": "https://www.expert.de/donauwoerth/Footer/Website/Impressum",
-     "quote": "Umsatzsteuer-Identifikationsnummer: DE 280055077",
-     "retrieved_at": "2026-11-27T16:08:00.278981Z"
-    },
-    {
-     "field": "tax_status",
-     "status": "confirmed",
-     "url": "https://www.expert.de/weissenburg2/Footer/Website/Impressum",
-     "quote": "Umsatzsteuer-Identifikationsnummer: DE 280055077",
-     "retrieved_at": "2026-11-27T16:08:00.278981Z"
+     "retrieved_at": "2026-11-27T16:22:11.979088Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.expert.de/shop/unsere-produkte/telekom-navigation/handys-smartphones/refurbished-smartphones/15078021514-smartphone-iphone-14-pro-128gb-sw.html",
      "quote": "inkl. MwSt., zzgl. Versand für 6.99 €",
-     "retrieved_at": "2026-11-27T16:08:00.278981Z"
+     "retrieved_at": "2026-11-27T16:22:11.979088Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.expert.de/block/Footer/Website/Impressum",
+     "quote": "Steuernummer: 27/200/14642",
+     "retrieved_at": "2026-11-27T16:22:11.979088Z"
     }
    ],
    "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -623,28 +595,28 @@
    "tax_status": "standard_vat",
    "company_name": "Media-Saturn Deutschland GmbH",
    "vat_id": "DE813879157",
-   "summary": "MediaMarkt erhebt für Geschäftskunden die gesetzliche Mehrwertsteuer von 19 % und bietet eine Rechnung mit ausgewiesener MwSt., sodass der Vorsteuerabzug möglich ist.",
+   "summary": "MediaMarkt erhebt für Geschäftskunden die gesetzliche Mehrwertsteuer von 19 % und bietet eine Rechnung mit ausgewiesener MwSt. an, sodass der Vorsteuerabzug möglich ist.",
    "evidence": [
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.mediamarkt.de/de/product/_ecoflow-stream-ultra-x-mit-2-ja-solar-500w-module-balkonkraftwerk-160847041.html",
      "quote": "Für Geschäftskunden wird die gesetzliche Mehrwertsteuer (19 %) zusätzlich berechnet.",
-     "retrieved_at": "2026-11-27T16:08:00.790161Z"
+     "retrieved_at": "2026-11-27T16:22:14.500773Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.mediamarkt.de/de/legal/impressum",
-     "quote": "Alle Preise in Euro und inkl. der gesetzlichen Mehrwertsteuer, zzgl. Versandkosten. Verkauf nur an private Endkunden. Abgabe nur in haushaltsüblichen Mengen. Änderungen und Irrtümer vorbehalten.",
-     "retrieved_at": "2026-11-27T16:08:00.790161Z"
+     "quote": "Alle Preise in Euro und inkl. der gesetzlichen Mehrwertsteuer, zzgl. Versandkosten. Verkauf nur an private Endkunden. Abgabe nur in haushaltsüblichen Mengen.",
+     "retrieved_at": "2026-11-27T16:22:14.500773Z"
     },
     {
      "field": "tax_status",
      "status": "confirmed",
      "url": "https://www.mediamarkt.de/de/campaign/neuesvonApple",
-     "quote": "Alle Preise in Euro und inkl. der gesetzlichen Mehrwertsteuer, zzgl. Versandkosten. Verkauf nur an private Endkunden. Abgabe nur in haushaltsüblichen Mengen. Änderungen und Irrtümer vorbehalten.",
-     "retrieved_at": "2026-11-27T16:08:00.790161Z"
+     "quote": "Alle Preise in Euro und inkl. der gesetzlichen Mehrwertsteuer, zzgl. Versandkosten. Verkauf nur an private Endkunden. Abgabe nur in haushaltsüblichen Mengen.",
+     "retrieved_at": "2026-11-27T16:22:14.500773Z"
     }
    ],
    "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -662,37 +634,44 @@
      "status": "confirmed",
      "url": "https://ca.trustpilot.com/review/smartport.de?page=3",
      "quote": "smartport is rated \"Average\" with 2.9 / 5 on Trustpilot",
-     "retrieved_at": "2026-11-27T16:07:58.916997Z"
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
     },
     {
      "field": "reputation",
      "status": "confirmed",
      "url": "https://ca.trustpilot.com/review/smartport.de?page=3",
      "quote": "It is the most aweful online shop I have ever ordered something.",
-     "retrieved_at": "2026-11-27T16:07:58.916997Z"
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
     },
     {
      "field": "reputation",
      "status": "confirmed",
      "url": "https://www.trustpilot.com/review/smartport.de",
      "quote": "If you are looking for a fast and seamlesss experience, then SmartPort is really not it.",
-     "retrieved_at": "2026-11-27T16:07:58.916997Z"
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
     },
     {
      "field": "reputation",
      "status": "confirmed",
      "url": "https://nz.trustpilot.com/review/smartport.de?page=2",
      "quote": "Ordered an iphone 16 and 17 for blackfriday by smartport, but after almost 3 weeks I have still not received my order.",
-     "retrieved_at": "2026-11-27T16:07:58.916997Z"
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
     },
     {
      "field": "reputation",
      "status": "confirmed",
      "url": "https://nz.trustpilot.com/review/smartport.de?page=2",
-     "quote": "Excellent price. Excellent product. It just took 16 days for the delivery to arrive, instead of the 4 to 5 days announced.",
-     "retrieved_at": "2026-11-27T16:07:58.916997Z"
+     "quote": "Flawless Experience – Five Stars!",
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
     }
    ]
   }
+ },
+ "offer_titles": {
+  "ad03ae218b535465a8301eac5478a859": "Samsung Galaxy S26 Ultra, 256 GB Black",
+  "1d08814febec26c2eba896b350daf7db": "Samsung Galaxy S26 Ultra - 256GB Black - Neuware Dif­fe­renz­be­steu­ert",
+  "0e488e6da6589b5d43f2126d97487f05": "Samsung Galaxy S26 Ultra 256GB Black Neu - dif­fe­renz­be­steu­ert",
+  "91ede8e03e28d232130e4a7e3878cb5a": "Samsung Galaxy S26 Ultra S948 5G Dual Sim 12GB RAM 256GB Black inkl. 19% MwSt.",
+  "3f5f7ee10ebb9b9a387f333c03587b50": "Samsung S26 Ultra 5G 256GB black"
  }
 }

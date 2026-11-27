@@ -72,7 +72,8 @@ async def connect(token=None, country='DE'):
     if token:
         http = httpx.AsyncClient(headers={'Authorization': f'Bearer {token}'}, timeout=30)
     else:
-        from vendorscan.idealo_auth import oauth_provider
+        from vendorscan.idealo_auth import oauth_provider, refresh_if_expiring
+        await asyncio.to_thread(refresh_if_expiring)  # idealo returns 403, not 401, on expiry
         http = httpx.AsyncClient(auth=oauth_provider(), timeout=30)
     async with http:
         async with streamable_http_client(URL, http_client=http) as (read, write, _):

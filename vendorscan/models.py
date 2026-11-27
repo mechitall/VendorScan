@@ -73,6 +73,9 @@ class Offer(BaseModel):
     shipping_gross: Money | None = None
     mandatory_fees_gross: Money | None = None
     tax_status: TaxStatus = TaxStatus.UNKNOWN
+    tax_confidence: str | None = None  # "confirmed" or "likely"; None while unknown
+    tax_basis: str | None = None       # which rule in vat_rules.py decided, in plain words
+    title: str | None = None           # offer title from idealo's page (via the extension)
     vat_rate: Money | None = None  # e.g. Decimal("0.19"); None if unknown
     risk_flags: list[str] = Field(default_factory=list)
     evidence: list[Evidence] = Field(default_factory=list)
