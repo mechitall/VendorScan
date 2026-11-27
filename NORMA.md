@@ -43,6 +43,26 @@ code consistent with Norma.
 | #6 extension | 18 issues: 3 × Medium `print()` in production code, 1 × Medium long timeout also applies to the connection, magic-number timeouts (Low) | Named timeouts with a separate connect timeout in `vendorscan/settings.py`; logging instead of `print()` | 8 left |
 | #6 (second round) | 7 × Low `open()` without explicit encoding | `encoding="utf-8"` on every file read/write | 1 left: the accepted `print()` |
 
+## PR #7: deliberate demonstration (second GitHub author: `edrethardo`, with Claude Code)
+
+The violation in `norma_demo.py` was planted **on purpose** (PLAN.md section 15, step 4)
+to show a finding being caught and fixed. It is not an organic finding. Nothing imports the file.
+
+| Commit | What it contains | Norma PR check |
+|---|---|---|
+| `9d57a39` | `requests` and float money in `docs/test_norma.py` | No issues reported |
+| `d8b4d20` | Same rules broken in `norma_demo.py`, plus `print()` and an unnamed timeout | 2 issues: Medium `print()` in production code (line 18), Low magic-number timeout (line 14) |
+| `1b9d71f` | Fixed in place: logging, named timeouts, `httpx`, `Decimal` | No issues |
+
+The fix was also checked with Norma `live_check` (clean) before the commit, and recorded with
+`register_applied_actions`. The earlier commits on this PR were **not** checked through MCP
+first, because Norma was not yet connected for this author.
+
+**Open: the team policy is not taking effect.** On 27 November the "Policies" ruleset for this
+repository returned **0 rules** through Norma MCP, and neither `requests` nor float money was
+reported. Until that is fixed in the Norma workspace, do not claim that Norma enforces the three
+policy rules listed above, including in the submission note.
+
 ## Pull requests
 
 All changes went through pull requests, each checked by the Norma GitHub App
