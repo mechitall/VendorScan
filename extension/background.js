@@ -19,6 +19,23 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   return true;
 });
 
+// The next step: a live Nebius call on the server, for the scan the panel just showed.
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message?.type !== "vendorscan:decide") return false;
+  fetch(API + "/api/decide", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message.body),
+  })
+    .then(async (response) => {
+      const body = await response.json().catch(() => ({}));
+      sendResponse(response.ok ? { ok: true, data: body }
+        : { ok: false, error: typeof body.detail === "string" ? body.detail : `HTTP ${response.status}` });
+    })
+    .catch(() => sendResponse({ ok: false, error: OFFLINE }));
+  return true;
+});
+
 // Live scans: stream newline-delimited JSON events back to the panel as they arrive.
 chrome.runtime.onConnect.addListener((port) => {
   if (port.name !== "vendorscan:scan") return;

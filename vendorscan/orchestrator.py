@@ -7,6 +7,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import logging
 import re
 import sys
 from collections.abc import Awaitable, Callable
@@ -22,10 +23,13 @@ from .cost_engine import price_premium, rank_offers
 from .idealo_normalize import listed_lowest_price, offer_from_idealo, product_label
 from .models import BuyerType, CostBreakdown, Offer
 from .restock import RestockReport, research_restock
+from .idealo_signals import PriceContext, delivery_by_offer, price_context
 from .gaps import Gap, find_hidden_offer, find_reputations
 from . import vat_rules
 from .vendor_vat import VendorVat, research_vendors
 from .verdict import SCARCITY_PREMIUM, Verdict, decide
+
+logger = logging.getLogger(__name__)
 
 
 class RankedOffer(BaseModel):
@@ -47,6 +51,8 @@ class ScanResult(BaseModel):
     gaps: list[Gap] = Field(default_factory=list)  # what idealo lacked and how Tavily filled it
     reputations: dict[str, Gap] = Field(default_factory=dict)  # unrated sellers, keyed by name
     exact_match: bool = True  # False: the page's exact variant isn't in idealo's data feed
+    price_history: PriceContext | None = None  # idealo's 30-day history; None: idealo gave none
+    delivery: dict[str, str] = Field(default_factory=dict)  # offer id -> idealo delivery text
     source: str = "live"  # "live" or "replay:<file>"
 
 
@@ -54,7 +60,8 @@ def build_result(query: str, product: dict, raw_offers: list[dict], *,
                  variants: list[str] | None = None, restock: RestockReport | None = None,
                  vendors: dict[str, VendorVat] | None = None, hidden: Gap | None = None,
                  reputations: dict[str, Gap] | None = None,
-                 offer_titles: dict[str, str] | None = None, budget: Decimal | None = None, source: str = "live") -> ScanResult:
+                 offer_titles: dict[str, str] | None = None, price_history: PriceContext | None = None,
+                 budget: Decimal | None = None, source: str = "live") -> ScanResult:
     """Pure step after fetching: normalize, apply seller VAT research, cost per buyer, decide."""
     label = product_label(product)
     vendors = vendors or {}
@@ -67,6 +74,8 @@ def build_result(query: str, product: dict, raw_offers: list[dict], *,
                         listed_lowest=listed, total_offer_count=product.get("totalOfferCount"),
                         variants=variants or [], restock=restock, vendors=vendors, source=source)
     result.reputations = reputations or {}
+    result.price_history = price_history
+    result.delivery = delivery_by_offer(raw_offers)
     result.gaps = gap_report(offers, vendors, restock, hidden, result.reputations)
     for buyer in BuyerType:
         ranked = rank_offers(offers, buyer)
@@ -230,10 +239,16 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
     if not queries:
         raise LookupError("No product name on this page to search for.")
     offers: list[dict] = []
+    history: PriceContext | None = None
     async with connect() as idealo:
         product, found, exact = await _find_product(idealo, queries, product_id, variant)
         if product:
             offers = (await idealo.offers(product))["offers"]
+            # Never raise inside the MCP session (anyio would wrap it); history is optional.
+            try:
+                history = price_context(await idealo.history(product))
+            except (RuntimeError, ValueError):
+                logger.warning("idealo price history unavailable", exc_info=True)
     if not product:
         raise LookupError(f"idealo's data feed has no product matching {queries[0]!r}.")
     await emit({"type": "step", "id": "idealo", "text": f"{len(offers)} offers from idealo", "done": True})
@@ -246,7 +261,8 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
     unrated = list(dict.fromkeys(o.seller.name for o in sorted(normalized, key=lambda o: o.item_gross)
                                  if not o.seller.rating_count))
     # First answer right away from idealo's data and the offer titles; research refines it.
-    first = build_result(query, product, offers, offer_titles=offer_titles, budget=budget)
+    first = build_result(query, product, offers, offer_titles=offer_titles, price_history=history,
+                         budget=budget)
     first.exact_match = exact
     await emit({"type": "partial", "result": first.model_dump(mode="json")})
 
@@ -283,11 +299,12 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
             "hidden_offer": hidden.model_dump(mode="json") if hidden else None,
             "reputations": {k: v.model_dump(mode="json") for k, v in (reputations or {}).items()},
             "offer_titles": offer_titles,
+            "price_history": history.model_dump(mode="json") if history else None,
         }
         save.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1), encoding="utf-8")
     result = build_result(query, product, offers, variants=variants, restock=restock,
                           vendors=vendors, hidden=hidden, reputations=reputations,
-                          offer_titles=offer_titles, budget=budget)
+                          offer_titles=offer_titles, price_history=history, budget=budget)
     result.exact_match = exact
     return result
 
@@ -303,7 +320,9 @@ def replay(path: Path, *, budget: Decimal | None = None) -> ScanResult:
     vendors = {k: VendorVat.model_validate(v) for k, v in (snap.get("vendors") or {}).items()}
     hidden = Gap.model_validate(snap["hidden_offer"]) if snap.get("hidden_offer") else None
     reputations = {k: Gap.model_validate(v) for k, v in (snap.get("reputations") or {}).items()}
+    history = PriceContext.model_validate(snap["price_history"]) if snap.get("price_history") else None
     return build_result(snap["query"], snap["product"], snap["offers"], variants=snap.get("variants"),
+                        price_history=history,
                         restock=restock, vendors=vendors, hidden=hidden, reputations=reputations,
                         offer_titles=snap.get("offer_titles"), budget=budget, source=f"replay:{path.name}")
 
