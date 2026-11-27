@@ -137,7 +137,7 @@
       gap.finding && el("p", {}, gap.finding),
       (gap.evidence || []).map(quote));
     const gaps = el("section", { class: "vs-gaps" },
-      el("h3", {}, "What idealo didn't tell you"),
+      el("h3", {}, "What VendorScan figured out"),
       (r.gaps || []).map(gapItem));
 
     body.replaceChildren(head, tabs, verdictBox, table, gaps,
