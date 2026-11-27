@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "idealo": {
+      "type": "url",
+      "url": "https://mcp.idealo.com/mcp",
+      "oauth": {
+        "callbackPort": 6274
+      }
+    }
+  }
+}
