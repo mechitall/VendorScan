@@ -181,10 +181,6 @@
     REQUEST_CLARIFICATION: "Ask the seller first", PREPARE_PURCHASE: "Ready for your approval",
     WAIT: "Wait",
   };
-  const STATUS_LABEL = {
-    model: "chosen by Nebius", rejected: "model answer blocked by safety rules", error: "model call failed",
-  };
-
   function nextStep(buyer) {
     const entry = state.decisions[buyer];
     if (!entry) {
@@ -198,21 +194,16 @@
     }
     const { data: d, error } = state.decisions[buyer] || {};
     const box = (...children) => el("section", { class: "vs-next" },
-      el("div", { class: "vs-section-title" }, "Next step"), ...children);
-    if (error) return box(el("div", { class: "vs-error" }, `No model decision: ${error}`));
-    if (!d) return box(el("div", { class: "vs-hint" }, "Nebius is deciding…"));
+      el("div", { class: "vs-section-title" }, "Advice"), ...children);
+    if (error) return box(el("div", { class: "vs-hint" }, "No advice available right now."));
+    if (!d) return box(el("div", { class: "vs-progress-row" }, el("span", { class: "vs-spinner" }),
+      el("span", { class: "vs-hint" }, "Working out your best next step…")));
+    // A model answer the server's safety rules blocked is not shown as advice.
+    if (d.status === "rejected") return null;
     return box(
-      el("div", { class: "vs-next-action" }, STEP_LABEL[d.action] || d.action,
-        el("span", { class: "vs-hint" }, ` · ${STATUS_LABEL[d.status] || d.status}`)),
+      el("div", { class: "vs-next-action" }, STEP_LABEL[d.action] || d.action),
       el("p", {}, d.reason),
-      d.seller_question && el("blockquote", {}, d.seller_question),
-      el("details", {},
-        el("summary", {}, `Model calls: ${d.trace.length} · ${d.model} on ${d.provider}`),
-        d.trace.map((step) => el("p", {},
-          `${step.action || "no answer"} (${step.status}, ${step.latency_ms} ms)`,
-          step.search_query ? ` · searched “${step.search_query}”, ${step.sources.length} source(s)` : null)),
-        el("ul", {}, d.facts.filter((f) => f.material || d.evidence_ids.includes(f.id))
-          .map((f) => el("li", {}, `${f.id}${f.material ? " (open)" : ""}: ${f.text}`)))));
+      d.seller_question && el("blockquote", {}, d.seller_question));
   }
 
   // idealo's own signals for this product: price level over time and delivery of the top offer.
