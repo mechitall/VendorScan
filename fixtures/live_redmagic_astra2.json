@@ -1,0 +1,138 @@
+{
+ "_label": "LIVE SNAPSHOT for demo replay. Captured from the idealo MCP, Tavily and Nebius; not edited.",
+ "captured_at": "2026-11-27T15:34:37+00:00",
+ "query": "RedMagic Astra 2",
+ "variants": [
+  "Redmagic Astra 2 Gaming 512GB silber",
+  "Redmagic Astra 2 Gaming 256GB silber",
+  "Redmagic Astra 2 Gaming 256GB schwarz"
+ ],
+ "product": {
+  "itemType": "PRODUCT",
+  "siteId": 1,
+  "name": "Redmagic Astra 2 Gaming",
+  "nameDelta": "512GB silber",
+  "price": "899,00 €",
+  "imageUrl": "https://cdn.idealo.com/folder/Product/214218/2/214218295/s1_produktbild_mobil/redmagic-astra-2-gaming-512gb-silber.jpg",
+  "url": "https://www.idealo.de/preisvergleich/OffersOfProduct/214218295_-astra-2-gaming-512gb-silber-redmagic.html",
+  "totalOfferCount": 2
+ },
+ "offers": [
+  {
+   "key": "2e562e0d3d3b6247a11facf1278b8e10",
+   "price": "1.307,98 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "26895",
+    "merchantId": "82044986",
+    "name": "kaufland.de",
+    "merchantName": "Insta24",
+    "rating": {
+     "count": null,
+     "avg": null
+    },
+    "isMarketplace": true
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "DD",
+     "name": "Lastschrift"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mi. 02.12.–Do. 03.12.2026",
+    "deliveryStatus": "MEDIUM",
+    "earlyDeliveryDate": "2026-12-02",
+    "lateDeliveryDate": "2026-12-03"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=2e562e0d3d3b6247a11facf1278b8e10&categoryId=3747&pos=2&price=1307.98&productid=214218295&sid=26895&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T14:34:30.515Z"
+  }
+ ],
+ "restock": {
+  "product_name": "Redmagic Astra 2 Gaming 512GB silber",
+  "normal_price": "899.00",
+  "lowest_current_price": "1307.98",
+  "premium": "0.4549",
+  "restock_signal": false,
+  "successor_signal": false,
+  "official_price": "699.00",
+  "official_currency": "EUR",
+  "official_store_url": "https://eu.redmagic.gg/products/redmagic-astra-2-gaming-tablet",
+  "summary": "The Redmagic Astra 2 Gaming 512GB silber is currently priced at €699.00 on the official European store, which is significantly lower than the offered market price of €1307.98. There is no indication that a successor has been announced.",
+  "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507",
+  "evidence": [
+   {
+    "field": "official_price",
+    "status": "confirmed",
+    "url": "https://eu.redmagic.gg/products/redmagic-astra-2-gaming-tablet",
+    "quote": "Regular price €699.00",
+    "retrieved_at": "2026-11-27T15:34:37.157141Z"
+   },
+   {
+    "field": "official_price",
+    "status": "confirmed",
+    "url": "https://www.youtube.com/watch?v=JrREg85yaJk",
+    "quote": "it's $749 for the 12 GB version with 256 GB of storage",
+    "retrieved_at": "2026-11-27T15:34:37.157141Z"
+   },
+   {
+    "field": "official_price",
+    "status": "confirmed",
+    "url": "https://www.phonearena.com/news/redmagic-water-cooled-gaming-tablet-release-date-official-images-superb-hardware_id181316",
+    "quote": "expected price tag of $499",
+    "retrieved_at": "2026-11-27T15:34:37.157141Z"
+   }
+  ]
+ },
+ "vendors": {
+  "Insta24 (via kaufland.de)": {
+   "seller": "Insta24 (via kaufland.de)",
+   "tax_status": "unknown",
+   "company_name": "Kaufland e-commerce Services GmbH & Co. KG",
+   "vat_id": "DE357828524",
+   "summary": "No source about this seller states its VAT treatment.",
+   "evidence": [],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  }
+ },
+ "hidden_offer": {
+  "gap": "idealo lists €899.00, but no returned offer is that cheap",
+  "filled_by": "tavily+nebius (Qwen/Qwen3-30B-A3B-Instruct-2507)",
+  "finding": "REDMAGIC (Europe): 799.00 EUR, stock unknown.",
+  "evidence": [
+   {
+    "field": "hidden_offer",
+    "status": "confirmed",
+    "url": "https://eu.redmagic.gg/de/products/redmagic-astra-2-gaming-tablet",
+    "quote": "Regular price €799.00",
+    "retrieved_at": "2026-11-27T15:34:32.749101Z"
+   }
+  ]
+ }
+}

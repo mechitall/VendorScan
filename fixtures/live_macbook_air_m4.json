@@ -1,0 +1,360 @@
+{
+ "_label": "LIVE SNAPSHOT for demo replay. Captured from the idealo MCP, Tavily and Nebius; not edited.",
+ "captured_at": "2026-11-27T15:35:10+00:00",
+ "query": "Apple MacBook Air 13 M4 16GB 256GB",
+ "variants": [
+  "Apple MacBook Air 13\" 2025 M4 Mitternacht MW123D/A",
+  "Apple MacBook Air 13\" 2025 M4 Polarstern MW0Y3D/A",
+  "Apple MacBook Air 15\" 2025 M4 Himmelblau MC7A4D/A",
+  "Apple MacBook Air 13\" 2025 M4 Himmelblau MC6U4D/A",
+  "Apple MacBook Air 13\" 2025 M4 Mitternacht MW133D/A",
+  "Apple MacBook Air 13\" M5 2026 Mitternacht MDHE4D/A"
+ ],
+ "product": {
+  "itemType": "PRODUCT",
+  "siteId": 1,
+  "name": "Apple MacBook Air 13\" 2025 M4",
+  "nameDelta": "Mitternacht MW123D/A",
+  "price": "1.149,00 €",
+  "imageUrl": "https://cdn.idealo.com/folder/Product/206043/7/206043741/s1_produktbild_mobil/apple-macbook-air-13-2025-m4-mitternacht-mw123d-a.jpg",
+  "url": "https://www.idealo.de/preisvergleich/OffersOfProduct/206043741_-macbook-air-13-2025-m4-mitternacht-mw123d-a-apple.html",
+  "userReviewsSummary": {
+   "averageRating": 4.81,
+   "totalReviewCount": 190
+  },
+  "totalOfferCount": 4
+ },
+ "offers": [
+  {
+   "key": "c646991f7cacccf1888b9d9c568acee1",
+   "price": "1.149,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "22384",
+    "merchantId": null,
+    "name": "easynotebooks.de",
+    "merchantName": null,
+    "rating": {
+     "count": 1249,
+     "avg": 3.9
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mo. 30.11.–Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-11-30",
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=c646991f7cacccf1888b9d9c568acee1&categoryId=3751&pos=1&price=1149.00&productid=206043741&sid=22384&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": true,
+   "freshness": "2026-11-27T14:34:56.340Z"
+  },
+  {
+   "key": "444e280cd41daeb03178007097b6c975",
+   "price": "1.149,01 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "22817",
+    "merchantId": null,
+    "name": "notebook.de",
+    "merchantName": null,
+    "rating": {
+     "count": 232,
+     "avg": 3.9
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mo. 30.11.–Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-11-30",
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=444e280cd41daeb03178007097b6c975&categoryId=3751&pos=2&price=1149.01&productid=206043741&sid=22817&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T14:34:56.341Z"
+  },
+  {
+   "key": "fb76c747ce2390357a863b9c3dd219cd",
+   "price": "1.318,32 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "26895",
+    "merchantId": "69122992",
+    "name": "kaufland.de",
+    "merchantName": "Easynotebooks",
+    "rating": {
+     "count": null,
+     "avg": null
+    },
+    "isMarketplace": true
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "DD",
+     "name": "Lastschrift"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mo. 30.11.–Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-11-30",
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=fb76c747ce2390357a863b9c3dd219cd&categoryId=3751&pos=3&price=1318.32&productid=206043741&sid=26895&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T14:34:56.341Z"
+  },
+  {
+   "key": "6d74919e5505500a24a8d0f40e120fd9",
+   "price": "1.319,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "317105",
+    "merchantId": null,
+    "name": "galaxus.de",
+    "merchantName": null,
+    "rating": {
+     "count": 2667,
+     "avg": 4.63
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mo. 07.12.–Mi. 16.12.2026",
+    "deliveryStatus": "LONG",
+    "earlyDeliveryDate": "2026-12-07",
+    "lateDeliveryDate": "2026-12-16"
+   },
+   "freeReturnDays": 30,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=6d74919e5505500a24a8d0f40e120fd9&categoryId=3751&pos=4&price=1319.00&productid=206043741&sid=317105&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T14:34:56.341Z"
+  }
+ ],
+ "restock": null,
+ "vendors": {
+  "easynotebooks.de": {
+   "seller": "easynotebooks.de",
+   "tax_status": "unknown",
+   "company_name": "DEQSTER",
+   "vat_id": "DE 18893217",
+   "summary": "Only generic statements found (e.g. prices 'inkl. MwSt.' or a VAT ID); a VAT invoice is not confirmed.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.easynotebooks.de/Auf-Rechnung",
+     "quote": "Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders beschrieben.",
+     "retrieved_at": "2026-11-27T15:35:04.756761Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.easynotebooks.de/Grosskunden",
+     "quote": "Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders beschrieben.",
+     "retrieved_at": "2026-11-27T15:35:04.756761Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.easynotebooks.de/Steuersaetze",
+     "quote": "Im Preis unserer Produkte ist die im Zielland gültige gesetzliche Mehrwertsteuer enthalten bzw. (im Falle von Versicherungen) in Deutschland die jeweils gültige Versicherungssteuer.",
+     "retrieved_at": "2026-11-27T15:35:04.756761Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.easynotebooks.de/hersteller/deqster",
+     "quote": "Umsatzsteuer-Identifikationsnr.: DE 18893217",
+     "retrieved_at": "2026-11-27T15:35:04.756761Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "notebook.de": {
+   "seller": "notebook.de",
+   "tax_status": "unknown",
+   "company_name": "Net Factory Gesellschaft für Netzwerklösungen mbH",
+   "vat_id": "DE188932174",
+   "summary": "Only generic statements found (e.g. prices 'inkl. MwSt.' or a VAT ID); a VAT invoice is not confirmed.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.notebook.de/Zubehoer/Telefonie-Headsets/Yealink/533854/Yealink-WH66-Dual-Headset-On-Ear-DECT",
+     "quote": "Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders beschrieben.",
+     "retrieved_at": "2026-11-27T15:35:04.394967Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.notebook.de/Zubehoer/Eingabegeraete/Tastatur/1106121/Razer-Cynosa-V2-Tastatur-Hintergrundbeleuchtung",
+     "quote": "Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders beschrieben.",
+     "retrieved_at": "2026-11-27T15:35:04.394967Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.notebook.de/Zubehoer/Notebook-Zubehoer/Sonstiges-Notebookzubehoer/1100733/Dicota-Blickschutzfilter-fuer-Notebook-2-Wege-entfernbar-magnetisch-Schwarz-fuer-Microsoft-S",
+     "quote": "Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders beschrieben.",
+     "retrieved_at": "2026-11-27T15:35:04.394967Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.notebook.de/Zubehoer/Komponenten/FestplattenSSDs/Interne-SSDs/599481/Samsung-PM9A3-MZQL23T8HCLS-SSD-verschluesselt-3.84-TB-intern-2.5-6.4-cm",
+     "quote": "Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten, wenn nicht anders beschrieben.",
+     "retrieved_at": "2026-11-27T15:35:04.394967Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.notebook.de/Informationen/Impressum",
+     "quote": "Umsatzsteuer-Identifikationsnr.: DE 188932174",
+     "retrieved_at": "2026-11-27T15:35:04.394967Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "Easynotebooks (via kaufland.de)": {
+   "seller": "Easynotebooks (via kaufland.de)",
+   "tax_status": "unknown",
+   "company_name": "Kaufland e-commerce Services GmbH & Co. KG",
+   "vat_id": "DE357828524",
+   "summary": "No source about this seller states its VAT treatment.",
+   "evidence": [],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "galaxus.de": {
+   "seller": "galaxus.de",
+   "tax_status": "standard_vat",
+   "company_name": "Galaxus Deutschland GmbH",
+   "vat_id": "DE312684999",
+   "summary": "Galaxus.de erhebt und zeigt die Mehrwertsteuer auf Rechnungen gesondert an und ermöglicht den Vorsteuerabzug für Geschäftskunden.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.galaxus.de/de/s1/product/sony-wh-1000xm4-aktive-geraeuschunterdrueckung-30-h-kabellos-kopfhoerer-13366514?offertype=refurbished&offerid=3035082",
+     "quote": "Die Mehrwertsteuer wird auf der Rechnung ausgewiesen.",
+     "retrieved_at": "2026-11-27T15:35:10.344082Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://galaxus.de/de/page/19598",
+     "quote": "Nicht nur Privatpersonen kaufen bei Galaxus komfortabel und effizient ein. Auch als Geschäftskunde oder Geschäftskundin findest du in unserem Shop fast alles für deinen Bedarf.",
+     "retrieved_at": "2026-11-27T15:35:10.344082Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.galaxus.de/de/wiki/5639",
+     "quote": "Umsatzsteueridentifikationsnummer gemäß § 27a Umsatzsteuergesetz: DE312684999.",
+     "retrieved_at": "2026-11-27T15:35:10.344082Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  }
+ },
+ "hidden_offer": null
+}

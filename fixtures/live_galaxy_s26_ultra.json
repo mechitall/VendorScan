@@ -1,0 +1,677 @@
+{
+ "_label": "LIVE SNAPSHOT for demo replay. Captured from the idealo MCP, Tavily and Nebius; not edited.",
+ "captured_at": "2026-11-27T16:22:22+00:00",
+ "query": "Samsung Galaxy S26 Ultra",
+ "variants": [
+  "Samsung Galaxy S26 Ultra 256GB Black",
+  "Samsung Galaxy S26 Ultra 512GB Black",
+  "Samsung Galaxy S26 Ultra 256GB Cobalt Violet",
+  "Samsung Galaxy S26 Ultra 256GB Sky Blue",
+  "Samsung Galaxy S26 Ultra 512GB Sky Blue",
+  "Samsung Galaxy S26 Ultra 512GB Cobalt Violet",
+  "Samsung Galaxy S26 Ultra 1TB Black",
+  "Samsung Galaxy S26 256GB Black",
+  "Samsung Galaxy S26 Ultra 256GB White",
+  "Samsung Galaxy S26 Ultra 1TB Cobalt Violet"
+ ],
+ "product": {
+  "itemType": "PRODUCT",
+  "siteId": 1,
+  "name": "Samsung Galaxy S26 Ultra",
+  "nameDelta": "256GB Black",
+  "price": "959,00 €",
+  "imageUrl": "https://cdn.idealo.com/folder/Product/209522/5/209522573/s1_produktbild_mobil/samsung-galaxy-s26-ultra-256gb-black.jpg",
+  "url": "https://www.idealo.de/preisvergleich/OffersOfProduct/209522573_-galaxy-s26-ultra-256gb-black-samsung.html",
+  "userReviewsSummary": {
+   "averageRating": 4.74,
+   "totalReviewCount": 127
+  },
+  "testReportsSummary": {
+   "grade": "1,5"
+  },
+  "totalOfferCount": 52
+ },
+ "offers": [
+  {
+   "key": "ad03ae218b535465a8301eac5478a859",
+   "price": "939,55 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "316622",
+    "merchantId": null,
+    "name": "samsung.com/de/shop",
+    "merchantName": null,
+    "rating": {
+     "count": 353,
+     "avg": 1.7
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "04.12.2026",
+    "deliveryStatus": "UNKNOWN",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": null
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=ad03ae218b535465a8301eac5478a859&categoryId=19116&pos=1&price=939.55&productid=209522573&sid=316622&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": true,
+   "freshness": "2026-11-27T15:22:07.437Z"
+  },
+  {
+   "key": "1d08814febec26c2eba896b350daf7db",
+   "price": "939,90 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "338630",
+    "merchantId": null,
+    "name": "smartport.de (Marktplatzhändler)",
+    "merchantName": "smartport",
+    "rating": {
+     "count": null,
+     "avg": null
+    },
+    "isMarketplace": true
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Sa. 05.12.–Di. 08.12.2026",
+    "deliveryStatus": "LONG",
+    "earlyDeliveryDate": "2026-12-05",
+    "lateDeliveryDate": "2026-12-08"
+   },
+   "freeReturnDays": null,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=1d08814febec26c2eba896b350daf7db&categoryId=19116&pos=2&price=939.90&productid=209522573&sid=338630&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:22:07.437Z"
+  },
+  {
+   "key": "0e488e6da6589b5d43f2126d97487f05",
+   "price": "959,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "338528",
+    "merchantId": null,
+    "name": "smartspitze.de",
+    "merchantName": null,
+    "rating": {
+     "count": 6,
+     "avg": 5
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "bis Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": null,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=0e488e6da6589b5d43f2126d97487f05&categoryId=19116&pos=3&price=959.00&productid=209522573&sid=338528&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:22:07.438Z"
+  },
+  {
+   "key": "91ede8e03e28d232130e4a7e3878cb5a",
+   "price": "962,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "334615",
+    "merchantId": null,
+    "name": "zodis.de",
+    "merchantName": null,
+    "rating": {
+     "count": 225,
+     "avg": 4.5
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Di. 01.12.–Do. 03.12.2026",
+    "deliveryStatus": "MEDIUM",
+    "earlyDeliveryDate": "2026-12-01",
+    "lateDeliveryDate": "2026-12-03"
+   },
+   "freeReturnDays": null,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=91ede8e03e28d232130e4a7e3878cb5a&categoryId=19116&pos=4&price=962.00&productid=209522573&sid=334615&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "6,00 €",
+   "hasAlwaysFreeShipping": false,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:22:07.438Z"
+  },
+  {
+   "key": "3f5f7ee10ebb9b9a387f333c03587b50",
+   "price": "968,99 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "308617",
+    "merchantId": null,
+    "name": "groupon.de",
+    "merchantName": null,
+    "rating": {
+     "count": 29,
+     "avg": 1
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "APPLE_PAY",
+     "name": "Apple Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "bis Do. 10.12.2026",
+    "deliveryStatus": "LONG",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": "2026-12-10"
+   },
+   "freeReturnDays": null,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=3f5f7ee10ebb9b9a387f333c03587b50&categoryId=19116&pos=5&price=968.99&productid=209522573&sid=308617&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:22:07.438Z"
+  },
+  {
+   "key": "af697862766895f60b268b66a2d2ed25",
+   "price": "992,98 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "301558",
+    "merchantId": null,
+    "name": "alza.de",
+    "merchantName": null,
+    "rating": {
+     "count": 9628,
+     "avg": 4.87
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "bis Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": null,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=af697862766895f60b268b66a2d2ed25&categoryId=19116&pos=8&price=992.98&productid=209522573&sid=301558&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "4,99 €",
+   "hasAlwaysFreeShipping": false,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:22:07.717Z"
+  },
+  {
+   "key": "6d14561b5144c387386c57aac4f9b4a9",
+   "price": "999,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "286835",
+    "merchantId": null,
+    "name": "expert.de",
+    "merchantName": null,
+    "rating": {
+     "count": 4376,
+     "avg": 2.6
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "DD",
+     "name": "Lastschrift"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Di. 01.12.–Mi. 02.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-12-01",
+    "lateDeliveryDate": "2026-12-02"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=6d14561b5144c387386c57aac4f9b4a9&categoryId=19116&pos=9&price=999.00&productid=209522573&sid=286835&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "6,99 €",
+   "hasAlwaysFreeShipping": false,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:22:07.717Z"
+  },
+  {
+   "key": "6e0a6b19b1a1587e40540bfc2f5b6053",
+   "price": "999,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "285519",
+    "merchantId": null,
+    "name": "mediamarkt.de",
+    "merchantName": null,
+    "rating": {
+     "count": 18594,
+     "avg": 3.85
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "bis Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": 30,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=6e0a6b19b1a1587e40540bfc2f5b6053&categoryId=19116&pos=10&price=999.00&productid=209522573&sid=285519&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:22:07.717Z"
+  }
+ ],
+ "restock": null,
+ "vendors": {
+  "samsung.com/de/shop": {
+   "seller": "samsung.com/de/shop",
+   "tax_status": "unknown",
+   "company_name": "Samsung Electronics GmbH",
+   "vat_id": "DE811710402",
+   "summary": "No source about this seller states its VAT treatment.",
+   "evidence": [],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "smartport (via smartport.de (Marktplatzhändler))": {
+   "seller": "smartport (via smartport.de (Marktplatzhändler))",
+   "tax_status": "unknown",
+   "company_name": "smartport GmbH",
+   "vat_id": "HRB 309104",
+   "summary": "Die Quellen enthalten keine ausreichenden Informationen, um zu bestimmen, ob die Rechnungen der smartport GmbH die Umsatzsteuer gesondert ausweisen, die Differenzbesteuerung anwenden oder unter § 19 UStG als Kleinunternehmer tätig ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://smartport.com/de-de/impressum",
+     "quote": "Vertreiber der Waren und Vertragspartner für alle Käufe im Shop ist die smartport GmbH, Lena-Christ-Straße 2, 82031 Grünwald, Deutschland, Amtsgericht München HRB 309104, vertreten durch den Geschäftsführer Michele Serra.",
+     "retrieved_at": "2026-11-27T16:22:22.296418Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://firmeneintrag.creditreform.de/63071/6210484711/SMARTPORT_GMBH",
+     "quote": "Umsatzsteuer-ID des Unternehmens ist in den [...]",
+     "retrieved_at": "2026-11-27T16:22:22.296418Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://openregister.de/company/DE-HRB-M1114-56182",
+     "quote": "Aktiv\nRegister\nAmtsgericht München HRB 309104",
+     "retrieved_at": "2026-11-27T16:22:22.296418Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "smartspitze.de": {
+   "seller": "smartspitze.de",
+   "tax_status": "margin_scheme",
+   "company_name": "Smartspitze UG (haftungsbeschränkt)",
+   "vat_id": "DE460933908",
+   "summary": "Der Verkäufer verwendet die Differenzbesteuerung nach § 25a UStG, weshalb die Rechnung die Mehrwertsteuer nicht gesondert ausweist und ein Vorsteuerabzug für Geschäftskunden nicht möglich ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://smartspitze.de/kaufen/google-pixel-10-128gb-obsidian",
+     "quote": "Dieser Artikel unterliegt der Differenzbesteuerung gemäß § 25a UStG. Die Mehrwertsteuer ist im Kaufpreis enthalten, wird jedoch auf der Rechnung nicht gesondert ausgewiesen.",
+     "retrieved_at": "2026-11-27T16:22:14.436020Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "zodis.de": {
+   "seller": "zodis.de",
+   "tax_status": "unknown",
+   "company_name": "Zodis.de",
+   "vat_id": "DE815193659",
+   "summary": "Only generic statements found (e.g. prices 'inkl. MwSt.' or a VAT ID); a VAT invoice is not confirmed.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.zodis.de/versandinformationen",
+     "quote": "Alle Preise inkl. MwSt angegeben.",
+     "retrieved_at": "2026-11-27T16:22:13.913179Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.zodis.de/impressum",
+     "quote": "Umsatzsteuer-Identifikationsnummer: DE815193659",
+     "retrieved_at": "2026-11-27T16:22:13.913179Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "groupon.de": {
+   "seller": "groupon.de",
+   "tax_status": "unknown",
+   "company_name": "Groupon GmbH",
+   "vat_id": "DE268596614",
+   "summary": "Only generic statements found (e.g. prices 'inkl. MwSt.' or a VAT ID); a VAT invoice is not confirmed.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.groupon.de/legal/termsofsale3pip",
+     "quote": "Groupon bedeutet Groupon GmbH, ein Unternehmen, das nach den Gesetzen der Bundesrepublik Deutschland gegründet wurde, mit Sitz in Berlin und dessen Büro unter der Adresse c/o Mindspace, Krausenstrasse 9, 10117 Berlin registriert ist. Groupons Handelsregisternummer lautet HRB 123512 B und die Umsatzs",
+     "retrieved_at": "2026-11-27T16:22:14.438720Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.groupon.de/legal/termsofsalegoods",
+     "quote": "Unsere Umsatzsteuer-Identifikationsnummer ist DE289935214.",
+     "retrieved_at": "2026-11-27T16:22:14.438720Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "alza.de": {
+   "seller": "alza.de",
+   "tax_status": "standard_vat",
+   "company_name": "Alza.cz a.s.",
+   "vat_id": "Umsatzsteuer-Identifikationsnummer: ",
+   "summary": "Alza.de stellt für Geschäftskunden Rechnungen mit getrennt ausgewiesener Mehrwertsteuer aus, sodass der Vorsteuerabzug möglich ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.alza.de/verlangerte-garantie-art2541",
+     "quote": "Wenn Sie zum Vorsteuerabzug berechtigt sind, erfolgt die Gutschrift über den Nettobetrag (ohne Mehrwertsteuer).",
+     "retrieved_at": "2026-11-27T16:22:13.413677Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://m.alza.de/verlangerte-garantie-art2541",
+     "quote": "Wenn Sie zum Vorsteuerabzug berechtigt sind, erfolgt die Gutschrift über den Nettobetrag (ohne Mehrwertsteuer).",
+     "retrieved_at": "2026-11-27T16:22:13.413677Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.alza.de/agb",
+     "quote": "Kunden gelten jedenfalls als Unternehmer, sobald sie bei der Bestellung ihre Umsatzsteuer-Identifikationsnummer („USt-IdNr.“) angeben.",
+     "retrieved_at": "2026-11-27T16:22:13.413677Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "expert.de": {
+   "seller": "expert.de",
+   "tax_status": "unknown",
+   "company_name": "expert Arndt",
+   "vat_id": "DE 280055077",
+   "summary": "Only generic statements found (e.g. prices 'inkl. MwSt.' or a VAT ID); a VAT invoice is not confirmed.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.expert.de/block/Footer/Website/Impressum",
+     "quote": "Umsatzsteuer-Identifikationsnummer: DE 280055077",
+     "retrieved_at": "2026-11-27T16:22:11.979088Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.expert.de/shop/unsere-produkte/telekom-navigation/handys-smartphones/refurbished-smartphones/15078021514-smartphone-iphone-14-pro-128gb-sw.html",
+     "quote": "inkl. MwSt., zzgl. Versand für 6.99 €",
+     "retrieved_at": "2026-11-27T16:22:11.979088Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.expert.de/block/Footer/Website/Impressum",
+     "quote": "Steuernummer: 27/200/14642",
+     "retrieved_at": "2026-11-27T16:22:11.979088Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "mediamarkt.de": {
+   "seller": "mediamarkt.de",
+   "tax_status": "standard_vat",
+   "company_name": "Media-Saturn Deutschland GmbH",
+   "vat_id": "DE813879157",
+   "summary": "MediaMarkt erhebt für Geschäftskunden die gesetzliche Mehrwertsteuer von 19 % und bietet eine Rechnung mit ausgewiesener MwSt. an, sodass der Vorsteuerabzug möglich ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.mediamarkt.de/de/product/_ecoflow-stream-ultra-x-mit-2-ja-solar-500w-module-balkonkraftwerk-160847041.html",
+     "quote": "Für Geschäftskunden wird die gesetzliche Mehrwertsteuer (19 %) zusätzlich berechnet.",
+     "retrieved_at": "2026-11-27T16:22:14.500773Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.mediamarkt.de/de/legal/impressum",
+     "quote": "Alle Preise in Euro und inkl. der gesetzlichen Mehrwertsteuer, zzgl. Versandkosten. Verkauf nur an private Endkunden. Abgabe nur in haushaltsüblichen Mengen.",
+     "retrieved_at": "2026-11-27T16:22:14.500773Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.mediamarkt.de/de/campaign/neuesvonApple",
+     "quote": "Alle Preise in Euro und inkl. der gesetzlichen Mehrwertsteuer, zzgl. Versandkosten. Verkauf nur an private Endkunden. Abgabe nur in haushaltsüblichen Mengen.",
+     "retrieved_at": "2026-11-27T16:22:14.500773Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  }
+ },
+ "hidden_offer": null,
+ "reputations": {
+  "smartport (via smartport.de (Marktplatzhändler))": {
+   "gap": "No idealo ratings for smartport (via smartport.de (Marktplatzhändler))",
+   "filled_by": "tavily+nebius (Qwen/Qwen3-30B-A3B-Instruct-2507)",
+   "finding": "Trustpilot: 2.9/5, 3000 reviews. Smartport has an average rating of 2.9 out of 5 on Trustpilot, with mixed feedback on delivery delays and customer service.",
+   "evidence": [
+    {
+     "field": "reputation",
+     "status": "confirmed",
+     "url": "https://ca.trustpilot.com/review/smartport.de?page=3",
+     "quote": "smartport is rated \"Average\" with 2.9 / 5 on Trustpilot",
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
+    },
+    {
+     "field": "reputation",
+     "status": "confirmed",
+     "url": "https://ca.trustpilot.com/review/smartport.de?page=3",
+     "quote": "It is the most aweful online shop I have ever ordered something.",
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
+    },
+    {
+     "field": "reputation",
+     "status": "confirmed",
+     "url": "https://www.trustpilot.com/review/smartport.de",
+     "quote": "If you are looking for a fast and seamlesss experience, then SmartPort is really not it.",
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
+    },
+    {
+     "field": "reputation",
+     "status": "confirmed",
+     "url": "https://nz.trustpilot.com/review/smartport.de?page=2",
+     "quote": "Ordered an iphone 16 and 17 for blackfriday by smartport, but after almost 3 weeks I have still not received my order.",
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
+    },
+    {
+     "field": "reputation",
+     "status": "confirmed",
+     "url": "https://nz.trustpilot.com/review/smartport.de?page=2",
+     "quote": "Flawless Experience – Five Stars!",
+     "retrieved_at": "2026-11-27T16:22:12.223443Z"
+    }
+   ]
+  }
+ },
+ "offer_titles": {
+  "ad03ae218b535465a8301eac5478a859": "Samsung Galaxy S26 Ultra, 256 GB Black",
+  "1d08814febec26c2eba896b350daf7db": "Samsung Galaxy S26 Ultra - 256GB Black - Neuware Dif­fe­renz­be­steu­ert",
+  "0e488e6da6589b5d43f2126d97487f05": "Samsung Galaxy S26 Ultra 256GB Black Neu - dif­fe­renz­be­steu­ert",
+  "91ede8e03e28d232130e4a7e3878cb5a": "Samsung Galaxy S26 Ultra S948 5G Dual Sim 12GB RAM 256GB Black inkl. 19% MwSt.",
+  "3f5f7ee10ebb9b9a387f333c03587b50": "Samsung S26 Ultra 5G 256GB black"
+ }
+}

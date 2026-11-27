@@ -1,0 +1,763 @@
+{
+ "_label": "LIVE SNAPSHOT for demo replay. Captured from the idealo MCP, Tavily and Nebius; not edited.",
+ "captured_at": "2026-11-27T16:28:57+00:00",
+ "query": "Apple iPhone 17 Pro Max 1000GB Cosmic Orange",
+ "variants": [
+  "Apple iPhone 17 Pro Max 1000GB Cosmic Orange",
+  "Apple iPhone 17 Pro 1000GB Cosmic Orange",
+  "Apple iPhone 17 Pro Max 256GB Cosmic Orange",
+  "Apple iPhone 17 Pro Max 1000GB Tiefblau",
+  "Apple iPhone 17 Pro Max 1000GB Silber",
+  "Apple iPhone 17 Pro Max 256GB Tiefblau",
+  "Apple iPhone 17 Pro Max 512GB Cosmic Orange",
+  "Apple iPhone 17 Pro 256GB Cosmic Orange",
+  "Apple iPhone 17 Pro Max 256GB Silber",
+  "Apple iPhone 17 Pro Max 2000GB Cosmic Orange"
+ ],
+ "product": {
+  "itemType": "PRODUCT",
+  "siteId": 1,
+  "name": "Apple iPhone 17 Pro Max",
+  "nameDelta": "1000GB Cosmic Orange",
+  "price": "1.605,00 €",
+  "imageUrl": "https://cdn.idealo.com/folder/Product/207702/1/207702165/s1_produktbild_mobil/apple-iphone-17-pro-max-1000gb-cosmic-orange.jpg",
+  "url": "https://www.idealo.de/preisvergleich/OffersOfProduct/207702165_-iphone-17-pro-max-1000gb-cosmic-orange-apple.html",
+  "userReviewsSummary": {
+   "averageRating": 4.77,
+   "totalReviewCount": 322
+  },
+  "testReportsSummary": {
+   "grade": "1,5"
+  },
+  "totalOfferCount": 30
+ },
+ "offers": [
+  {
+   "key": "cb5758b5ac36ed8d17b9e76b3ba55817",
+   "price": "1.605,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "338528",
+    "merchantId": null,
+    "name": "smartspitze.de",
+    "merchantName": null,
+    "rating": {
+     "count": 6,
+     "avg": 5
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "bis Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": null,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=cb5758b5ac36ed8d17b9e76b3ba55817&categoryId=19116&pos=1&price=1605.00&productid=207702165&sid=338528&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": true,
+   "freshness": "2026-11-27T15:28:46.350Z"
+  },
+  {
+   "key": "012ccb7b1fc4f2021a57327c8c19486b",
+   "price": "1.619,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "326031",
+    "merchantId": null,
+    "name": "kaufen.avatel.de",
+    "merchantName": null,
+    "rating": {
+     "count": 29,
+     "avg": 4.6
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Sa. 28.11.–Mo. 30.11.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-11-28",
+    "lateDeliveryDate": "2026-11-30"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=012ccb7b1fc4f2021a57327c8c19486b&categoryId=19116&pos=3&price=1619.00&productid=207702165&sid=326031&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.350Z"
+  },
+  {
+   "key": "76f7d32268856f36dbc57f01ae154b14",
+   "price": "1.629,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "289287",
+    "merchantId": null,
+    "name": "asgoodasnew.de",
+    "merchantName": null,
+    "rating": {
+     "count": 3150,
+     "avg": 4.56
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "bis Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": 30,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=76f7d32268856f36dbc57f01ae154b14&categoryId=19116&pos=4&price=1629.00&productid=207702165&sid=289287&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "6,90 €",
+   "hasAlwaysFreeShipping": false,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.350Z"
+  },
+  {
+   "key": "c5376f659476d186ac946831b1902d1e",
+   "price": "1.695,57 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "26895",
+    "merchantId": "50541269",
+    "name": "kaufland.de",
+    "merchantName": "mobilfunk-schreiber",
+    "rating": {
+     "count": null,
+     "avg": null
+    },
+    "isMarketplace": true
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "DD",
+     "name": "Lastschrift"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mo. 30.11.–Di. 01.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-11-30",
+    "lateDeliveryDate": "2026-12-01"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=c5376f659476d186ac946831b1902d1e&categoryId=19116&pos=5&price=1695.57&productid=207702165&sid=26895&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.350Z"
+  },
+  {
+   "key": "0e42aa669d61055974f0530c5f181f55",
+   "price": "1.699,99 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "273154",
+    "merchantId": null,
+    "name": "clevertronic.de",
+    "merchantName": null,
+    "rating": {
+     "count": 2940,
+     "avg": 4.68
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "bis Mo. 30.11.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": "2026-11-30"
+   },
+   "freeReturnDays": 30,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=0e42aa669d61055974f0530c5f181f55&categoryId=19116&pos=6&price=1699.99&productid=207702165&sid=273154&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.554Z"
+  },
+  {
+   "key": "cddc78e8a64090ef9613f48f9e91881c",
+   "price": "1.707,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "334700",
+    "merchantId": null,
+    "name": "ibuy-shop.de",
+    "merchantName": null,
+    "rating": {
+     "count": 2,
+     "avg": 5
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "GCH",
+     "name": "Google Checkout"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Di. 01.12.–Mi. 02.12.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-12-01",
+    "lateDeliveryDate": "2026-12-02"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=cddc78e8a64090ef9613f48f9e91881c&categoryId=19116&pos=7&price=1707.00&productid=207702165&sid=334700&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.555Z"
+  },
+  {
+   "key": "76d29e0f409d69a52065c783e4fe1837",
+   "price": "1.734,98 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "62184",
+    "merchantId": null,
+    "name": "voelkner.de",
+    "merchantName": null,
+    "rating": {
+     "count": 17173,
+     "avg": 4.78
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Lieferbar ab 11.12.2026",
+    "deliveryStatus": "UNKNOWN",
+    "earlyDeliveryDate": null,
+    "lateDeliveryDate": null
+   },
+   "freeReturnDays": 30,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=76d29e0f409d69a52065c783e4fe1837&categoryId=19116&pos=8&price=1734.98&productid=207702165&sid=62184&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.555Z"
+  },
+  {
+   "key": "d4aa86eee4fc81b8aced79272a1bafbd",
+   "price": "1.749,00 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "323128",
+    "merchantId": null,
+    "name": "gomibo.de",
+    "merchantName": null,
+    "rating": {
+     "count": 1476,
+     "avg": 4.75
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Sa. 28.11.–Mo. 30.11.2026",
+    "deliveryStatus": "SHORT",
+    "earlyDeliveryDate": "2026-11-28",
+    "lateDeliveryDate": "2026-11-30"
+   },
+   "freeReturnDays": 31,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=d4aa86eee4fc81b8aced79272a1bafbd&categoryId=19116&pos=9&price=1749.00&productid=207702165&sid=323128&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "1,95 €",
+   "hasAlwaysFreeShipping": false,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.555Z"
+  },
+  {
+   "key": "6409bdc49e298aa3ad181356f4ff1e0c",
+   "price": "1.750,94 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "20481",
+    "merchantId": null,
+    "name": "electronis.de",
+    "merchantName": null,
+    "rating": {
+     "count": 6932,
+     "avg": 4.82
+    },
+    "isMarketplace": false
+   },
+   "payments": [
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "COD",
+     "name": "Nachnahme"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    },
+    {
+     "costCode": "AMZP",
+     "name": "Amazon Pay"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mi. 02.12.–Fr. 04.12.2026",
+    "deliveryStatus": "MEDIUM",
+    "earlyDeliveryDate": "2026-12-02",
+    "lateDeliveryDate": "2026-12-04"
+   },
+   "freeReturnDays": null,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=6409bdc49e298aa3ad181356f4ff1e0c&categoryId=19116&pos=10&price=1750.94&productid=207702165&sid=20481&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T15:28:46.555Z"
+  }
+ ],
+ "restock": null,
+ "vendors": {
+  "smartspitze.de": {
+   "seller": "smartspitze.de",
+   "tax_status": "margin_scheme",
+   "company_name": "Smartspitze UG (haftungsbeschränkt)",
+   "vat_id": "DE460933908",
+   "summary": "Der Verkäufer unterliegt der Differenzbesteuerung gemäß § 25a UStG, weshalb die Mehrwertsteuer nicht gesondert auf der Rechnung ausgewiesen wird und ein Vorsteuerabzug für Geschäftskunden nicht möglich ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://smartspitze.de/kaufen/google-pixel-10-128gb-obsidian",
+     "quote": "Dieser Artikel unterliegt der Differenzbesteuerung gemäß § 25a UStG. Die Mehrwertsteuer ist im Kaufpreis enthalten, wird jedoch auf der Rechnung nicht gesondert ausgewiesen.",
+     "retrieved_at": "2026-11-27T16:28:53.159175Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "kaufen.avatel.de": {
+   "seller": "kaufen.avatel.de",
+   "tax_status": "margin_scheme",
+   "company_name": "avatel.de",
+   "vat_id": null,
+   "summary": "Der Verkäufer avatel.de stellt Rechnungen nach der Differenzbesteuerung gemäß § 25a UStG aus, sodass ein Vorsteuerabzug für Geschäftskunden möglich ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://kaufen.avatel.de/greenworks-aimowbot-c6-c6a1-m%C3%A4hroboter-600-m%C2%B2-rtkvision-neu-ovp",
+     "quote": "Rechnung nach Differenzbesteuerung gemäß § 25a UStG.",
+     "retrieved_at": "2026-11-27T16:28:52.713312Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://kaufen.avatel.de/apple-watch-series-12-42mm-5g-lichtgold-sportarmband-sand-s-m-neu-ovp",
+     "quote": "Rechnung nach Differenzbesteuerung gemäß § 25a UStG.",
+     "retrieved_at": "2026-11-27T16:28:52.713312Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "asgoodasnew.de": {
+   "seller": "asgoodasnew.de",
+   "tax_status": "margin_scheme",
+   "company_name": "asgoodasnew electronics GmbH",
+   "vat_id": "DE263602886",
+   "summary": "Die Rechnungen enthalten keine separate Ausweisung der Umsatzsteuer, da die Artikel der Differenzbesteuerung nach § 25a UStG unterliegen.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://asgoodasnew.de/AGB-allgem-Verbraucherinformationen",
+     "quote": "Die von uns angebotenen Artikel unterliegen der Differenzbesteuerung nach § 25a UStG. Die USt. wird somit nicht separat auf der Rechnung ausgewiesen.",
+     "retrieved_at": "2026-11-27T16:28:57.633464Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://asgoodasnew.de/Handys/Samsung/Galaxy-S23/Galaxy-S23-oxid",
+     "quote": "Die von uns angebotenen Artikel unterliegen der Differenzbesteuerung nach § 25a UStG. Die USt. wird somit nicht separat auf der Rechnung ausgewiesen.",
+     "retrieved_at": "2026-11-27T16:28:57.633464Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://asgoodasnew.de/Handys/Samsung/Galaxy-S24/Galaxy-S24-oxid",
+     "quote": "Die von uns angebotenen Artikel unterliegen der Differenzbesteuerung nach § 25a UStG. Die USt. wird somit nicht separat auf der Rechnung ausgewiesen.",
+     "retrieved_at": "2026-11-27T16:28:57.633464Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://asgoodasnew.de/Handys/Apple/iPhone-XS",
+     "quote": "Die von uns angebotenen Artikel unterliegen der Differenzbesteuerung nach § 25a UStG. Die USt. wird somit nicht separat auf der Rechnung ausgewiesen.",
+     "retrieved_at": "2026-11-27T16:28:57.633464Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://asgoodasnew.de/Tablets/Apple/iPad-mini",
+     "quote": "Die von uns angebotenen Artikel unterliegen der Differenzbesteuerung nach § 25a UStG. Die USt. wird somit nicht separat auf der Rechnung ausgewiesen.",
+     "retrieved_at": "2026-11-27T16:28:57.633464Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "mobilfunk-schreiber (via kaufland.de)": {
+   "seller": "mobilfunk-schreiber (via kaufland.de)",
+   "tax_status": "unknown",
+   "company_name": "Kaufland Mobil",
+   "vat_id": "DE122265872",
+   "summary": "No source about this seller states its VAT treatment.",
+   "evidence": [],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "clevertronic.de": {
+   "seller": "clevertronic.de",
+   "tax_status": "standard_vat",
+   "company_name": "Volt Venture GmbH",
+   "vat_id": "HR B 12145",
+   "summary": "Clevertronic.de bietet Rechnungen mit ausgewiesener Umsatzsteuer an, sodass Geschäftskunden den Vorsteuerabzug geltend machen können.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.clevertronic.de/agb",
+     "quote": "Bei Waren, die beim Verkäufer einer Differenzbesteuerung nach § 25 a UStG unterliegen, wird keine Umsatzsteuer ausgewiesen. Im Übrigen verstehen sich die Preise als Endpreise inklusive der gesetzlichen Umsatzsteuer, zzgl. Versandkosten.",
+     "retrieved_at": "2026-11-27T16:28:54.035212Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.clevertronic.de/kaufen/handy-kaufen/google/pixel-11-pro",
+     "quote": "Nur Artikel mit ausgewiesener Umsatzsteuer anzeigen.",
+     "retrieved_at": "2026-11-27T16:28:54.035212Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.clevertronic.de/kaufen/handy-kaufen/samsung/galaxy/a37",
+     "quote": "Geschäftskunde und die Umsatzsteuer ist dir wichtig? Nur Artikel mit ausgewiesener Umsatzsteuer anzeigen.",
+     "retrieved_at": "2026-11-27T16:28:54.035212Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.clevertronic.de/kaufen/macbook/neo",
+     "quote": "Nur Artikel mit ausgewiesener Umsatzsteuer anzeigen.",
+     "retrieved_at": "2026-11-27T16:28:54.035212Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.clevertronic.de/kaufen/handy-kaufen/apple/iphone-se-2020",
+     "quote": "Nur Artikel mit ausgewiesener Umsatzsteuer anzeigen.",
+     "retrieved_at": "2026-11-27T16:28:54.035212Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "ibuy-shop.de": {
+   "seller": "ibuy-shop.de",
+   "tax_status": "unknown",
+   "company_name": "iBuy GmbH",
+   "vat_id": null,
+   "summary": "Only generic statements found (e.g. prices 'inkl. MwSt.' or a VAT ID); a VAT invoice is not confirmed.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.ibuy-shop.de/tablets/apple",
+     "quote": "Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten",
+     "retrieved_at": "2026-11-27T16:28:56.323907Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.ibuy-shop.de/agb",
+     "quote": "Die in unserem Shop angegebenen Preise sind Endpreise und enthalten die jeweils gültige gesetzliche Umsatzsteuer, sofern sich aus der Beschreibung der Waren nichts anderes ergibt.",
+     "retrieved_at": "2026-11-27T16:28:56.323907Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.ibuy-shop.de/handy/apple/apple-iphone-17_34235_21284",
+     "quote": "\\ inkl. ges. MwSt. zzgl. Versandkosten",
+     "retrieved_at": "2026-11-27T16:28:56.323907Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.ibuy-shop.de/handy/apple/apple-iphone-17-pro-max_34238_21319",
+     "quote": "\\ inkl. ges. MwSt. zzgl. Versandkosten",
+     "retrieved_at": "2026-11-27T16:28:56.323907Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.ibuy-shop.de/zubehoer/computerzubehoer/huawei-brovi-h153-381-5g-cpe-5s-router-weiss_34371_21731",
+     "quote": "\\Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten und ggf. Nachnahmegebühren, wenn nicht anders beschrieben",
+     "retrieved_at": "2026-11-27T16:28:56.323907Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.ibuy-shop.de/gaming/sony-ps5-playstation-5-slim-disc-1-tb-white_34544_22497",
+     "quote": "\\Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten und ggf. Nachnahmegebühren, wenn nicht anders beschrieben",
+     "retrieved_at": "2026-11-27T16:28:56.323907Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "voelkner.de": {
+   "seller": "voelkner.de",
+   "tax_status": "standard_vat",
+   "company_name": "RE-INvent Retail GmbH",
+   "vat_id": "DE309928677",
+   "summary": "voelkner.de bietet Geschäftskunden Nettopreise mit separater Ausweisung der Mehrwertsteuer auf der Rechnung, sodass der Vorsteuerabzug möglich ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.voelkner.de/AGB-Geschaeftskunden.html",
+     "quote": "Die Preisangaben im Geschäftskundenbereich des Onlineshops sind Nettopreise, auf die zusätzlich die gültige gesetzliche Mehrwertsteuer zu entrichten ist.",
+     "retrieved_at": "2026-11-27T16:28:52.675449Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.voelkner.de/AGB-Geschaeftskunden.html",
+     "quote": "Auf der Rechnung werden neben dem Nettopreis für die Ware die Preise für ergänzende Leistungen ausgewiesen: Verpackung, Versand, Premium-Versand, etc. sowie die jeweils zum Zeitpunkt der Rechnungsstellung gültige Mehrwertsteuer.",
+     "retrieved_at": "2026-11-27T16:28:52.675449Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.voelkner.de/AGB-Privatkunden.html",
+     "quote": "Sofern sich aus unserer Produktbeschreibung nichts anderes ergibt, handelt es sich bei den angegebenen Preisen um Gesamtpreise, die die gesetzliche Umsatzsteuer enthalten.",
+     "retrieved_at": "2026-11-27T16:28:52.675449Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  },
+  "gomibo.de": {
+   "seller": "gomibo.de",
+   "tax_status": "standard_vat",
+   "company_name": "MobielWerkt B.V.",
+   "vat_id": "DE331344046",
+   "summary": "Gomibo.de ist ein geschäftlich tätiges Unternehmen, das für Geschäftskunden Rechnungen mit getrennt ausgewiesener Mehrwertsteuer ausstellt, sodass der Vorsteuerabzug möglich ist.",
+   "evidence": [
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.gomibo.de/business/kundenservice/bestellen-und-bezahlen",
+     "quote": "Du erhältst innerhalb eines Werktages eine Rechnung exklusive Mehrwertsteuer und kannst dann bezahlen.",
+     "retrieved_at": "2026-11-27T16:28:56.288586Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.gomibo.de/business/kundenservice/bestellen-und-bezahlen",
+     "quote": "Hast Du die Bestellung bereits inklusive Mehrwertsteuer bezahlt? Dann wird die Mehrwertsteuer innerhalb von 5 Werktagen auf Dein Konto zurückerstattet und Du kannst die Rechnung ohne Mehrwertsteuer in Deinem Konto finden.",
+     "retrieved_at": "2026-11-27T16:28:56.288586Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.gomibo.de/impressum",
+     "quote": "USt-IdNr.: DE331344046",
+     "retrieved_at": "2026-11-27T16:28:56.288586Z"
+    },
+    {
+     "field": "tax_status",
+     "status": "confirmed",
+     "url": "https://www.gomibo.de/kundenservice/ueber-gomibo/sicherheitunddatenschutz/niederlandischer_ecommerce_thuiswinkel",
+     "quote": "Umsatzsteuer-Identifikationsnummer: DE331344046",
+     "retrieved_at": "2026-11-27T16:28:56.288586Z"
+    }
+   ],
+   "judged_by": "llm:Qwen/Qwen3-30B-A3B-Instruct-2507"
+  }
+ },
+ "hidden_offer": null,
+ "reputations": {
+  "mobilfunk-schreiber (via kaufland.de)": {
+   "gap": "No idealo ratings for mobilfunk-schreiber (via kaufland.de)",
+   "filled_by": "tavily+nebius (Qwen/Qwen3-30B-A3B-Instruct-2507)",
+   "finding": "No review site with a verifiable rating for this seller. Treat as unrated.",
+   "evidence": []
+  }
+ },
+ "offer_titles": {
+  "cb5758b5ac36ed8d17b9e76b3ba55817": "Apple iPhone 17 Pro Max 1TB Cosmic Orange Neu - dif­fe­renz­be­steu­ert",
+  "012ccb7b1fc4f2021a57327c8c19486b": "Apple iPhone 17 Pro Max 1TB Cosmic Orange 6,9 Zoll 120 Hz 48 MP 12 GB RAM / Neu / OVP / Dif­fe­renz­be­steu­ert",
+  "76f7d32268856f36dbc57f01ae154b14": "Apple iPhone 17 Pro Max 1TB Cosmic Orange | NEU | ori­gi­nal­ver­packt (OVP) | dif­fe­renz­be­steu­ert | AN716355",
+  "c5376f659476d186ac946831b1902d1e": "Apple iPhone 17 Pro Max , 17,5 cm (6.9\"), 2868 x 1320 Pixel, 1 TB, 48 MP, iOS 26, Orange",
+  "0e42aa669d61055974f0530c5f181f55": "Apple iPhone 17 Pro Max 1TB Cosmic Orange",
+  "cddc78e8a64090ef9613f48f9e91881c": "Apple iPhone 17 Pro Max 1TB Cosmic Orange",
+  "76d29e0f409d69a52065c783e4fe1837": "Preis nur mit voelkner+ | Apple iPhone 17 Pro Max Cosmic Orange 1 TB EEK A (A - G) 17.5 cm (6.9 Zoll)",
+  "d4aa86eee4fc81b8aced79272a1bafbd": "Apple iPhone 17 Pro Max 1TB Orange",
+  "6409bdc49e298aa3ad181356f4ff1e0c": "Apple iPhone 17 Pro Max 1TB/12GB RAM Dual-SIM cos­mic-oran­ge"
+ }
+}
