@@ -63,5 +63,15 @@ def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
         return Verdict(recommendation=Recommendation.VERIFY, best_offer_id=offer.offer_id,
                        premium=premium, reasons=reasons)
 
+    reasons = [f"Best offer for you: {offer.seller.name} at €{cost.effective_cost_high}."]
+    if cost.recoverable_vat:
+        reasons.append(f"You pay €{cost.total_gross} upfront and can reclaim €{cost.recoverable_vat} VAT "
+                       "(the seller confirms VAT on its invoices).")
+    cheaper_gross = [(o, c) for o, c in ranked[1:] if c.total_gross < cost.total_gross]
+    if cheaper_gross:
+        other_offer, other = min(cheaper_gross, key=lambda pair: pair[1].total_gross)
+        reasons.append(f"{other_offer.seller.name} is cheaper upfront (€{other.total_gross}) but does not "
+                       f"confirm VAT invoices: €{other.effective_cost_low} if it issues one, "
+                       f"€{other.effective_cost_high} if not. Ask them before choosing it.")
     return Verdict(recommendation=Recommendation.BUY, best_offer_id=offer.offer_id, premium=premium,
-                   reasons=[f"Best offer for you: {offer.seller.name} at €{cost.effective_cost_high}."])
+                   reasons=reasons)

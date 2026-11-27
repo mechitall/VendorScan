@@ -70,11 +70,13 @@ def normal_price_from_history(history: dict) -> Decimal | None:
 
 
 async def tavily_search(query: str, *, client: httpx.AsyncClient, max_results: int = 5,
-                        topic: str = "general") -> dict:
-    response = await client.post(TAVILY_URL, json={
-        "query": query, "max_results": max_results, "topic": topic,
-        "search_depth": "basic", "include_answer": True,
-    }, headers={"Authorization": f"Bearer {require('TAVILY_API_KEY')}"}, timeout=20)
+                        topic: str = "general", include_domains: list[str] | None = None,
+                        depth: str = "basic") -> dict:
+    payload = {"query": query, "max_results": max_results, "topic": topic,
+               "search_depth": depth, "include_answer": True}
+    if include_domains:
+        payload["include_domains"] = include_domains
+    response = await client.post(TAVILY_URL, json=payload, headers={"Authorization": f"Bearer {require('TAVILY_API_KEY')}"}, timeout=20)
     response.raise_for_status()
     return response.json()
 

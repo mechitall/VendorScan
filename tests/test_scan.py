@@ -91,3 +91,20 @@ class LiveSnapshotTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LiveMacbookSnapshotTests(unittest.TestCase):
+    """Replays the real MacBook Air capture: business and private buyers get different winners."""
+
+    SNAP = Path(__file__).parent.parent / "fixtures" / "live_macbook_air_m4.json"
+
+    def test_business_and_private_pick_different_shops(self):
+        result = replay(self.SNAP)
+        private = result.by_buyer[BuyerType.PRIVATE][0].offer.seller.name
+        business = result.by_buyer[BuyerType.BUSINESS_VAT][0].offer.seller.name
+        self.assertNotEqual(private, business)
+        self.assertEqual(result.verdicts[BuyerType.BUSINESS_VAT].recommendation, Recommendation.BUY)
+
+    def test_gaps_name_what_idealo_lacked(self):
+        gaps = replay(self.SNAP).gaps
+        self.assertTrue(any("VAT treatment" in g.gap for g in gaps))

@@ -57,6 +57,7 @@ class Seller(BaseModel):
     rating: float | None = None
     rating_count: int | None = None
     is_marketplace: bool | None = None
+    domain: str | None = None  # shop website from idealo, e.g. "galaxus.de" (the marketplace for marketplace sellers)
 
 
 class Offer(BaseModel):
