@@ -1,39 +1,41 @@
 # VendorScan × Norma
 
-How our team (one human with Claude Code, one with Codex) kept agent-written
-code consistent with Norma.
+How our team of two (GitHub accounts `mechitall` and `edrethardo`), working with coding
+agents, used Norma on this repository.
 
 ## Submission note (paste into the form)
 
-> **Finding we accepted:** `print()` in production code (Maintainability), in
-> `vendorscan/idealo_auth.py` (`_open_browser`). During the one-time idealo
-> OAuth sign-in, the user must see the sign-in URL in the terminal when no
-> browser opens. Logging hides INFO by default, so switching would make sign-in
-> silently hang for anyone without a desktop browser. It runs once per machine,
-> never in the request path, and the reason is written next to the line.
+> **Finding we accepted:** rule `py-maint-no-print-1.0`, "print() in production code"
+> (Medium, Maintainability), in `vendorscan/idealo_auth.py` line 105 (`_open_browser`).
+> During the one-time idealo sign-in the user must see the sign-in URL in the terminal if no
+> browser opens. An INFO log is not shown unless logging is configured, so the user could
+> wait for a sign-in link they never see. The line runs only during sign-in, not while
+> handling a scan result, and the reason is written next to it.
 >
-> **How the policy kept authors consistent:** our policy bans hardcoded keys,
-> floats for money and the `requests` package, and `AGENTS.md` makes both agents
-> (Claude Code and Codex) run a Norma check before committing. Example of one
-> agent repeating another's mistake: the first idealo client (Codex, PR #2)
-> printed its output with `print()`, and Norma's scan of `main` flagged it as
-> Maintainability issues. Claude later wrote new modules and repeated the same
-> pattern; Norma flagged `print()` again on PR #6. We fixed it for both authors
-> (logging, explicit stdout for CLI output) and kept one deliberate exception,
-> documented above. Norma also caught both agents hardcoding their own timeouts
-> (20, 30, 60 s); they now share named timeouts in `vendorscan/settings.py`.
->
-> _TODO before submitting: confirm in Norma (Issues tab of the `main` scan) that
-> the 3 Medium Maintainability issues are the `print()` calls in `idealo_client.py`._
+> **Consistency between authors:** the first idealo client (PR #2) printed its output with
+> `print()`, and Norma's scan of `main` lists three Medium findings of this rule in that
+> version of `idealo_client.py`. The same pattern came back in later code by another author,
+> and Norma reported it on PR #6. Those calls were replaced; the one exception above stays.
+> Our shared rules (no committed keys, `Decimal` for money, `httpx` instead of `requests`)
+> are written down for every agent. Our Norma policy did not return any rules through Norma
+> MCP when we last checked, so we do not claim that Norma enforced them.
 
 ## Workspace and policy
 
-- **Workspace:** _<team name>_ (fill in)
-- **Policy rules** (created in the Norma workspace):
+- **Workspace:** _<workspace name as shown in Norma>_ (fill in before submitting)
+- **Intended policy rules:**
   1. No hardcoded API keys, tokens or secrets in any file. Keys live in a
      git-ignored `.env`; idealo OAuth tokens in a git-ignored `.idealo_oauth.json`.
   2. Money uses `decimal.Decimal`, never `float`, in `vendorscan/`.
   3. Ban the `requests` package; use `httpx` (already used by the MCP SDK).
+- **Status:** the "Policies" ruleset for this repository returned **0 rules** through Norma
+  MCP on 27 November (last checked shortly after 18:28 CET). Create the policy under
+  **New policy** (Describe, Review, **Apply**), for example:
+  `Ban the requests package in every repository. Use httpx instead. Severity: High.`
+  Only after `get_rules_for_ruleset` returns it, update the submission note above.
+- The open issues Norma MCP lists for `main` (three `print()` calls, `idealo_client.py`
+  lines 80, 88 and 91) come from an older scan; those calls are no longer in the file.
+  Run a new scan in Norma before submitting so the project score reflects the current code.
 
 ## Found and fixed
 
@@ -65,12 +67,19 @@ policy rules listed above, including in the submission note.
 
 ## Pull requests
 
-All changes went through pull requests, each checked by the Norma GitHub App
-before merging. Authors: `mechitall` (Claude Code) and `edrethardo` (Codex).
+Norma GitHub App comments, as checked on 27 November:
+
+| PR | Author | Norma comment |
+|---|---|---|
+| #1, #3, #6 | `mechitall` | yes, merged |
+| #7, #8 | `edrethardo` (with Claude Code) | yes, merged |
+| #2 | `edrethardo` | none |
+| #4, #5 | `mechitall` | none |
 
 ## Norma in the agent loop
 
-`AGENTS.md` instructs every coding agent to run a Norma check on the files it
-changed before each commit and to either fix findings or explain in the PR why
-one stays. The Norma MCP server is configured for both agents:
-`.mcp.json` (Claude Code) and `.codex/config.toml` (Codex).
+`AGENTS.md` instructs every coding agent to run a Norma check on the files it changed before
+each commit, and to fix findings or explain in the PR why one stays. The Norma MCP server is
+set up in `.mcp.json` (Claude Code) and `.codex/config.toml` (Codex). This was not followed
+for every commit: for example, PR #8 relied on the pull request check, as its description
+says. On PR #7 the fix was checked with `live_check` before the commit.
