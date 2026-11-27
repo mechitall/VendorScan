@@ -2,7 +2,7 @@
 
 **Tagline:** Know the deal before you buy.
 
-**Event:** Agentic Hackathon: From Research to Commerce — idealo + Norma Partner Challenges; Tavily integration, 27 November 2026  
+**Event:** Agentic Hackathon: From Research to Commerce — idealo + Norma + Nebius Partner Challenges; Tavily integration, 27 November 2026  
 **Submission deadline:** 19:45 CET (internal target: 19:25)  
 **Repository:** https://github.com/mechitall/VendorScan  
 **Challenge brief:** https://aiagentsberlin.xyz/ah3-brief-idealo.pdf
@@ -292,7 +292,7 @@ Show the business/private ranking reversal first, followed by the uncertain rese
 
 ## 15. Partner integrations — Tavily and Norma (added scope)
 
-Primary track: Agentic Commerce / idealo. Additional challenge: Norma code governance. Tavily is the runtime evidence-retrieval provider. Confirm eligibility for multiple partner submissions and the exact Norma brief with mentors; its PDF could not be retrieved during this update.
+Primary track: Agentic Commerce / idealo. Additional challenges: Norma code governance and Nebius Evidence to Action. Tavily is the runtime evidence-retrieval provider. Confirm eligibility for multiple partner submissions and the exact Norma brief with mentors; its PDF could not be retrieved during this update.
 
 ### Tavily — runtime vendor research (P0)
 
@@ -322,3 +322,57 @@ Norma is a development-time quality gate, not a runtime dependency of VendorScan
 - Both: integrate and rehearse before the existing 18:30 feature freeze. Do not delay the idealo MVP for optional Norma enhancements.
 - Submission: demonstrate idealo data -> Tavily evidence -> buyer-specific decision; show Norma's real PR governance evidence separately. Confirm whether separate submissions or a shared entry are required.
 - Done: authenticated Tavily search/extract, evidence with source URLs, and at least one actual Norma PR check with documented outcome. Credentials and partner access remain external prerequisites.
+
+
+## 16. Nebius Token Factory — Evidence to Action (P0)
+
+Challenge brief: https://aiagentsberlin.xyz/ah3-brief-nebius-evidence-to-action.pdf
+
+The PDF was unavailable when updating this plan; confirm exact judging, submission and model requirements with the Nebius mentor. The following is the proposed implementation based on the previously reported challenge concept, not a verified transcription of its rules.
+
+### Runtime integration
+
+Use Nebius Token Factory as the actual inference provider for the existing VendorScan agent. Do not create a second agent stack or deploy GPU infrastructure. Use the OpenAI-compatible Python SDK:
+
+```python
+import os
+from openai import AsyncOpenAI
+
+client = AsyncOpenAI(
+    api_key=os.environ["NEBIUS_API_KEY"],
+    base_url=os.getenv("NEBIUS_BASE_URL", "https://api.tokenfactory.nebius.com/v1"),
+    timeout=30.0,
+    max_retries=1,
+)
+model = os.environ["NEBIUS_MODEL"]
+```
+
+Install `openai`. Choose an available model with tested tool-calling support from the authenticated Token Factory catalog; verify a real tool call before building around it. Keep keys out of Git and logs. See https://dev.nebius.com/cookbook/first-agent-on-nebius.
+
+### Evidence-to-action loop
+
+1. Understand buyer constraints and select exact product variant.
+2. Call idealo MCP tools to discover offers and price history.
+3. Call Tavily search/extract to collect offer-level evidence.
+4. Use Nebius inference to identify missing/conflicting facts and choose bounded follow-up searches or alternatives. Untrusted web content cannot authorize tools or purchases.
+5. Extract structured claims with source IDs; validate schema and source references. Unsupported claims become UNKNOWN. Compute costs and apply safety gates deterministically in Python (Decimal, not model arithmetic).
+6. Choose BUY / WAIT / VERIFY / AVOID with a source-backed explanation. BUY means prepare the purchase for human approval, never execute a payment. VERIFY means request clarification or continue bounded research; WAIT means recommend alternatives or waiting.
+7. Display decision, evidence, uncertainty, selected tool calls and actual model/provider information. Record observable tool trace and latency, not hidden chain-of-thought; redact secrets and personal information.
+
+Bound the loop to two additional research rounds and a small set of relevant offers. On timeout, model error or unresolved evidence, preserve partial findings and return VERIFY rather than fabricate a result. Verify policy gates independently of LLM output.
+
+### Two demo cases
+
+- Normal: credible seller with offer-specific VAT evidence and transparent costs; calculate buyer-specific effective price and prepare a purchase recommendation.
+- Challenge: conflicting tax statements, scarce product, unknown mandatory fees or weak seller evidence; agent autonomously requests further evidence, evaluates an alternative, and returns VERIFY/WAIT if uncertainty persists. A price premium alone does not establish fraud.
+- Use real idealo/Tavily results where available and clearly label illustrative fixtures. Both paths should use actual Nebius inference; show the difference in observable actions, not just different prose.
+
+### Acceptance and submission
+
+- Live Token Factory authentication, model selection and actual inference/tool-calling smoke test.
+- At least one real end-to-end execution with Nebius, idealo and Tavily; normal and challenge cases reproducible.
+- Evidence-linked decisions and a visible change of action when information is insufficient or conflicting.
+- Record actual model ID, tool calls, outcome, and token usage if returned by the API; no fabricated screenshots or results.
+- Norma checks remain a separate development-time demonstration.
+- Engineer A owns Nebius provider configuration, tool orchestration and decision gates; Engineer B owns Tavily, evidence UI and Norma setup. Timebox Nebius initial smoke test to 15 minutes. Keep the existing feature freeze and submission target.
+- Confirm with organizers whether the three challenges require separate submissions and any mandatory artifacts. API credentials and live access are still prerequisites.
