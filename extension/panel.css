@@ -112,3 +112,8 @@
 #vendorscan-panel .vs-link:hover { text-decoration: underline; }
 #vendorscan-panel .vs-finding-detail { margin: 6px 0 0; color: var(--vs-ink); font-size: 12px; }
 #vendorscan-panel .vs-inline-link { font-weight: 600; text-decoration: underline; text-decoration-color: rgba(15, 76, 134, .35); }
+#vendorscan-panel .vs-next { border: 1px solid #0a3761; border-radius: 8px; padding: 8px 10px; margin: 8px 0; }
+#vendorscan-panel .vs-next p { margin: 4px 0; font-size: 12px; }
+#vendorscan-panel .vs-next-action { font-weight: 700; }
+#vendorscan-panel .vs-next ul { margin: 4px 0; padding-left: 16px; font-size: 11px; overflow-wrap: anywhere; }
+#vendorscan-panel .vs-signals { font-size: 12px; margin: 6px 0; }

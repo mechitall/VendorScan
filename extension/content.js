@@ -83,6 +83,13 @@
     if (port) port.disconnect();
     Object.assign(state, { result: null, steps: new Map(), loading: true, error: null, showAll: false });
     render();
+    const query = {
+      name: productName().slice(0, 200), title: document.title.slice(0, 300),
+      product_id: productId() || null, slug: productSlug()?.slice(0, 300) || null,
+      fresh, offer_titles: offerTitles(),
+    };
+    state.query = query;
+    state.decisions = {};
     port = chrome.runtime.connect({ name: "vendorscan:scan" });
     port.onMessage.addListener((event) => {
       if (event.type === "step") state.steps.set(event.id, event);
@@ -91,17 +98,15 @@
       else if (event.type === "error") { state.error = event.message; state.loading = false; }
       render();
     });
-    port.postMessage({
-      name: productName().slice(0, 200), title: document.title.slice(0, 300),
-      product_id: productId() || null, slug: productSlug()?.slice(0, 300) || null,
-      fresh, offer_titles: offerTitles(),
-    });
+    port.postMessage(query);
   }
 
   function loadDemo(name) {
     if (port) port.disconnect();
     Object.assign(state, { result: null, steps: new Map(), loading: true, error: null, showAll: false });
     render();
+    state.query = { demo: name };
+    state.decisions = {};
     chrome.runtime.sendMessage({ type: "vendorscan:fetch", path: `/api/demo/${name}` }, (reply) => {
       state.loading = false;
       if (reply?.ok) state.result = reply.data; else state.error = reply?.error || "Extension error";
@@ -135,7 +140,13 @@
     const verdict = r.verdicts[state.buyer];
     const rows = r.by_buyer[state.buyer] || [];
     const best = rows[0];
-    const [label, tone] = VERDICT[verdict.recommendation] || [verdict.recommendation, ""];
+    // A rule "Buy" is only a candidate: the headline says Buy once the live model clears it.
+    const decision = state.decisions?.[state.buyer];
+    const cleared = decision?.data?.action === "PREPARE_PURCHASE";
+    let [label, tone] = VERDICT[verdict.recommendation] || [verdict.recommendation, ""];
+    if (verdict.recommendation === "BUY" && !cleared) {
+      [label, tone] = !decision || decision.pending ? ["Checking…", ""] : ["Check first", "vs-warn"];
+    }
     const card = el("section", { class: `vs-verdict ${tone}` }, el("div", { class: "vs-pill" }, label));
 
     if (verdict.recommendation === "BUY" && best) {
@@ -162,6 +173,59 @@
         el("ul", {}, more.map((x) => el("li", {}, linkify(x, verdict.links))))));
     }
     return card;
+  }
+
+  // The next step is chosen by a live Nebius model; the server's rules limit what it may choose.
+  const STEP_LABEL = {
+    INVESTIGATE: "Research more", COMPARE_ALTERNATIVE: "Compare another offer",
+    REQUEST_CLARIFICATION: "Ask the seller first", PREPARE_PURCHASE: "Ready for your approval",
+    WAIT: "Wait",
+  };
+  const STATUS_LABEL = {
+    model: "chosen by Nebius", rejected: "model answer blocked by safety rules", error: "model call failed",
+  };
+
+  function nextStep(buyer) {
+    const entry = state.decisions[buyer];
+    if (!entry) {
+      const decisions = state.decisions;
+      decisions[buyer] = { pending: true };
+      chrome.runtime.sendMessage({ type: "vendorscan:decide", body: { ...state.query, fresh: false, buyer } },
+        (reply) => {
+          decisions[buyer] = reply?.ok ? { data: reply.data } : { error: reply?.error || "Extension error" };
+          if (decisions === state.decisions) render();
+        });
+    }
+    const { data: d, error } = state.decisions[buyer] || {};
+    const box = (...children) => el("section", { class: "vs-next" },
+      el("div", { class: "vs-section-title" }, "Next step"), ...children);
+    if (error) return box(el("div", { class: "vs-error" }, `No model decision: ${error}`));
+    if (!d) return box(el("div", { class: "vs-hint" }, "Nebius is deciding…"));
+    return box(
+      el("div", { class: "vs-next-action" }, STEP_LABEL[d.action] || d.action,
+        el("span", { class: "vs-hint" }, ` · ${STATUS_LABEL[d.status] || d.status}`)),
+      el("p", {}, d.reason),
+      d.seller_question && el("blockquote", {}, d.seller_question),
+      el("details", {},
+        el("summary", {}, `Model calls: ${d.trace.length} · ${d.model} on ${d.provider}`),
+        d.trace.map((step) => el("p", {},
+          `${step.action || "no answer"} (${step.status}, ${step.latency_ms} ms)`,
+          step.search_query ? ` · searched “${step.search_query}”, ${step.sources.length} source(s)` : null)),
+        el("ul", {}, d.facts.filter((f) => f.material || d.evidence_ids.includes(f.id))
+          .map((f) => el("li", {}, `${f.id}${f.material ? " (open)" : ""}: ${f.text}`)))));
+  }
+
+  // idealo's own signals for this product: price level over time and delivery of the top offer.
+  function signals(r) {
+    const h = r.price_history;
+    const top = (r.by_buyer[state.buyer] || [])[0];
+    const delivery = top && r.delivery?.[top.offer.offer_id];
+    const lines = [
+      h && `30 days on idealo: ${euro(h.min_price)}–${euro(h.max_price)}, now ${euro(h.current_price)}`
+        + (h.change_percent == null ? "" : ` (${Number(h.change_percent) > 0 ? "+" : ""}${h.change_percent}%)`),
+      delivery && `Delivery (${shortSeller(top.offer.seller.name)}): ${delivery}`,
+    ].filter(Boolean);
+    return lines.length ? el("section", { class: "vs-signals" }, lines.map((t) => el("div", {}, t))) : null;
   }
 
   function offerRow({ offer, cost }, index, researching) {
@@ -236,7 +300,8 @@
     }
     if (state.loading && !r?.source?.startsWith("replay")) children.push(progress());
     if (state.error) children.push(el("div", { class: "vs-error" }, state.error));
-    if (r) children.push(verdictCard(r), offerList(r), !state.loading && findings(r));
+    if (r) children.push(verdictCard(r), !state.loading && nextStep(state.buyer), signals(r), offerList(r),
+      !state.loading && findings(r));
     if (!state.loading) {
       children.push(el("footer", { class: "vs-footer" },
         el("span", {}, "Estimates, not tax advice."),

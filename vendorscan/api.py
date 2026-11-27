@@ -9,16 +9,20 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import re
 import time
 from decimal import Decimal
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
+from .models import BuyerType
+from .next_action import Decision, choose_next_action
 from .orchestrator import ScanResult, replay, scan
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
@@ -27,7 +31,26 @@ DEMOS = {"redmagic": "live_redmagic_astra2.json", "macbook": "live_macbook_air_m
 CACHE_SECONDS = 600
 
 app = FastAPI(title="VendorScan local API", docs_url=None, redoc_url=None)
-app.add_middleware(CORSMiddleware, allow_origin_regex=r"^chrome-extension://[a-p]{32}$",
+EXTENSION_ORIGIN = r"^chrome-extension://[a-p]{32}$"
+LOCAL_HOSTS = ["127.0.0.1", "localhost"]
+
+
+@app.middleware("http")
+async def refuse_web_pages(request: Request, call_next):
+    """CORS only hides responses; a web page could still start a paid scan. Refuse it outright."""
+    origin = request.headers.get("origin")
+    if origin:
+        allowed = re.match(EXTENSION_ORIGIN, origin) is not None
+    else:
+        allowed = request.headers.get("sec-fetch-site") not in ("cross-site", "same-site")
+    if not allowed:
+        return JSONResponse({"detail": "Only the VendorScan extension may call this API."}, status_code=403)
+    return await call_next(request)
+
+
+# A foreign host name pointing at this machine (DNS rebinding) is refused too.
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=LOCAL_HOSTS)
+app.add_middleware(CORSMiddleware, allow_origin_regex=EXTENSION_ORIGIN,
                    allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 
 _cache: dict[tuple, tuple[float, ScanResult]] = {}
@@ -49,12 +72,21 @@ class ScanRequest(BaseModel):
     offer_titles: dict[str, str] = Field(default_factory=dict, max_length=80)
 
 
+def _clean_titles(offer_titles: dict[str, str]) -> dict[str, str]:
+    return {k: v[:200] for k, v in offer_titles.items() if re.fullmatch(r"[0-9a-f]{32}", k)}
+
+
+def _scan_key(request: ScanRequest, titles: dict[str, str]) -> tuple:
+    """One key for scan and decide, so a decision finds the scan it belongs to."""
+    return (request.name, request.title, request.slug, request.product_id, request.budget,
+            tuple(sorted(titles.items())))
+
+
 @app.post("/api/scan")
 async def scan_product(request: ScanRequest) -> dict:
     """Scan the idealo product the user is looking at."""
-    titles = {k: v[:200] for k, v in request.offer_titles.items() if re.fullmatch(r"[0-9a-f]{32}", k)}
-    key = (request.name, request.title, request.slug, request.product_id, request.budget,
-           tuple(sorted(titles.items())))
+    titles = _clean_titles(request.offer_titles)
+    key = _scan_key(request, titles)
     cached = _cache.get(key)
     if cached and not request.fresh and time.time() - cached[0] < CACHE_SECONDS:
         return cached[1].model_dump(mode="json")
@@ -70,9 +102,8 @@ async def scan_product(request: ScanRequest) -> dict:
 @app.post("/api/scan/stream")
 async def scan_stream(request: ScanRequest) -> StreamingResponse:
     """Same scan, streamed as newline-delimited JSON events so the panel can show progress."""
-    titles = {k: v[:200] for k, v in request.offer_titles.items() if re.fullmatch(r"[0-9a-f]{32}", k)}
-    key = (request.name, request.title, request.slug, request.product_id, request.budget,
-           tuple(sorted(titles.items())))
+    titles = _clean_titles(request.offer_titles)
+    key = _scan_key(request, titles)
     queue: asyncio.Queue = asyncio.Queue()
 
     async def run() -> None:
@@ -114,9 +145,33 @@ def demo(demo: str, budget: Decimal | None = Query(default=None, gt=0)) -> dict:
     return replay(FIXTURES / DEMOS[demo], budget=budget).model_dump(mode="json")
 
 
+class DecideRequest(ScanRequest):
+    buyer: BuyerType
+    demo: str | None = Field(default=None, max_length=40)
+
+
+@app.post("/api/decide")
+async def decide_next_step(request: DecideRequest) -> Decision:
+    """Let a live Nebius model choose the next step for an already scanned product."""
+    if request.demo:
+        if request.demo not in DEMOS:
+            raise HTTPException(status_code=404, detail=f"Unknown demo. Choose from: {', '.join(DEMOS)}")
+        result = replay(FIXTURES / DEMOS[request.demo], budget=request.budget)
+    else:
+        cached = _cache.get(_scan_key(request, _clean_titles(request.offer_titles)))
+        if not cached:
+            raise HTTPException(status_code=409, detail="Scan this product first.")
+        result = cached[1]
+    return await choose_next_action(result, request.buyer)
+
+
 def main() -> None:
     import uvicorn
 
+    # Show each Nebius call (model, action, latency) in the server terminal.
+    trace = logging.getLogger("vendorscan.next_action")
+    trace.addHandler(logging.StreamHandler())
+    trace.setLevel(logging.INFO)
     uvicorn.run(app, host="127.0.0.1", port=8765, log_level="info")
 
 

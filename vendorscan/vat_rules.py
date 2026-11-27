@@ -50,6 +50,11 @@ def _clean(title: str | None) -> str:
     return (title or "").replace("\xad", "").replace("­", "")
 
 
+def states_vat(title: str | None) -> bool:
+    """True if this offer title itself says that 19 % VAT is included."""
+    return bool(_VAT_19.search(_clean(title)))
+
+
 def condition_from_title(title: str | None) -> str | None:
     """"new", "used" or None (no title) from an offer title on idealo's page.
 
