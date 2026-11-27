@@ -43,14 +43,14 @@ class FileTokenStorage(TokenStorage):
 
     def _read(self) -> dict:
         try:
-            return json.loads(self.path.read_text())
+            return json.loads(self.path.read_text(encoding="utf-8"))
         except (FileNotFoundError, json.JSONDecodeError):
             return {}
 
     def _write(self, key: str, value: dict) -> None:
         data = self._read()
         data[key] = value
-        self.path.write_text(json.dumps(data, indent=2))
+        self.path.write_text(json.dumps(data, indent=2), encoding="utf-8")
         os.chmod(self.path, 0o600)
 
     async def get_tokens(self) -> OAuthToken | None:
@@ -127,7 +127,7 @@ def refresh_if_expiring(path: Path = CACHE_FILE) -> bool:
     refreshes on 401, so without this every session silently breaks after an hour.
     """
     try:
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding="utf-8"))
         tokens, client = data["tokens"], data["client"]
     except (FileNotFoundError, KeyError, json.JSONDecodeError):
         return False
@@ -144,7 +144,7 @@ def refresh_if_expiring(path: Path = CACHE_FILE) -> bool:
     fresh = response.json()
     fresh.setdefault("refresh_token", tokens["refresh_token"])
     data["tokens"] = fresh
-    path.write_text(json.dumps(data, indent=2))
+    path.write_text(json.dumps(data, indent=2), encoding="utf-8")
     os.chmod(path, 0o600)
     return True
 

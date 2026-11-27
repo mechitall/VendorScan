@@ -284,7 +284,7 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
             "reputations": {k: v.model_dump(mode="json") for k, v in (reputations or {}).items()},
             "offer_titles": offer_titles,
         }
-        save.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1))
+        save.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1), encoding="utf-8")
     result = build_result(query, product, offers, variants=variants, restock=restock,
                           vendors=vendors, hidden=hidden, reputations=reputations,
                           offer_titles=offer_titles, budget=budget)
@@ -298,7 +298,7 @@ VAT_WORDS = {"standard_vat": "VAT invoice", "margin_scheme": "margin scheme, no 
 
 def replay(path: Path, *, budget: Decimal | None = None) -> ScanResult:
     """Rebuild a result from a saved snapshot (no network), for demo backup and tests."""
-    snap = json.loads(path.read_text())
+    snap = json.loads(path.read_text(encoding="utf-8"))
     restock = RestockReport.model_validate(snap["restock"]) if snap.get("restock") else None
     vendors = {k: VendorVat.model_validate(v) for k, v in (snap.get("vendors") or {}).items()}
     hidden = Gap.model_validate(snap["hidden_offer"]) if snap.get("hidden_offer") else None
