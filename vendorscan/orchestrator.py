@@ -8,6 +8,7 @@ import argparse
 import asyncio
 import json
 import re
+import sys
 from collections.abc import Awaitable, Callable
 from datetime import datetime, timezone
 from decimal import Decimal
@@ -319,7 +320,8 @@ def main() -> None:
     result = asyncio.run(scan(args.query, variant=args.variant, budget=args.budget,
                               with_restock=not args.no_restock, with_vendors=not args.no_vendors,
                               save=args.save))
-    print(result.model_dump_json(indent=2))
+    # CLI: the JSON result is this command's output, written to stdout for piping.
+    sys.stdout.write(result.model_dump_json(indent=2) + "\n")
 
 
 if __name__ == "__main__":

@@ -17,6 +17,7 @@ from pydantic import BaseModel, Field
 from .config import require
 from .cost_engine import price_premium
 from .models import Evidence, EvidenceStatus
+from .settings import TAVILY_TIMEOUT
 
 TAVILY_URL = "https://api.tavily.com/search"
 QUOTE_LIMIT = 300
@@ -77,7 +78,7 @@ async def tavily_search(query: str, *, client: httpx.AsyncClient, max_results: i
                "search_depth": depth, "include_answer": True}
     if include_domains:
         payload["include_domains"] = include_domains
-    response = await client.post(TAVILY_URL, json=payload, headers={"Authorization": f"Bearer {require('TAVILY_API_KEY')}"}, timeout=20)
+    response = await client.post(TAVILY_URL, json=payload, headers={"Authorization": f"Bearer {require('TAVILY_API_KEY')}"}, timeout=TAVILY_TIMEOUT)
     response.raise_for_status()
     return response.json()
 

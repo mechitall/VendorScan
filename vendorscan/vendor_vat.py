@@ -18,6 +18,7 @@ from pydantic import BaseModel, Field
 from . import llm
 from .models import Evidence, EvidenceStatus, Offer, TaxStatus
 from .restock import QUOTE_LIMIT, _normalize, _sources, tavily_search
+from .settings import SELLER_RESEARCH_SECONDS
 
 MAX_PARALLEL = 8
 MAX_SELLERS = 8          # only the cheapest sellers can win the ranking
@@ -186,7 +187,7 @@ async def research_vendors(offers: list[Offer], client: httpx.AsyncClient | None
         else:
             async with semaphore:
                 try:
-                    result = await asyncio.wait_for(research_vendor(offer, client), timeout=15)
+                    result = await asyncio.wait_for(research_vendor(offer, client), timeout=SELLER_RESEARCH_SECONDS)
                     _cache[key] = (time.time(), result)
                 except (httpx.HTTPError, RuntimeError, ValueError, asyncio.TimeoutError) as error:
                     result = VendorVat(seller=offer.seller.name,

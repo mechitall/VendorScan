@@ -7,6 +7,7 @@ import os
 import httpx
 
 from .config import load_env, require
+from .settings import LLM_TIMEOUT
 
 BASE_URL = "https://api.tokenfactory.nebius.com/v1"
 # Non-reasoning model: answers directly, so JSON never gets cut off by hidden reasoning.
@@ -33,7 +34,7 @@ async def chat_json(system: str, user: str, *, client: httpx.AsyncClient,
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": user}],
         },
-        timeout=60,
+        timeout=LLM_TIMEOUT,
     )
     response.raise_for_status()
     choice = response.json()["choices"][0]

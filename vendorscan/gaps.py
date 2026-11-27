@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 from . import llm
 from .models import Evidence, EvidenceStatus
 from .restock import QUOTE_LIMIT, _normalize, _sources, tavily_search
+from .settings import REPUTATION_SECONDS
 
 
 def _decimal(value) -> Decimal | None:
@@ -134,7 +135,7 @@ async def find_reputations(sellers: list[str], limit: int = 4) -> dict[str, Gap]
     async with httpx.AsyncClient() as client:
         async def one(seller: str) -> tuple[str, Gap]:
             try:
-                return seller, await asyncio.wait_for(find_reputation(seller, client), timeout=20)
+                return seller, await asyncio.wait_for(find_reputation(seller, client), timeout=REPUTATION_SECONDS)
             except (httpx.HTTPError, RuntimeError, ValueError, asyncio.TimeoutError) as error:
                 return seller, Gap(gap=f"No idealo ratings for {seller}",
                                    finding=f"Review search failed ({type(error).__name__}).")

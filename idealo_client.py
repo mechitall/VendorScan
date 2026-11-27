@@ -2,10 +2,13 @@
 import argparse
 import asyncio
 import json
+import logging
 import os
+import sys
 from contextlib import asynccontextmanager
 
 URL = 'https://mcp.idealo.com/mcp'
+log = logging.getLogger(__name__)
 
 
 class IdealoClient:
@@ -65,16 +68,17 @@ class IdealoClient:
 async def connect(token=None, country='DE'):
     """Connect to idealo. Uses IDEALO_ACCESS_TOKEN if set, else browser OAuth (cached)."""
     import httpx
+    from vendorscan.settings import IDEALO_TIMEOUT
     from mcp import ClientSession
     from mcp.client.streamable_http import streamable_http_client
 
     token = token or os.environ.get('IDEALO_ACCESS_TOKEN')
     if token:
-        http = httpx.AsyncClient(headers={'Authorization': f'Bearer {token}'}, timeout=30)
+        http = httpx.AsyncClient(headers={'Authorization': f'Bearer {token}'}, timeout=IDEALO_TIMEOUT)
     else:
         from vendorscan.idealo_auth import oauth_provider, refresh_if_expiring
         await asyncio.to_thread(refresh_if_expiring)  # idealo returns 403, not 401, on expiry
-        http = httpx.AsyncClient(auth=oauth_provider(), timeout=30)
+        http = httpx.AsyncClient(auth=oauth_provider(), timeout=IDEALO_TIMEOUT)
     async with http:
         async with streamable_http_client(URL, http_client=http) as (read, write, _):
             async with ClientSession(read, write) as session:
@@ -85,7 +89,7 @@ async def connect(token=None, country='DE'):
 async def smoke(query, index):
     async with connect() as client:
         tools = await client.session.list_tools()
-        print('Tools:', ', '.join(tool.name for tool in tools.tools))
+        log.info('Tools: %s', ', '.join(tool.name for tool in tools.tools))
         result = await client.search(query)
         products = result['results']
         if not products:
@@ -93,10 +97,11 @@ async def smoke(query, index):
         if not 0 <= index < len(products):
             raise ValueError('Product index out of range')
         product = products[index]
-        print('Selected product:', product['name'])
+        log.info('Selected product: %s', product['name'])
         offers = await client.offers(product)
         history = await client.history(product)
-        print(json.dumps({'product': product, 'offers': offers, 'history': history}, ensure_ascii=False, indent=2))
+        # CLI smoke test: the JSON is this command's output.
+        sys.stdout.write(json.dumps({'product': product, 'offers': offers, 'history': history}, ensure_ascii=False, indent=2) + '\n')
 
 
 if __name__ == '__main__':
@@ -104,4 +109,5 @@ if __name__ == '__main__':
     parser.add_argument('query', nargs='?', default='Apple MacBook Air M2')
     parser.add_argument('--index', type=int, default=0)
     args = parser.parse_args()
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
     asyncio.run(smoke(args.query, args.index))

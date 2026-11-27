@@ -11,6 +11,7 @@ from __future__ import annotations
 import asyncio
 import base64
 import json
+import logging
 import os
 import time
 import webbrowser
@@ -22,6 +23,10 @@ import httpx
 
 from mcp.client.auth import OAuthClientProvider, TokenStorage
 from mcp.shared.auth import OAuthClientInformationFull, OAuthClientMetadata, OAuthToken
+
+from .settings import TOKEN_TIMEOUT
+
+log = logging.getLogger(__name__)
 
 SERVER_URL = "https://mcp.idealo.com/mcp"
 CALLBACK_PORT = 6274
@@ -95,6 +100,8 @@ def _wait_for_callback(timeout: float) -> tuple[str, str | None]:
 
 
 async def _open_browser(url: str) -> None:
+    # Deliberately print(), not logging: during the one-time sign-in the user must see this
+    # URL in the terminal if no browser opens, and logging hides INFO by default.
     print(f"Opening idealo sign-in in your browser. If it doesn't open, visit:\n{url}")
     webbrowser.open(url)
 
@@ -129,7 +136,7 @@ def refresh_if_expiring(path: Path = CACHE_FILE) -> bool:
         return False
     if not tokens.get("refresh_token"):
         return False
-    response = httpx.post(TOKEN_ENDPOINT, timeout=20, data={
+    response = httpx.post(TOKEN_ENDPOINT, timeout=TOKEN_TIMEOUT, data={
         "grant_type": "refresh_token", "refresh_token": tokens["refresh_token"],
         "client_id": client["client_id"]})
     if response.status_code != 200:
@@ -166,8 +173,9 @@ async def _sign_in() -> None:
 
     async with connect() as client:
         tools = await client.session.list_tools()
-        print("Signed in. idealo tools:", ", ".join(t.name for t in tools.tools))
+        log.info("Signed in. idealo tools: %s", ", ".join(t.name for t in tools.tools))
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
     asyncio.run(_sign_in())
