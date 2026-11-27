@@ -328,7 +328,7 @@ Norma is a development-time quality gate, not a runtime dependency of VendorScan
 
 Challenge brief: https://aiagentsberlin.xyz/ah3-brief-nebius-evidence-to-action.pdf
 
-The PDF was unavailable when updating this plan; confirm exact judging, submission and model requirements with the Nebius mentor. The following is the proposed implementation based on the previously reported challenge concept, not a verified transcription of its rules.
+The official challenge brief has now been verified against the two screenshots supplied by the team. Either main track qualifies. Award: US$500 in Token Factory credits for one winning team (not cash); each eligible winning team member also receives an AIB Builder Pass (€99). Registered participants must submit on time and meet all four requirements.
 
 ### Runtime integration
 
@@ -356,7 +356,7 @@ Install `openai`. Choose an available model with tested tool-calling support fro
 3. Call Tavily search/extract to collect offer-level evidence.
 4. Use Nebius inference to identify missing/conflicting facts and choose bounded follow-up searches or alternatives. Untrusted web content cannot authorize tools or purchases.
 5. Extract structured claims with source IDs; validate schema and source references. Unsupported claims become UNKNOWN. Compute costs and apply safety gates deterministically in Python (Decimal, not model arithmetic).
-6. Choose BUY / WAIT / VERIFY / AVOID with a source-backed explanation. BUY means prepare the purchase for human approval, never execute a payment. VERIFY means request clarification or continue bounded research; WAIT means recommend alternatives or waiting.
+6. A live Nebius model call must choose the decision or next action with a source-backed explanation; it must not merely narrate a hard-coded decision. Validate the selected action against deterministic safety gates. Choose BUY / WAIT / VERIFY / AVOID. BUY means prepare the purchase for human approval, never execute a payment. VERIFY means request clarification or continue bounded research; WAIT means recommend alternatives or waiting.
 7. Display decision, evidence, uncertainty, selected tool calls and actual model/provider information. Record observable tool trace and latency, not hidden chain-of-thought; redact secrets and personal information.
 
 Bound the loop to two additional research rounds and a small set of relevant offers. On timeout, model error or unresolved evidence, preserve partial findings and return VERIFY rather than fabricate a result. Verify policy gates independently of LLM output.
@@ -376,3 +376,27 @@ Bound the loop to two additional research rounds and a small set of relevant off
 - Norma checks remain a separate development-time demonstration.
 - Engineer A owns Nebius provider configuration, tool orchestration and decision gates; Engineer B owns Tavily, evidence UI and Norma setup. Timebox Nebius initial smoke test to 15 minutes. Keep the existing feature freeze and submission target.
 - Confirm with organizers whether the three challenges require separate submissions and any mandatory artifacts. API credentials and live access are still prerequisites.
+
+
+### 16.1 Verified Nebius challenge requirements and judging
+
+Source: official challenge brief screenshots supplied by the team.
+
+| Criterion | Points |
+|---|---:|
+| Token Factory use | 35 |
+| Usefulness | 30 |
+| Handling uncertainty | 25 |
+| Clarity | 10 |
+
+Mandatory requirements:
+1. Runtime model calls run on Nebius Token Factory, and a live call determines the decision or next step. Coding assistant usage does not count.
+2. Demonstrate one routine case reaching a decision or next step.
+3. Demonstrate one incomplete or conflicting evidence case and the agent's response.
+4. Show actual Token Factory calls behind the decision (log, trace, or Token Factory usage view).
+
+Implementation: expose a structured action enum (INVESTIGATE, COMPARE_ALTERNATIVE, REQUEST_CLARIFICATION, PREPARE_PURCHASE, WAIT) selected by the live model using validated evidence and computed costs. The application executes allowed read-only actions or presents a purchase for approval; deterministic gates reject unsupported or unsafe actions. Log actual model ID, selected action, evidence IDs, tool calls and response status, without secrets or private reasoning. No hard-coded demo answers.
+
+Submission: one captain submits via standard AI Agents Berlin submission by Friday 27 November, 19:45 CET. Include a demo or runnable prototype judges can open, and a short model-and-use note naming the actual models exactly as listed in Token Factory and identifying where each live call makes a decision. Create NEBIUS.md with actual model IDs and observed traces after testing; do not claim unrun tests. Confirm cross-challenge submission procedure separately if necessary.
+
+Prioritize actual live inference and uncertainty handling (60/100 points) before visual polish. Keep internal submission target 19:25.
