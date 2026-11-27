@@ -57,6 +57,13 @@ class VerdictTests(unittest.TestCase):
         verdict = self.decide_for(raw_offer("905,00 €"), listed_lowest=D("900"))
         self.assertEqual(verdict.recommendation, Recommendation.BUY)
 
+    def test_unrated_seller_suggests_rated_alternative(self):
+        offers = [offer_from_idealo(raw_offer("900,00 €", count=None), "Tablet"),
+                  offer_from_idealo({**raw_offer("912,00 €"), "key": "k2"}, "Tablet")]
+        verdict = decide(rank_offers(offers, BuyerType.PRIVATE), BuyerType.PRIVATE, listed_lowest=D("900"))
+        self.assertEqual(verdict.recommendation, Recommendation.VERIFY)
+        self.assertIn("Rated alternative: Shop GmbH at €912.00 (+€12.00).", verdict.reasons)
+
     def test_business_must_verify_unknown_vat(self):
         verdict = self.decide_for(raw_offer("905,00 €"), BuyerType.BUSINESS_VAT, listed_lowest=D("900"))
         self.assertEqual(verdict.recommendation, Recommendation.VERIFY)

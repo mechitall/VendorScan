@@ -144,8 +144,10 @@
       }
     } else {
       card.append(el("div", { class: "vs-headline" }, verdict.reasons[0] || ""));
+      const tip = verdict.reasons.find((x) => x.startsWith("Rated alternative"));
+      if (tip) card.append(el("div", { class: "vs-insight" }, tip));
     }
-    const more = verdict.recommendation === "BUY" ? verdict.reasons.slice(1) : verdict.reasons.slice(1);
+    const more = verdict.reasons.slice(1).filter((x) => !x.startsWith("Rated alternative"));
     if (more.length) {
       card.append(el("details", { class: "vs-why" }, el("summary", {}, "Why?"),
         el("ul", {}, more.map((x) => el("li", {}, x)))));

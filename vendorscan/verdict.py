@@ -63,6 +63,12 @@ def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
         reasons.append("Shipping or fees unknown: confirm the final price at checkout.")
     if not offer.seller.rating_count:
         reasons.append(f"{offer.seller.name} has no ratings on idealo.")
+        rated = [(o, c) for o, c in ranked[1:] if o.seller.rating_count]
+        if rated:
+            alt, alt_cost = rated[0]
+            extra = alt_cost.effective_cost_high - cost.effective_cost_high
+            reasons.append(f"Rated alternative: {alt.seller.name} at €{alt_cost.effective_cost_high}"
+                           + (f" (+€{extra})." if extra > 0 else "."))
     if reasons:
         return Verdict(recommendation=Recommendation.VERIFY, best_offer_id=offer.offer_id,
                        premium=premium, reasons=reasons)
