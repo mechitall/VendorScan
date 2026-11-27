@@ -1,0 +1,34 @@
+{
+  "_label": "ILLUSTRATIVE FIXTURE - not live idealo data. Demo A from PLAN.md section 9.",
+  "offers": [
+    {
+      "offer_id": "demo-a",
+      "product_name": "Example laptop (refurbished)",
+      "condition": "refurbished",
+      "seller": {"name": "Example Refurb Shop", "is_marketplace": false},
+      "item_gross": "900.00",
+      "shipping_gross": "0.00",
+      "mandatory_fees_gross": "0.00",
+      "tax_status": "margin_scheme"
+    },
+    {
+      "offer_id": "demo-b",
+      "product_name": "Example laptop (new)",
+      "condition": "new",
+      "seller": {"name": "Example Retailer", "is_marketplace": false},
+      "item_gross": "999.00",
+      "shipping_gross": "0.00",
+      "mandatory_fees_gross": "0.00",
+      "tax_status": "standard_vat",
+      "vat_rate": "0.19"
+    },
+    {
+      "offer_id": "demo-c",
+      "product_name": "Example laptop (marketplace)",
+      "condition": "new",
+      "seller": {"name": "Example Marketplace Seller", "is_marketplace": true},
+      "item_gross": "870.00",
+      "tax_status": "unknown"
+    }
+  ]
+}
