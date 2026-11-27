@@ -109,6 +109,15 @@
     });
   }
 
+  // Turn seller names in a reason into links to that exact offer on idealo.
+  function linkify(text, links) {
+    const names = Object.keys(links || {}).sort((a, b) => b.length - a.length);
+    if (!names.length) return [text];
+    const escaped = names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    return text.split(new RegExp(`(${escaped.join("|")})`)).filter(Boolean).map((part) =>
+      links[part] ? link(links[part], shortSeller(part), "vs-inline-link") : part);
+  }
+
   // ---------- views ----------
   function progress() {
     const steps = [...state.steps.values()];
@@ -143,14 +152,14 @@
           `${euro(saved)} less than the cheapest price on idealo (${shortSeller(cheapest.offer.seller.name)}), after VAT.`));
       }
     } else {
-      card.append(el("div", { class: "vs-headline" }, verdict.reasons[0] || ""));
+      card.append(el("div", { class: "vs-headline" }, linkify(verdict.reasons[0] || "", verdict.links)));
       const tip = verdict.reasons.find((x) => x.startsWith("Rated alternative"));
-      if (tip) card.append(el("div", { class: "vs-insight" }, tip));
+      if (tip) card.append(el("div", { class: "vs-insight" }, linkify(tip, verdict.links)));
     }
     const more = verdict.reasons.slice(1).filter((x) => !x.startsWith("Rated alternative"));
     if (more.length) {
       card.append(el("details", { class: "vs-why" }, el("summary", {}, "Why?"),
-        el("ul", {}, more.map((x) => el("li", {}, x)))));
+        el("ul", {}, more.map((x) => el("li", {}, linkify(x, verdict.links))))));
     }
     return card;
   }

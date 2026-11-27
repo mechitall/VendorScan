@@ -111,3 +111,4 @@
 #vendorscan-panel .vs-link { background: none; border: 0; padding: 0; color: var(--vs-navy-2); font-size: 11px; }
 #vendorscan-panel .vs-link:hover { text-decoration: underline; }
 #vendorscan-panel .vs-finding-detail { margin: 6px 0 0; color: var(--vs-ink); font-size: 12px; }
+#vendorscan-panel .vs-inline-link { font-weight: 600; text-decoration: underline; text-decoration-color: rgba(15, 76, 134, .35); }

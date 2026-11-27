@@ -63,6 +63,7 @@ class VerdictTests(unittest.TestCase):
         verdict = decide(rank_offers(offers, BuyerType.PRIVATE), BuyerType.PRIVATE, listed_lowest=D("900"))
         self.assertEqual(verdict.recommendation, Recommendation.VERIFY)
         self.assertIn("Rated alternative: Shop GmbH at €912.00 (+€12.00).", verdict.reasons)
+        self.assertIn("Shop GmbH", verdict.links)
 
     def test_business_must_verify_unknown_vat(self):
         verdict = self.decide_for(raw_offer("905,00 €"), BuyerType.BUSINESS_VAT, listed_lowest=D("900"))

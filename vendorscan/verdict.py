@@ -20,9 +20,12 @@ class Verdict(BaseModel):
     best_offer_id: str | None = None
     premium: Decimal | None = None
     reasons: list[str] = Field(default_factory=list)
+    # Seller name -> link to that offer, for every seller the reasons mention, so the
+    # panel can turn names into links the buyer can check.
+    links: dict[str, str] = Field(default_factory=dict)
 
 
-def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
+def _decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
            listed_lowest: Decimal | None = None, restock_signal: bool = False,
            budget: Decimal | None = None) -> Verdict:
     if not ranked:
@@ -90,3 +93,13 @@ def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, *,
         reasons.append(f"{other_offer.seller.name} is cheaper upfront (€{other.total_gross}) but {why}.")
     return Verdict(recommendation=Recommendation.BUY, best_offer_id=offer.offer_id, premium=premium,
                    reasons=reasons)
+
+
+def decide(ranked: list[tuple[Offer, CostBreakdown]], buyer: BuyerType, **kwargs) -> Verdict:
+    verdict = _decide(ranked, buyer, **kwargs)
+    text = " ".join(verdict.reasons)
+    for offer, _ in ranked:
+        name = offer.seller.name
+        if name in text and offer.offer_url and name not in verdict.links:
+            verdict.links[name] = offer.offer_url
+    return verdict
