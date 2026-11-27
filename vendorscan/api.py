@@ -7,6 +7,8 @@ Start: python -m vendorscan.api   (then load the extension from ./extension)
 """
 from __future__ import annotations
 
+import asyncio
+import json
 import re
 import time
 from decimal import Decimal
@@ -14,6 +16,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 from .orchestrator import ScanResult, replay, scan
@@ -62,6 +65,45 @@ async def scan_product(request: ScanRequest) -> dict:
         raise HTTPException(status_code=404, detail=str(error)) from error
     _cache[key] = (time.time(), result)
     return result.model_dump(mode="json")
+
+
+@app.post("/api/scan/stream")
+async def scan_stream(request: ScanRequest) -> StreamingResponse:
+    """Same scan, streamed as newline-delimited JSON events so the panel can show progress."""
+    titles = {k: v[:200] for k, v in request.offer_titles.items() if re.fullmatch(r"[0-9a-f]{32}", k)}
+    key = (request.name, request.title, request.slug, request.product_id, request.budget,
+           tuple(sorted(titles.items())))
+    queue: asyncio.Queue = asyncio.Queue()
+
+    async def run() -> None:
+        cached = _cache.get(key)
+        try:
+            if cached and not request.fresh and time.time() - cached[0] < CACHE_SECONDS:
+                result = cached[1]
+            else:
+                result = await scan(request.name, product_id=request.product_id, slug=request.slug,
+                                    title=request.title, budget=request.budget, offer_titles=titles,
+                                    on_event=queue.put)
+                _cache[key] = (time.time(), result)
+            await queue.put({"type": "result", "result": result.model_dump(mode="json")})
+        except LookupError as error:
+            await queue.put({"type": "error", "message": str(error)})
+        except Exception:  # noqa: BLE001 - report to the panel instead of dropping the stream
+            await queue.put({"type": "error", "message": "Scan failed. Check the server log."})
+            raise
+        finally:
+            await queue.put(None)
+
+    async def events():
+        task = asyncio.create_task(run())
+        try:
+            while (event := await queue.get()) is not None:
+                yield json.dumps(event, ensure_ascii=False, default=str) + "\n"
+        finally:
+            if not task.done():
+                task.cancel()
+
+    return StreamingResponse(events(), media_type="application/x-ndjson")
 
 
 @app.get("/api/demo/{demo}")

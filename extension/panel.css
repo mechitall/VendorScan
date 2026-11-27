@@ -1,51 +1,113 @@
-#vendorscan-panel { --vs-bg: #ffffff; --vs-fg: #1d2433; --vs-muted: #667085; --vs-line: #e4e7ec;
-  --vs-accent: #0b5cff; --vs-buy: #0f7b3f; --vs-wait: #b54708; --vs-verify: #6941c6; --vs-avoid: #b42318;
-  position: fixed; top: 80px; right: 0; z-index: 2147483000; display: flex; align-items: flex-start;
-  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--vs-fg); }
-#vendorscan-panel * { box-sizing: border-box; }
-#vendorscan-panel .vs-toggle { writing-mode: vertical-rl; transform: rotate(180deg); background: var(--vs-accent);
-  color: #fff; border: 0; border-radius: 0 8px 8px 0; padding: 12px 6px; font-weight: 600; cursor: pointer; }
-#vendorscan-panel .vs-inner { display: none; width: 440px; max-height: calc(100vh - 100px); overflow-y: auto;
-  background: var(--vs-bg); border: 1px solid var(--vs-line); border-right: 0; border-radius: 10px 0 0 10px;
-  box-shadow: 0 12px 32px rgba(16, 24, 40, .18); }
-#vendorscan-panel.vs-open .vs-inner { display: block; }
-#vendorscan-panel .vs-header { display: flex; gap: 8px; align-items: baseline; padding: 12px 16px;
-  border-bottom: 1px solid var(--vs-line); }
-#vendorscan-panel .vs-header span, #vendorscan-panel .vs-muted { color: var(--vs-muted); }
-#vendorscan-panel .vs-body { padding: 12px 16px 16px; }
-#vendorscan-panel .vs-product { margin-bottom: 10px; }
-#vendorscan-panel .vs-chip { font-size: 11px; padding: 1px 6px; border-radius: 99px; background: #ecfdf3; color: var(--vs-buy); }
-#vendorscan-panel .vs-chip-warn { background: #fffaeb; color: var(--vs-wait); }
-#vendorscan-panel .vs-tabs { display: flex; gap: 4px; margin-bottom: 10px; }
-#vendorscan-panel .vs-tab { flex: 1; border: 1px solid var(--vs-line); background: #f9fafb; border-radius: 6px;
-  padding: 6px 4px; cursor: pointer; font-size: 12px; color: var(--vs-fg); }
-#vendorscan-panel .vs-tab.vs-active { background: var(--vs-accent); border-color: var(--vs-accent); color: #fff; }
-#vendorscan-panel .vs-verdict { border-left: 4px solid var(--vs-muted); background: #f9fafb; border-radius: 6px;
-  padding: 10px 12px; margin-bottom: 12px; }
-#vendorscan-panel .vs-verdict ul { margin: 6px 0 0; padding-left: 18px; }
-#vendorscan-panel .vs-badge { font-weight: 700; font-size: 18px; letter-spacing: .04em; }
-#vendorscan-panel .vs-buy { border-color: var(--vs-buy); } #vendorscan-panel .vs-buy .vs-badge { color: var(--vs-buy); }
-#vendorscan-panel .vs-wait { border-color: var(--vs-wait); } #vendorscan-panel .vs-wait .vs-badge { color: var(--vs-wait); }
-#vendorscan-panel .vs-verify { border-color: var(--vs-verify); } #vendorscan-panel .vs-verify .vs-badge { color: var(--vs-verify); }
-#vendorscan-panel .vs-avoid { border-color: var(--vs-avoid); } #vendorscan-panel .vs-avoid .vs-badge { color: var(--vs-avoid); }
-#vendorscan-panel .vs-offers { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-#vendorscan-panel .vs-offers th { text-align: left; font-weight: 600; color: var(--vs-muted); font-size: 11px;
-  border-bottom: 1px solid var(--vs-line); padding: 4px; }
-#vendorscan-panel .vs-offers td { border-bottom: 1px solid var(--vs-line); padding: 6px 4px; vertical-align: top; }
-#vendorscan-panel .vs-offers td:not(:first-child), #vendorscan-panel .vs-offers th:not(:first-child) { text-align: right; white-space: nowrap; }
-#vendorscan-panel .vs-best td { background: #f5f8ff; }
-#vendorscan-panel .vs-tags { margin-top: 3px; display: flex; flex-wrap: wrap; gap: 3px; }
-#vendorscan-panel .vs-tag { font-size: 10px; padding: 0 5px; border-radius: 4px; background: #f2f4f7; color: var(--vs-muted); }
-#vendorscan-panel .vs-tax-standard_vat { background: #ecfdf3; color: var(--vs-buy); }
-#vendorscan-panel .vs-tax-margin_scheme, #vendorscan-panel .vs-tax-small_business,
-#vendorscan-panel .vs-tax-private_sale { background: #fef3f2; color: var(--vs-avoid); }
-#vendorscan-panel .vs-gaps h3 { font-family: inherit; font-size: 13px !important; font-weight: 600; line-height: 1.4; margin: 0 0 6px; color: var(--vs-fg); }
-#vendorscan-panel p, #vendorscan-panel ul, #vendorscan-panel li, #vendorscan-panel td, #vendorscan-panel th { font-size: 13px; }
-#vendorscan-panel details { border: 1px solid var(--vs-line); border-radius: 6px; padding: 6px 8px; margin-bottom: 6px; }
-#vendorscan-panel summary { cursor: pointer; }
-#vendorscan-panel blockquote { margin: 6px 0; padding: 4px 8px; border-left: 3px solid var(--vs-line); color: #344054; font-size: 12px; }
-#vendorscan-panel a { color: var(--vs-accent); text-decoration: none; }
-#vendorscan-panel .vs-link { background: none; border: 0; padding: 0; color: var(--vs-accent); cursor: pointer; font: inherit; }
-#vendorscan-panel .vs-footer { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; margin-top: 10px; font-size: 11px; }
-#vendorscan-panel .vs-error { color: var(--vs-avoid); }
-#vendorscan-panel .vs-note { margin-top: 4px; padding: 4px 8px; border-radius: 6px; background: #fffaeb; color: var(--vs-wait); font-size: 12px; }
+/* VendorScan panel. Scoped under #vendorscan-panel so idealo's styles don't leak in. */
+#vendorscan-panel {
+  --vs-navy: #0a3761; --vs-navy-2: #0f4c86; --vs-orange: #ff6600; --vs-orange-soft: #fff1e8;
+  --vs-ink: #1b2a3a; --vs-muted: #6b7a8c; --vs-line: #e6ebf1; --vs-bg: #f4f6f9; --vs-white: #ffffff;
+  --vs-good: #0a7d47; --vs-good-soft: #e7f6ee; --vs-bad: #c8261b; --vs-bad-soft: #fdeceb;
+  --vs-warn: #b25e00; --vs-warn-soft: #fff4e5;
+  position: fixed; top: 88px; right: 0; z-index: 2147483000; display: flex; align-items: flex-start;
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: var(--vs-ink);
+}
+#vendorscan-panel *, #vendorscan-panel *::before, #vendorscan-panel *::after { box-sizing: border-box; font-family: inherit; }
+#vendorscan-panel button { font: inherit; cursor: pointer; }
+#vendorscan-panel ul { list-style: none; margin: 0; padding: 0; }
+#vendorscan-panel a { color: var(--vs-navy-2); text-decoration: none; }
+#vendorscan-panel a:hover { text-decoration: underline; }
+
+/* Handle and card */
+#vendorscan-panel .vs-tab-handle { writing-mode: vertical-rl; transform: rotate(180deg); background: var(--vs-orange);
+  color: #fff; border: 0; border-radius: 0 8px 8px 0; padding: 14px 7px; font-weight: 700; letter-spacing: .02em;
+  box-shadow: 0 4px 12px rgba(10, 55, 97, .25); }
+#vendorscan-panel .vs-card { display: none; width: 380px; max-height: calc(100vh - 110px); overflow-y: auto;
+  background: var(--vs-bg); border-radius: 12px 0 0 12px; box-shadow: 0 16px 40px rgba(10, 55, 97, .22); }
+#vendorscan-panel.vs-open .vs-card { display: block; }
+#vendorscan-panel.vs-open .vs-tab-handle { display: none; }
+#vendorscan-panel .vs-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center;
+  justify-content: space-between; background: var(--vs-navy); color: #fff; padding: 10px 14px; }
+#vendorscan-panel .vs-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
+#vendorscan-panel .vs-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--vs-orange); }
+#vendorscan-panel .vs-close { background: none; border: 0; color: #fff; font-size: 22px; line-height: 1; padding: 0 2px; opacity: .8; }
+#vendorscan-panel .vs-body { padding: 12px 14px 14px; display: grid; gap: 10px; }
+
+/* Product and buyer switch */
+#vendorscan-panel .vs-product-name { font-weight: 700; font-size: 14px; line-height: 1.3; }
+#vendorscan-panel .vs-meta { display: flex; gap: 8px; align-items: center; color: var(--vs-muted); font-size: 12px; margin-top: 2px; }
+#vendorscan-panel .vs-badge { background: var(--vs-orange-soft); color: var(--vs-orange); border-radius: 99px; padding: 0 8px; font-weight: 600; }
+#vendorscan-panel .vs-note { margin-top: 6px; font-size: 12px; color: var(--vs-warn); background: var(--vs-warn-soft); border-radius: 8px; padding: 6px 8px; }
+#vendorscan-panel .vs-seg { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--vs-white);
+  border: 1px solid var(--vs-line); border-radius: 10px; padding: 3px; gap: 3px; }
+#vendorscan-panel .vs-seg button { border: 0; background: transparent; border-radius: 8px; padding: 6px 4px; font-size: 12px; color: var(--vs-muted); font-weight: 600; }
+#vendorscan-panel .vs-seg button.vs-seg-on { background: var(--vs-navy); color: #fff; }
+
+/* Loading */
+#vendorscan-panel .vs-progress { background: var(--vs-white); border-radius: 10px; padding: 10px 12px; border: 1px solid var(--vs-line); }
+#vendorscan-panel .vs-progress-row { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; }
+#vendorscan-panel .vs-spinner { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--vs-orange-soft);
+  border-top-color: var(--vs-orange); animation: vs-spin .8s linear infinite; flex: none; }
+@keyframes vs-spin { to { transform: rotate(360deg); } }
+#vendorscan-panel .vs-bar { height: 4px; background: var(--vs-line); border-radius: 99px; margin: 8px 0 6px; overflow: hidden; }
+#vendorscan-panel .vs-bar-fill { height: 100%; background: var(--vs-orange); border-radius: 99px; transition: width .4s ease; }
+#vendorscan-panel .vs-steps li { font-size: 12px; color: var(--vs-muted); display: flex; gap: 6px; animation: vs-in .25s ease; }
+#vendorscan-panel .vs-check { color: var(--vs-good); font-weight: 700; }
+@keyframes vs-in { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+
+/* Verdict */
+#vendorscan-panel .vs-verdict { background: var(--vs-white); border-radius: 12px; padding: 12px 14px; border: 1px solid var(--vs-line);
+  border-top: 4px solid var(--vs-muted); }
+#vendorscan-panel .vs-verdict.vs-good { border-top-color: var(--vs-good); }
+#vendorscan-panel .vs-verdict.vs-warn { border-top-color: var(--vs-orange); }
+#vendorscan-panel .vs-verdict.vs-bad { border-top-color: var(--vs-bad); }
+#vendorscan-panel .vs-pill { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  border-radius: 99px; padding: 2px 9px; background: var(--vs-bg); color: var(--vs-muted); }
+#vendorscan-panel .vs-good .vs-pill { background: var(--vs-good-soft); color: var(--vs-good); }
+#vendorscan-panel .vs-warn .vs-pill { background: var(--vs-warn-soft); color: var(--vs-warn); }
+#vendorscan-panel .vs-bad .vs-pill { background: var(--vs-bad-soft); color: var(--vs-bad); }
+#vendorscan-panel .vs-best { margin-top: 8px; font-weight: 600; }
+#vendorscan-panel .vs-big { font-size: 26px; font-weight: 800; color: var(--vs-navy); line-height: 1.15; }
+#vendorscan-panel .vs-sub { font-size: 12px; color: var(--vs-muted); }
+#vendorscan-panel .vs-headline { margin-top: 8px; font-weight: 600; }
+#vendorscan-panel .vs-insight { margin-top: 8px; font-size: 13px; background: var(--vs-orange-soft); color: #8a3a00; border-radius: 8px; padding: 6px 8px; }
+#vendorscan-panel .vs-why { margin-top: 8px; font-size: 13px; }
+#vendorscan-panel .vs-why summary { color: var(--vs-navy-2); cursor: pointer; font-weight: 600; }
+#vendorscan-panel .vs-why li { margin-top: 4px; color: var(--vs-ink); padding-left: 10px; position: relative; }
+#vendorscan-panel .vs-why li::before { content: "·"; position: absolute; left: 0; color: var(--vs-muted); }
+
+/* Offers */
+#vendorscan-panel .vs-offers { background: var(--vs-white); border-radius: 12px; padding: 10px 12px; border: 1px solid var(--vs-line); }
+#vendorscan-panel .vs-section-title { font-size: 12px; font-weight: 700; color: var(--vs-muted); text-transform: uppercase;
+  letter-spacing: .05em; display: flex; justify-content: space-between; margin: 0 0 4px; }
+#vendorscan-panel .vs-hint { text-transform: none; letter-spacing: 0; font-weight: 500; }
+#vendorscan-panel .vs-offer { display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: 1px solid var(--vs-line); }
+#vendorscan-panel .vs-offer:first-child { border-top: 0; }
+#vendorscan-panel .vs-offer-top .vs-seller { font-weight: 700; }
+#vendorscan-panel .vs-seller { font-size: 14px; }
+#vendorscan-panel .vs-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
+#vendorscan-panel .vs-tag { font-size: 11px; border-radius: 6px; padding: 0 6px; background: var(--vs-bg); color: var(--vs-muted); }
+#vendorscan-panel .vs-tag-good { background: var(--vs-good-soft); color: var(--vs-good); }
+#vendorscan-panel .vs-tag-bad { background: var(--vs-bad-soft); color: var(--vs-bad); }
+#vendorscan-panel .vs-tag-pending { background: var(--vs-orange-soft); color: var(--vs-orange); animation: vs-pulse 1.2s ease-in-out infinite; }
+@keyframes vs-pulse { 50% { opacity: .45; } }
+#vendorscan-panel .vs-offer-price { text-align: right; white-space: nowrap; }
+#vendorscan-panel .vs-cost { font-weight: 700; color: var(--vs-navy); }
+#vendorscan-panel .vs-upfront { font-size: 11px; color: var(--vs-muted); }
+#vendorscan-panel .vs-more { width: 100%; margin-top: 6px; border: 1px solid var(--vs-line); background: var(--vs-bg);
+  border-radius: 8px; padding: 6px; font-size: 12px; color: var(--vs-navy-2); font-weight: 600; }
+#vendorscan-panel .vs-foot-note { margin-top: 6px; font-size: 11px; color: var(--vs-muted); }
+
+/* Findings */
+#vendorscan-panel .vs-findings { background: var(--vs-white); border-radius: 12px; padding: 10px 12px; border: 1px solid var(--vs-line); }
+#vendorscan-panel .vs-findings > summary { cursor: pointer; margin: 0; }
+#vendorscan-panel .vs-finding { border-top: 1px solid var(--vs-line); padding: 7px 0; font-size: 12px; }
+#vendorscan-panel .vs-finding summary { cursor: pointer; list-style: none; }
+#vendorscan-panel .vs-finding summary::-webkit-details-marker { display: none; }
+#vendorscan-panel .vs-finding-what { display: block; font-weight: 600; color: var(--vs-ink); }
+#vendorscan-panel .vs-finding-text { display: block; color: var(--vs-muted); }
+#vendorscan-panel blockquote { margin: 6px 0 0; padding: 4px 8px; border-left: 3px solid var(--vs-orange); background: var(--vs-bg);
+  border-radius: 0 6px 6px 0; font-size: 12px; color: var(--vs-ink); }
+#vendorscan-panel .vs-source { font-size: 11px; }
+
+/* Footer and errors */
+#vendorscan-panel .vs-error { background: var(--vs-bad-soft); color: var(--vs-bad); border-radius: 8px; padding: 8px 10px; font-size: 13px; }
+#vendorscan-panel .vs-footer { display: grid; gap: 2px; font-size: 11px; color: var(--vs-muted); padding-top: 2px; }
+#vendorscan-panel .vs-link { background: none; border: 0; padding: 0; color: var(--vs-navy-2); font-size: 11px; }
+#vendorscan-panel .vs-link:hover { text-decoration: underline; }
+#vendorscan-panel .vs-finding-detail { margin: 6px 0 0; color: var(--vs-ink); font-size: 12px; }

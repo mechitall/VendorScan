@@ -8,6 +8,7 @@ import argparse
 import asyncio
 import json
 import re
+from collections.abc import Awaitable, Callable
 from datetime import datetime, timezone
 from decimal import Decimal
 from pathlib import Path
@@ -211,10 +212,19 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
                with_restock: bool = True, with_vendors: bool = True,
                save: Path | None = None, product_id: str | None = None,
                slug: str | None = None, title: str | None = None,
-               offer_titles: dict[str, str] | None = None) -> ScanResult:
+               offer_titles: dict[str, str] | None = None,
+               on_event: Callable[[dict], Awaitable[None]] | None = None) -> ScanResult:
+    """Run one scan. ``on_event`` (optional) receives progress events as they happen:
+    {"type": "step", "id": ..., "text": ..., "done": bool} and {"type": "partial", "result": ...}.
+    """
     from idealo_client import connect
 
+    async def emit(event: dict) -> None:
+        if on_event:
+            await on_event(event)
+
     load_env()
+    await emit({"type": "step", "id": "idealo", "text": "Finding the product on idealo", "done": False})
     queries = queries_for(query, slug, title)
     if not queries:
         raise LookupError("No product name on this page to search for.")
@@ -225,6 +235,7 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
             offers = (await idealo.offers(product))["offers"]
     if not product:
         raise LookupError(f"idealo's data feed has no product matching {queries[0]!r}.")
+    await emit({"type": "step", "id": "idealo", "text": f"{len(offers)} offers from idealo", "done": True})
 
     # Restock research and seller VAT research are independent: run them together.
     normalized = [offer_from_idealo(r, product_label(product)) for r in offers]
@@ -233,11 +244,31 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
     with_restock = with_restock and scarcity_signal(product, normalized)
     unrated = list(dict.fromkeys(o.seller.name for o in sorted(normalized, key=lambda o: o.item_gross)
                                  if not o.seller.rating_count))
+    # First answer right away from idealo's data and the offer titles; research refines it.
+    first = build_result(query, product, offers, offer_titles=offer_titles, budget=budget)
+    first.exact_match = exact
+    await emit({"type": "partial", "result": first.model_dump(mode="json")})
+
+    async def step(step_id: str, start_text: str, coro, done_text):
+        await emit({"type": "step", "id": step_id, "text": start_text, "done": False})
+        value = await coro
+        await emit({"type": "step", "id": step_id, "text": done_text(value), "done": True})
+        return value
+
+    async def on_vendor(name: str, vat: VendorVat) -> None:
+        await emit({"type": "step", "id": f"vat:{name}", "done": True,
+                    "text": f"{name.split(' (via ')[0]}: {VAT_WORDS.get(vat.tax_status.value, 'checked')}"})
+
     restock, vendors, hidden, reputations = await asyncio.gather(
-        _restock_for(product, offers) if with_restock else _none(),
-        research_vendors(normalized) if with_vendors and normalized else _none(),
-        _hidden_offer_for(product, offers) if with_restock else _none(),
-        find_reputations(unrated) if with_vendors and unrated else _none())
+        step("restock", "Checking official store and restocks", _restock_for(product, offers),
+             lambda r: "Official store checked") if with_restock else _none(),
+        step("vat", "Checking sellers' VAT on their websites",
+             research_vendors(normalized, on_done=on_vendor), lambda v: f"VAT checked for {len(v or {})} sellers")
+        if with_vendors and normalized else _none(),
+        step("hidden", "Looking for the cheaper listing", _hidden_offer_for(product, offers),
+             lambda g: "Cheaper listing checked") if with_restock else _none(),
+        step("reviews", "Checking reviews of unrated sellers", find_reputations(unrated),
+             lambda g: "Reviews checked") if with_vendors and unrated else _none())
     variants = [product_label(p) for p in found]
     if save:
         snapshot = {
@@ -258,6 +289,10 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
                           offer_titles=offer_titles, budget=budget)
     result.exact_match = exact
     return result
+
+
+VAT_WORDS = {"standard_vat": "VAT invoice", "margin_scheme": "margin scheme, no VAT back",
+             "small_business": "no VAT (§ 19)", "private_sale": "private seller", "unknown": "no clear answer"}
 
 
 def replay(path: Path, *, budget: Decimal | None = None) -> ScanResult:

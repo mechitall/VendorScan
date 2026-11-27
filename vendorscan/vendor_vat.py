@@ -36,6 +36,7 @@ Classify tax_status:
 - "private_sale": the seller is a private person.
 - "unknown": anything else. A generic "inkl. MwSt." or just having a VAT ID is NOT enough.
 
+Write the summary in English.
 Return JSON with exactly these keys:
 {"tax_status": "...", "company_name": str | null, "vat_id": str | null,
  "summary": "one sentence for a business buyer",
@@ -167,8 +168,8 @@ def apply_vendor_vat(offer: Offer, vat: VendorVat) -> Offer:
     return offer.model_copy(update=update)
 
 
-async def research_vendors(offers: list[Offer], client: httpx.AsyncClient | None = None
-                           ) -> dict[str, VendorVat]:
+async def research_vendors(offers: list[Offer], client: httpx.AsyncClient | None = None,
+                           on_done=None) -> dict[str, VendorVat]:
     """Research the cheapest distinct sellers, in parallel and cached; failures stay unknown."""
     semaphore = asyncio.Semaphore(MAX_PARALLEL)
     unique: dict[str, Offer] = {}
@@ -181,14 +182,17 @@ async def research_vendors(offers: list[Offer], client: httpx.AsyncClient | None
     async def one(key: str, offer: Offer) -> tuple[str, VendorVat]:
         cached = _cache.get(key)
         if cached and time.time() - cached[0] < CACHE_SECONDS:
-            return key, cached[1]
-        async with semaphore:
-            try:
-                result = await asyncio.wait_for(research_vendor(offer, client), timeout=30)
-            except (httpx.HTTPError, RuntimeError, ValueError, asyncio.TimeoutError) as error:
-                return key, VendorVat(seller=offer.seller.name,
-                                      summary=f"Research failed ({type(error).__name__}).")
-        _cache[key] = (time.time(), result)
+            result = cached[1]
+        else:
+            async with semaphore:
+                try:
+                    result = await asyncio.wait_for(research_vendor(offer, client), timeout=15)
+                    _cache[key] = (time.time(), result)
+                except (httpx.HTTPError, RuntimeError, ValueError, asyncio.TimeoutError) as error:
+                    result = VendorVat(seller=offer.seller.name,
+                                       summary=f"Research failed ({type(error).__name__}).")
+        if on_done:
+            await on_done(key, result)
         return key, result
 
     try:
