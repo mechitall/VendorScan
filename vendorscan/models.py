@@ -8,7 +8,7 @@ from __future__ import annotations
 from datetime import datetime
 from decimal import Decimal
 from enum import Enum
-from typing import Annotated, Optional
+from typing import Annotated
 
 from pydantic import BaseModel, Field, PlainSerializer
 
@@ -46,17 +46,17 @@ class Recommendation(str, Enum):
 class Evidence(BaseModel):
     field: str
     status: EvidenceStatus
-    url: Optional[str] = None
-    quote: Optional[str] = None
-    retrieved_at: Optional[datetime] = None
+    url: str | None = None
+    quote: str | None = None
+    retrieved_at: datetime | None = None
 
 
 class Seller(BaseModel):
     name: str
-    shop_id: Optional[str] = None
-    rating: Optional[float] = None
-    rating_count: Optional[int] = None
-    is_marketplace: Optional[bool] = None
+    shop_id: str | None = None
+    rating: float | None = None
+    rating_count: int | None = None
+    is_marketplace: bool | None = None
 
 
 class Offer(BaseModel):
@@ -65,14 +65,14 @@ class Offer(BaseModel):
     offer_id: str
     product_name: str
     seller: Seller
-    condition: Optional[str] = None
+    condition: str | None = None
     currency: str = "EUR"
-    offer_url: Optional[str] = None
+    offer_url: str | None = None
     item_gross: Money
-    shipping_gross: Optional[Money] = None
-    mandatory_fees_gross: Optional[Money] = None
+    shipping_gross: Money | None = None
+    mandatory_fees_gross: Money | None = None
     tax_status: TaxStatus = TaxStatus.UNKNOWN
-    vat_rate: Optional[Money] = None  # e.g. Decimal("0.19"); None if unknown
+    vat_rate: Money | None = None  # e.g. Decimal("0.19"); None if unknown
     risk_flags: list[str] = Field(default_factory=list)
     evidence: list[Evidence] = Field(default_factory=list)
 
@@ -90,7 +90,7 @@ class CostBreakdown(BaseModel):
     buyer_type: BuyerType
     total_gross: Money
     complete: bool
-    recoverable_vat: Optional[Money]
+    recoverable_vat: Money | None
     effective_cost_low: Money
     effective_cost_high: Money
     notes: list[str] = Field(default_factory=list)
