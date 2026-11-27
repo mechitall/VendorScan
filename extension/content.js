@@ -38,9 +38,10 @@
   const euro = (v) => (v == null ? "?" : `€${Number(v).toLocaleString("de-DE", { minimumFractionDigits: 2 })}`);
   const range = (lo, hi) => (lo === hi ? euro(lo) : `${euro(lo)}–${euro(hi)}`);
 
-  const productId = (location.pathname.match(/OffersOfProduct\/(\d+)/) || [])[1];
+  // Read from the URL each time: picking a variant can change it without reloading the page.
+  const productId = () => (location.pathname.match(/OffersOfProduct\/(\d+)/) || [])[1];
   // e.g. "214218295_-astra-2-gaming-512gb-silber-redmagic": carries the variant and model number.
-  const productSlug = (location.pathname.match(/OffersOfProduct\/([\w-]+)\.html/) || [])[1];
+  const productSlug = () => (location.pathname.match(/OffersOfProduct\/([\w-]+)\.html/) || [])[1];
   const productName = () =>
     (document.querySelector("h1")?.textContent || document.title.split(/\s+(ab|\|)\s+/)[0] || "")
       .replace(/\s+/g, " ").trim();
@@ -91,8 +92,8 @@
     const payload = {
       name: productName().slice(0, 200),
       title: document.title.slice(0, 300),
-      product_id: productId || null,
-      slug: productSlug ? productSlug.slice(0, 300) : null,
+      product_id: productId() || null,
+      slug: productSlug() ? productSlug().slice(0, 300) : null,
       fresh,
       offer_titles: offerTitles(),
     };
@@ -126,7 +127,8 @@
     const head = el("div", { class: "vs-product" },
       el("div", {}, el("strong", {}, r.product), " ", source),
       r.exact_match === false && el("div", { class: "vs-note" },
-        "This exact variant isn't in idealo's data feed; showing the closest match."),
+        `This page shows several variants together, and idealo's data feed only has single variants. ` +
+        `Showing the closest one: ${r.product}. Pick a variant on the page for an exact scan.`),
       r.listed_lowest && el("div", { class: "vs-muted" }, `idealo lists from ${euro(r.listed_lowest)}`));
 
     const verdictBox = el("section", { class: `vs-verdict vs-${verdict.recommendation.toLowerCase()}` },
@@ -171,4 +173,13 @@
   }
 
   scanThisPage();
+
+  // Rescan when the user switches to another product or variant without a full page load.
+  let lastPath = location.pathname;
+  setInterval(() => {
+    if (location.pathname !== lastPath && /OffersOfProduct\//.test(location.pathname)) {
+      lastPath = location.pathname;
+      setTimeout(() => scanThisPage(), 800); // let idealo render the new offer list first
+    }
+  }, 1000);
 })();
