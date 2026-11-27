@@ -21,6 +21,12 @@ Python 3.11+, official MCP Python SDK (`idealo_client.py`), Pydantic, Streamlit.
 - Don't change the shared offer schema in `vendorscan/models.py` without telling the other author.
 - Work on a branch and merge through a pull request. Never push to `main`.
 
+## MCP servers
+- `idealo`: product, offer and price-history data (OAuth sign-in on first use).
+- `tavily`: web search. Needs `TAVILY_API_KEY` exported in the shell that starts the agent
+  (for example `set -a; source .env; set +a`). The key is never written into config files.
+- `norma`: code checks, see below.
+
 ## Norma (code checks)
 The Norma MCP server is configured for Codex in `.codex/config.toml` and for
 Claude Code in `.mcp.json`. Before each commit, run a Norma check on the files

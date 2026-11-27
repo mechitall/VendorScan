@@ -8,3 +8,8 @@ url = "https://mcp.idealo.com/mcp"
 # Norma checks code as agents write it (hackathon Norma track).
 [mcp_servers.norma]
 url = "https://api.qualityclouds.ai/mcp"
+
+# Web search for agents. Reads the key from the TAVILY_API_KEY environment variable.
+[mcp_servers.tavily]
+url = "https://mcp.tavily.com/mcp/"
+bearer_token_env_var = "TAVILY_API_KEY"

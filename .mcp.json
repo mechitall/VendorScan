@@ -10,6 +10,13 @@
     "norma": {
       "type": "http",
       "url": "https://api.qualityclouds.ai/mcp"
+    },
+    "tavily": {
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${TAVILY_API_KEY}"
+      }
     }
   }
 }
