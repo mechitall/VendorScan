@@ -4,6 +4,19 @@ Know the deal before you buy. A Chrome extension for idealo product pages that s
 each offer really costs a private buyer or a VAT-registered business, fills gaps with web
 evidence, and lets a model on Nebius Token Factory choose the next step. It never buys anything.
 
+## See it in action
+
+▶️ **[Demo video (53 s)](docs/demo/vendorscan-demo.mp4)**: four real idealo product pages, recorded with the
+extension's own panel code fed by live scans from our server.
+
+| Results stream in while it checks every seller | A VAT-registered business gets a different winner |
+|---|---|
+| ![Live scan](docs/demo/01-live-scan.gif) | ![Business vs private](docs/demo/02-business-vs-private.gif) |
+| **Unrated seller: check first, with a rated alternative** | **Reseller markup: skip this offer** |
+| ![Unrated seller](docs/demo/03-unrated-seller.gif) | ![Skip reseller](docs/demo/04-skip-reseller.gif) |
+
+Raw recordings of those scans: [`docs/demo/recordings/`](docs/demo/recordings/).
+
 ## Run it
 
 ```bash
