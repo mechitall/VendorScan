@@ -42,6 +42,7 @@ class ScanResult(BaseModel):
     restock: RestockReport | None = None
     vendors: dict[str, VendorVat] = Field(default_factory=dict)  # keyed by seller name
     gaps: list[Gap] = Field(default_factory=list)  # what idealo lacked and how Tavily filled it
+    exact_match: bool = True  # False: the page's exact variant isn't in idealo's data feed
     source: str = "live"  # "live" or "replay:<file>"
 
 
@@ -140,27 +141,79 @@ def product_id_from_url(url: str | None) -> str | None:
     return match.group(1) if match else None
 
 
+def _tokens(text: str) -> set[str]:
+    return {t for t in re.split(r"[^a-z0-9äöüß]+", (text or "").lower()) if len(t) > 1}
+
+
+def closest_product(found: list[dict], wanted: str) -> dict | None:
+    """Result whose name and URL share the most words with what the page says."""
+    want = _tokens(wanted)
+    if not found or not want:
+        return None
+    def score(p: dict) -> float:
+        have = _tokens(f"{product_label(p)} {p.get('url', '')}")
+        return len(want & have) / len(want)
+    best = max(found, key=score)
+    return best if score(best) >= 0.5 else None
+
+
+async def _find_product(idealo, queries: list[str], product_id: str | None,
+                        variant: int) -> tuple[dict | None, list[dict], bool]:
+    """Try each query until the exact idealo product id shows up.
+
+    Returns (product, results of the first query, exact match?). Never raises inside
+    the MCP session, so errors stay readable instead of being wrapped by anyio.
+    """
+    first: list[dict] = []
+    for query in queries:
+        found = (await idealo.search(query)).get("results", [])
+        first = first or found
+        if not product_id:
+            return (found[variant] if 0 <= variant < len(found) else None), found, True
+        for p in found:
+            if product_id_from_url(p.get("url")) == product_id:
+                return p, found, True
+    # idealo's data feed may not carry this exact variant: fall back to the closest one.
+    pool = first
+    return closest_product(pool, " ".join(queries)), first, False
+
+
+def queries_for(name: str, slug: str | None = None, title: str | None = None) -> list[str]:
+    """Search texts from what the page shows, most specific first, without duplicates."""
+    candidates = []
+    if title:
+        candidates.append(re.split(r"\s+ab\s+[\d.,]+\s*€|\s+\|\s+", title)[0])
+    if slug:
+        words = [w for w in re.split(r"[-_]+", slug) if w]
+        if words and words[0].isdigit() and len(words[0]) >= 6:
+            words = words[1:]  # leading idealo product id, not part of the name
+        candidates.append(" ".join(words))
+    candidates.append(name)
+    seen, result = set(), []
+    for c in (c.strip() for c in candidates):
+        if len(c) >= 2 and c.lower() not in seen:
+            seen.add(c.lower())
+            result.append(c)
+    return result
+
+
 async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
                with_restock: bool = True, with_vendors: bool = True,
-               save: Path | None = None, product_id: str | None = None) -> ScanResult:
+               save: Path | None = None, product_id: str | None = None,
+               slug: str | None = None, title: str | None = None) -> ScanResult:
     from idealo_client import connect
 
     load_env()
+    queries = queries_for(query, slug, title)
+    if not queries:
+        raise LookupError("No product name on this page to search for.")
+    offers: list[dict] = []
     async with connect() as idealo:
-        found = (await idealo.search(query)).get("results", [])
-        if not found:
-            raise LookupError(f"idealo found no product for {query!r}")
-        if product_id:
-            # The extension knows the exact product from the idealo page URL.
-            matches = [p for p in found if product_id_from_url(p.get("url")) == product_id]
-            if not matches:
-                raise LookupError(f"idealo search for {query!r} did not return product {product_id}")
-            product = matches[0]
-        elif not 0 <= variant < len(found):
-            raise ValueError(f"variant must be between 0 and {len(found) - 1}")
-        else:
-            product = found[variant]
-        offers = (await idealo.offers(product))["offers"]
+        product, found, exact = await _find_product(idealo, queries, product_id, variant)
+        if product:
+            offers = (await idealo.offers(product))["offers"]
+    if not product:
+        raise LookupError(f"idealo's data feed has no product matching {queries[0]!r}.")
 
     # Restock research and seller VAT research are independent: run them together.
     normalized = [offer_from_idealo(r, product_label(product)) for r in offers]
@@ -183,8 +236,10 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
             "hidden_offer": hidden.model_dump(mode="json") if hidden else None,
         }
         save.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1))
-    return build_result(query, product, offers, variants=variants, restock=restock,
-                        vendors=vendors, hidden=hidden, budget=budget)
+    result = build_result(query, product, offers, variants=variants, restock=restock,
+                          vendors=vendors, hidden=hidden, budget=budget)
+    result.exact_match = exact
+    return result
 
 
 def replay(path: Path, *, budget: Decimal | None = None) -> ScanResult:

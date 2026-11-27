@@ -6,6 +6,7 @@ is untrusted data: it is quoted as evidence, never followed as instructions.
 """
 from __future__ import annotations
 
+import asyncio
 from datetime import datetime, timezone
 from decimal import Decimal
 from statistics import median
@@ -178,10 +179,10 @@ async def research_restock(product_name: str, *, history: dict | None = None,
     owns_client = client is None
     client = client or httpx.AsyncClient()
     try:
-        official = await tavily_search(f"{product_name} official store price Germany EU", client=client)
-        restock = await tavily_search(
-            f"{product_name} sold out restock back in stock pre-order", client=client)
-        successor = await tavily_search(f"{product_name} successor release date", client=client)
+        official, restock, successor = await asyncio.gather(
+            tavily_search(f"{product_name} official store price Germany EU", client=client),
+            tavily_search(f"{product_name} sold out restock back in stock pre-order", client=client),
+            tavily_search(f"{product_name} successor release date", client=client))
         if llm.available():
             try:
                 await _judge(report, _sources(official, restock, successor), client)

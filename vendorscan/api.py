@@ -33,17 +33,19 @@ def health() -> dict:
 
 
 @app.get("/api/scan")
-async def scan_product(name: str = Query(min_length=2, max_length=200),
+async def scan_product(name: str = Query(default="", max_length=200),
                        product_id: str | None = Query(default=None, pattern=r"^\d{1,15}$"),
+                       slug: str | None = Query(default=None, max_length=300, pattern=r"^[\w-]+$"),
+                       title: str | None = Query(default=None, max_length=300),
                        budget: Decimal | None = Query(default=None, gt=0),
                        fresh: bool = False) -> dict:
     """Scan the idealo product the user is looking at."""
-    key = (name, product_id, budget)
+    key = (name, product_id, slug, title, budget)
     cached = _cache.get(key)
     if cached and not fresh and time.time() - cached[0] < CACHE_SECONDS:
         return cached[1].model_dump(mode="json")
     try:
-        result = await scan(name, product_id=product_id, budget=budget)
+        result = await scan(name, product_id=product_id, slug=slug, title=title, budget=budget)
     except LookupError as error:
         raise HTTPException(status_code=404, detail=str(error)) from error
     _cache[key] = (time.time(), result)

@@ -108,3 +108,19 @@ class LiveMacbookSnapshotTests(unittest.TestCase):
     def test_gaps_name_what_idealo_lacked(self):
         gaps = replay(self.SNAP).gaps
         self.assertTrue(any("VAT treatment" in g.gap for g in gaps))
+
+
+class ProductMatchingTests(unittest.TestCase):
+    def test_queries_use_title_and_slug_without_product_id(self):
+        from vendorscan.orchestrator import queries_for
+        queries = queries_for("Redmagic Astra 2", "214218295_-astra-2-gaming-512gb-silber-redmagic",
+                              "Redmagic Astra 2 Gaming 512GB silber ab 899,00 € (November 2026) | idealo.de")
+        self.assertEqual(queries[0], "Redmagic Astra 2 Gaming 512GB silber")
+        self.assertEqual(queries[1], "astra 2 gaming 512gb silber redmagic")
+
+    def test_closest_product_needs_real_overlap(self):
+        from vendorscan.orchestrator import closest_product
+        found = [{"name": "Lenovo Legion Tab G5", "nameDelta": "ZAH20094GR", "url": "x"},
+                 {"name": "Lenovo Legion 5 15", "url": "y"}]
+        self.assertEqual(closest_product(found, "Lenovo Legion Tab G5")["nameDelta"], "ZAH20094GR")
+        self.assertIsNone(closest_product(found, "Apple iPhone 16 Pro"))

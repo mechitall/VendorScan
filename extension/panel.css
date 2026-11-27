@@ -48,3 +48,4 @@
 #vendorscan-panel .vs-link { background: none; border: 0; padding: 0; color: var(--vs-accent); cursor: pointer; font: inherit; }
 #vendorscan-panel .vs-footer { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; margin-top: 10px; font-size: 11px; }
 #vendorscan-panel .vs-error { color: var(--vs-avoid); }
+#vendorscan-panel .vs-note { margin-top: 4px; padding: 4px 8px; border-radius: 6px; background: #fffaeb; color: var(--vs-wait); font-size: 12px; }
