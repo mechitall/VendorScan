@@ -19,8 +19,8 @@ from . import llm
 from .models import Evidence, EvidenceStatus, Offer, TaxStatus
 from .restock import QUOTE_LIMIT, _normalize, _sources, tavily_search
 
-MAX_PARALLEL = 6
-MAX_SELLERS = 5          # only the cheapest sellers can win the ranking
+MAX_PARALLEL = 8
+MAX_SELLERS = 8          # only the cheapest sellers can win the ranking
 CACHE_SECONDS = 3600     # a shop's VAT handling doesn't change within the hour
 _cache: dict[str, tuple[float, "VendorVat"]] = {}
 
@@ -94,14 +94,21 @@ async def research_vendor(offer: Offer, client: httpx.AsyncClient) -> VendorVat:
         ]
         responses = await asyncio.gather(*(tavily_search(q, client=client, include_domains=own_site, depth=d)
                                            for q, d in searches))
+        sources = _sources(*responses)
     else:
+        sources = []
+    if not sources:
+        # No own site, or it returned nothing: search the web by shop name.
+        own_site = None
         responses = await asyncio.gather(
             tavily_search(f"{name} Impressum USt-IdNr Handelsregister", client=client),
             tavily_search(f"{name} Rechnung ausgewiesene Mehrwertsteuer Geschäftskunden "
                           "Differenzbesteuerung", client=client))
-    sources = _sources(*responses)
+        sources = _sources(*responses)
     if not sources or not llm.available():
-        result.summary = "No sources found." if not sources else "No LLM key: VAT treatment not assessed."
+        result.summary = ("Searched the shop's site and the web: no sources found." if not sources
+                          else "No LLM key: VAT treatment not assessed.")
+        result.judged_by = "tavily" if not sources else None
         return result
 
     listing = "\n\n".join(f"[{i}] {s['title']}\nURL: {s['url']}\n{s['content']}"

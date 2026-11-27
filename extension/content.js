@@ -84,7 +84,9 @@
     return el("p", { class: "vs-muted vs-demos" }, "Offline demo: ",
       el("button", { class: "vs-link", onclick: () => load("/api/demo/redmagic", "Loading demo…") }, "RedMagic Astra 2"),
       " · ",
-      el("button", { class: "vs-link", onclick: () => load("/api/demo/macbook", "Loading demo…") }, "MacBook Air M4"));
+      el("button", { class: "vs-link", onclick: () => load("/api/demo/macbook", "Loading demo…") }, "MacBook Air M4"),
+      " · ",
+      el("button", { class: "vs-link", onclick: () => load("/api/demo/galaxy", "Loading demo…") }, "Galaxy S26 Ultra"));
   }
 
   function render() {

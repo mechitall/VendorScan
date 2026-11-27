@@ -31,6 +31,12 @@ def parse_euro(value: str | int | float | None) -> Decimal | None:
         return None
 
 
+def shop_domain(shop_name: str | None) -> str | None:
+    """idealo shop name -> host: "samsung.com/de/shop" -> "samsung.com", "Galaxus" -> None."""
+    host = (shop_name or "").strip().lower().split("/")[0].removeprefix("www.")
+    return host if re.fullmatch(r"[a-z0-9-]+(\.[a-z0-9-]+)+", host) else None
+
+
 def listed_lowest_price(search_result: dict) -> Decimal | None:
     """Lowest price idealo shows for a product in search, across all its shops."""
     return parse_euro(search_result.get("price"))
@@ -56,7 +62,7 @@ def offer_from_idealo(raw: dict, product_name: str) -> Offer:
         product_name=product_name,
         seller=Seller(name=seller_name, shop_id=shop.get("shopId"), rating=rating.get("avg"),
                       rating_count=rating.get("count"), is_marketplace=is_marketplace,
-                      domain=shop.get("name") if "." in (shop.get("name") or "") else None),
+                      domain=shop_domain(shop.get("name"))),
         offer_url=raw.get("relocatorUrl"),
         item_gross=parse_euro(raw.get("price")),
         shipping_gross=parse_euro(raw.get("minShippingCost")),

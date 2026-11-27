@@ -20,7 +20,7 @@ from .cost_engine import price_premium, rank_offers
 from .idealo_normalize import listed_lowest_price, offer_from_idealo, product_label
 from .models import BuyerType, CostBreakdown, Offer
 from .restock import RestockReport, research_restock
-from .gaps import Gap, find_hidden_offer
+from .gaps import Gap, find_hidden_offer, find_reputations
 from .vendor_vat import VendorVat, apply_vendor_vat, research_vendors
 from .verdict import SCARCITY_PREMIUM, Verdict, decide
 
@@ -42,6 +42,7 @@ class ScanResult(BaseModel):
     restock: RestockReport | None = None
     vendors: dict[str, VendorVat] = Field(default_factory=dict)  # keyed by seller name
     gaps: list[Gap] = Field(default_factory=list)  # what idealo lacked and how Tavily filled it
+    reputations: dict[str, Gap] = Field(default_factory=dict)  # unrated sellers, keyed by name
     exact_match: bool = True  # False: the page's exact variant isn't in idealo's data feed
     source: str = "live"  # "live" or "replay:<file>"
 
@@ -49,7 +50,7 @@ class ScanResult(BaseModel):
 def build_result(query: str, product: dict, raw_offers: list[dict], *,
                  variants: list[str] | None = None, restock: RestockReport | None = None,
                  vendors: dict[str, VendorVat] | None = None, hidden: Gap | None = None,
-                 budget: Decimal | None = None, source: str = "live") -> ScanResult:
+                 reputations: dict[str, Gap] | None = None, budget: Decimal | None = None, source: str = "live") -> ScanResult:
     """Pure step after fetching: normalize, apply seller VAT research, cost per buyer, decide."""
     label = product_label(product)
     vendors = vendors or {}
@@ -60,7 +61,8 @@ def build_result(query: str, product: dict, raw_offers: list[dict], *,
     result = ScanResult(query=query, product=label, product_url=product.get("url"),
                         listed_lowest=listed, total_offer_count=product.get("totalOfferCount"),
                         variants=variants or [], restock=restock, vendors=vendors, source=source)
-    result.gaps = gap_report(offers, vendors, restock, hidden)
+    result.reputations = reputations or {}
+    result.gaps = gap_report(offers, vendors, restock, hidden, result.reputations)
     for buyer in BuyerType:
         ranked = rank_offers(offers, buyer)
         result.by_buyer[buyer] = [RankedOffer(offer=o, cost=c) for o, c in ranked]
@@ -79,20 +81,25 @@ def scarcity_signal(product: dict, offers: list[Offer]) -> bool:
 
 
 def gap_report(offers: list[Offer], vendors: dict[str, VendorVat],
-               restock: RestockReport | None, hidden: Gap | None) -> list[Gap]:
+               restock: RestockReport | None, hidden: Gap | None,
+               reputations: dict[str, Gap] | None = None) -> list[Gap]:
     """List what idealo's data left open, and what (if anything) filled it."""
     gaps: list[Gap] = []
     if hidden:
         gaps.append(hidden)
     for name, vat in vendors.items():
         gaps.append(Gap(gap=f"VAT treatment of {name} (idealo has no VAT field)",
-                        filled_by=vat.judged_by and f"tavily+nebius ({vat.judged_by.removeprefix('llm:')})",
+                        filled_by=(f"tavily+nebius ({vat.judged_by.removeprefix('llm:')})"
+                                   if (vat.judged_by or "").startswith("llm:") else vat.judged_by),
                         finding=f"{vat.tax_status.value}: {vat.summary or ''}".strip(),
                         evidence=vat.evidence))
+    seen: set[str] = set()
     for offer in offers:
-        if not offer.seller.rating_count:
-            gaps.append(Gap(gap=f"No idealo ratings for {offer.seller.name}",
-                            finding="Left open: treat as an unrated seller."))
+        name = offer.seller.name
+        if not offer.seller.rating_count and name not in seen:
+            seen.add(name)
+            gaps.append((reputations or {}).get(name) or Gap(
+                gap=f"No idealo ratings for {name}", finding="Not searched: treat as an unrated seller."))
     if restock:
         if restock.official_price:
             finding = (f"Official store: {restock.official_price} {restock.official_currency or ''}"
@@ -219,10 +226,13 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
     normalized = [offer_from_idealo(r, product_label(product)) for r in offers]
     # Restock research only fills a gap when idealo's own data signals scarcity.
     with_restock = with_restock and scarcity_signal(product, normalized)
-    restock, vendors, hidden = await asyncio.gather(
+    unrated = list(dict.fromkeys(o.seller.name for o in sorted(normalized, key=lambda o: o.item_gross)
+                                 if not o.seller.rating_count))
+    restock, vendors, hidden, reputations = await asyncio.gather(
         _restock_for(product, offers) if with_restock else _none(),
         research_vendors(normalized) if with_vendors and normalized else _none(),
-        _hidden_offer_for(product, offers) if with_restock else _none())
+        _hidden_offer_for(product, offers) if with_restock else _none(),
+        find_reputations(unrated) if with_vendors and unrated else _none())
     variants = [product_label(p) for p in found]
     if save:
         snapshot = {
@@ -234,10 +244,11 @@ async def scan(query: str, *, variant: int = 0, budget: Decimal | None = None,
             "restock": restock.model_dump(mode="json") if restock else None,
             "vendors": {k: v.model_dump(mode="json") for k, v in (vendors or {}).items()},
             "hidden_offer": hidden.model_dump(mode="json") if hidden else None,
+            "reputations": {k: v.model_dump(mode="json") for k, v in (reputations or {}).items()},
         }
         save.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1))
     result = build_result(query, product, offers, variants=variants, restock=restock,
-                          vendors=vendors, hidden=hidden, budget=budget)
+                          vendors=vendors, hidden=hidden, reputations=reputations, budget=budget)
     result.exact_match = exact
     return result
 
@@ -248,8 +259,9 @@ def replay(path: Path, *, budget: Decimal | None = None) -> ScanResult:
     restock = RestockReport.model_validate(snap["restock"]) if snap.get("restock") else None
     vendors = {k: VendorVat.model_validate(v) for k, v in (snap.get("vendors") or {}).items()}
     hidden = Gap.model_validate(snap["hidden_offer"]) if snap.get("hidden_offer") else None
+    reputations = {k: Gap.model_validate(v) for k, v in (snap.get("reputations") or {}).items()}
     return build_result(snap["query"], snap["product"], snap["offers"], variants=snap.get("variants"),
-                        restock=restock, vendors=vendors, hidden=hidden, budget=budget, source=f"replay:{path.name}")
+                        restock=restock, vendors=vendors, hidden=hidden, reputations=reputations, budget=budget, source=f"replay:{path.name}")
 
 
 def main() -> None:

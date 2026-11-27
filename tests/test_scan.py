@@ -124,3 +124,18 @@ class ProductMatchingTests(unittest.TestCase):
                  {"name": "Lenovo Legion 5 15", "url": "y"}]
         self.assertEqual(closest_product(found, "Lenovo Legion Tab G5")["nameDelta"], "ZAH20094GR")
         self.assertIsNone(closest_product(found, "Apple iPhone 16 Pro"))
+
+
+class GapFillingTests(unittest.TestCase):
+    def test_shop_domain_is_host_only(self):
+        from vendorscan.idealo_normalize import shop_domain
+        self.assertEqual(shop_domain("samsung.com/de/shop"), "samsung.com")
+        self.assertEqual(shop_domain("www.Galaxus.de"), "galaxus.de")
+        self.assertIsNone(shop_domain("Galaxus"))
+
+    def test_galaxy_snapshot_flips_and_fills_ratings(self):
+        result = replay(Path(__file__).parent.parent / "fixtures" / "live_galaxy_s26_ultra.json")
+        private = result.by_buyer[BuyerType.PRIVATE][0].offer.seller.name
+        business = result.by_buyer[BuyerType.BUSINESS_VAT][0].offer.seller.name
+        self.assertNotEqual(private, business)
+        self.assertFalse(any(g.finding == "Not searched: treat as an unrated seller." for g in result.gaps))

@@ -17,7 +17,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from .orchestrator import ScanResult, replay, scan
 
 FIXTURES = Path(__file__).resolve().parent.parent / "fixtures"
-DEMOS = {"redmagic": "live_redmagic_astra2.json", "macbook": "live_macbook_air_m4.json"}
+DEMOS = {"redmagic": "live_redmagic_astra2.json", "macbook": "live_macbook_air_m4.json",
+         "galaxy": "live_galaxy_s26_ultra.json"}
 CACHE_SECONDS = 600
 
 app = FastAPI(title="VendorScan local API", docs_url=None, redoc_url=None)

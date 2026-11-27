@@ -39,7 +39,7 @@
 #vendorscan-panel .vs-tax-standard_vat { background: #ecfdf3; color: var(--vs-buy); }
 #vendorscan-panel .vs-tax-margin_scheme, #vendorscan-panel .vs-tax-small_business,
 #vendorscan-panel .vs-tax-private_sale { background: #fef3f2; color: var(--vs-avoid); }
-#vendorscan-panel .vs-gaps h3 { font: 600 13px/1.4 inherit; margin: 0 0 6px; color: var(--vs-fg); }
+#vendorscan-panel .vs-gaps h3 { font-family: inherit; font-size: 13px !important; font-weight: 600; line-height: 1.4; margin: 0 0 6px; color: var(--vs-fg); }
 #vendorscan-panel p, #vendorscan-panel ul, #vendorscan-panel li, #vendorscan-panel td, #vendorscan-panel th { font-size: 13px; }
 #vendorscan-panel details { border: 1px solid var(--vs-line); border-radius: 6px; padding: 6px 8px; margin-bottom: 6px; }
 #vendorscan-panel summary { cursor: pointer; }
