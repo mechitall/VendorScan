@@ -18,7 +18,7 @@ idealo helps users find the cheapest listed offer. VendorScan determines which o
 
 ### MVP outcome
 
-Enter a product and buyer profile. VendorScan discovers real offers via idealo MCP, investigates sellers and offer-specific conditions, calculates comparable costs, ranks offers and recommends BUY, WAIT, VERIFY or AVOID with evidence and a link for purchase approval.
+Open VendorScan in the Chrome side panel on a shopping page, explicitly capture the current product context or enter a product manually, and select a buyer profile. VendorScan discovers real offers via idealo MCP, investigates sellers and offer-specific conditions, calculates comparable costs, ranks offers and recommends BUY, WAIT, VERIFY or AVOID with evidence and a link for purchase approval.
 
 The MVP does **not** execute payments or make irreversible purchases. A prepared purchase is explicitly approved by the user outside the agent.
 
@@ -31,18 +31,19 @@ The MVP does **not** execute payments or make irreversible purchases. A prepared
 | P0 | Vendor investigation | Investigate up to 3–5 relevant offers using source URLs and extracted evidence |
 | P0 | Tax and cost engine | Deterministic calculations; distinguish confirmed tax treatment from unknown |
 | P0 | Recommendation | Explain ranking, missing evidence, next action and seller link |
-| P0 | UI | Show comparison table, evidence and final recommendation |
+| P0 | Chrome extension UI | Manifest V3 side panel, explicit page capture, editable product query, comparison, sources, model trace and recommendation |
 | P0 | Submission | README, setup instructions, demo and submission text |
 | P1 | Price history | Compare current offer to available 30-day product price history |
 | P1 | Alternative search | Search another matching offer or recommend waiting if appropriate |
-| P1 | Progress visualization | Show live agent steps and evidence collection |
+| P0 | Agent execution trace | Show actual Nebius model calls, selected actions and evidence collection |
 | Out of scope | Checkout automation, payment, accounts, databases, production hosting | Do not implement before submission |
 
 ## 3. Architecture
 
 ```mermaid
 flowchart TD
-  U[Buyer profile and product request] --> A[VendorScan orchestrator]
+  U[Chrome MV3 side panel: buyer profile and product request] --> API[FastAPI localhost API]
+  API --> A[VendorScan orchestrator on Nebius Token Factory]
   A --> I[idealo MCP]
   I --> P[Product selection and offers]
   P --> V[Parallel vendor research]
@@ -55,7 +56,7 @@ flowchart TD
   D -->|Missing evidence; bounded retry| V
 ```
 
-Suggested stack: Python 3.11+, official MCP Python SDK with Streamable HTTP, Pydantic, `decimal.Decimal`, Streamlit, and a tool-calling LLM (existing endpoint or Nebius). Use Tavily or another available search API for vendor research. Add FastAPI only if the team needs a separate frontend; otherwise call the Python service directly from Streamlit. Store configuration in environment variables, not Git.
+Stack: Chrome Manifest V3 side panel (vanilla HTML/CSS/JS), FastAPI backend on localhost, Python 3.11+, official MCP Python SDK with Streamable HTTP, Pydantic, `decimal.Decimal`, Nebius Token Factory for all runtime model calls, and Tavily for vendor research. Streamlit is optional only if an existing working fallback already exists; do not build two frontends. Store credentials exclusively in backend environment variables, not Git or the browser.
 
 ## 4. idealo MCP integration
 
@@ -75,7 +76,7 @@ claude mcp add --transport http idealo https://mcp.idealo.com/mcp --callback-por
 
 In Claude Code, use `/mcp` to authenticate, then ask it to search for an RTX 3090 or a specific MacBook model and retrieve offers. This verifies access but is not itself the application integration. For the Python backend, use the SDK OAuth flow or a valid access token (`IDEALO_ACCESS_TOKEN`) as supported by the client. Never commit tokens.
 
-A starter integration was previously prepared with `idealo_client.py`, `.mcp.json`, `requirements-idealo.txt`, `test_idealo_client.py` and `IDEALO.md`. Import it into the repository if available. Local mock tests passed according to the previous implementation report; the live endpoint was not verified, and GitHub writes returned HTTP 403. Do not mark the live integration complete until tested on the team's machine.
+The starter integration (`idealo_client.py`, `.mcp.json`, `requirements-idealo.txt`, `test_idealo_client.py` and `IDEALO.md`) is merged into main (PR #2). Run the tests on your machine; the live endpoint has not yet been verified. Do not mark the live integration complete until tested on the team's machine.
 
 ### Tool sequence
 
@@ -182,7 +183,7 @@ Rank comparable, eligible offers by effective cost first (gross for private buye
 
 ## 9. Frontend and demo
 
-Single-page UI:
+Chrome side panel (primary UI):
 1. Product search, buyer type, budget and optional deadline.
 2. Agent progress: discover → investigate → calculate → decide.
 3. Table: seller, condition, listed price, shipping/fees, gross total, VAT status, potential VAT recovery, effective cost, evidence/risk and decision.
@@ -210,7 +211,14 @@ Save an authorized, sanitized snapshot of real MCP responses and relevant source
 
 ```text
 VendorScan/
-  app.py                  # Streamlit UI
+  extension/             # Chrome MV3 side panel
+    manifest.json
+    background.js
+    sidepanel.html
+    sidepanel.js
+    sidepanel.css
+  backend/
+    main.py               # FastAPI HTTP entrypoint
   idealo_client.py         # existing starter or SDK wrapper
   vendorscan/
     models.py
@@ -234,7 +242,7 @@ Adapt to existing team code rather than replacing working files. Put secrets in 
 
 ## 11. Execution schedule and ownership
 
-Original planning assumption: two developers, start around 15:10 CET. These are target milestones; if starting later, compress the development blocks, keep feature freeze and submission buffer, and prioritize P0.
+Revised planning assumption: two developers, browser extension decision around 16:19 CET. The revised schedule in section 17 supersedes the original table below. Preserve the 18:30 feature freeze and 19:25 submission target.
 
 | Time (CET) | Milestone | Owner |
 |---|---|---|
@@ -273,7 +281,7 @@ Developer A: MCP integration, orchestrator, schema, cost engine and integration.
 >
 > Both problems have the same root cause: knowing the price doesn't mean knowing the deal.
 >
-> VendorScan combines idealo's commerce intelligence with autonomous vendor research, tax-aware cost calculations and explainable risk assessment.
+> VendorScan is a browser-based shopping copilot combining idealo commerce intelligence, Tavily vendor research, Nebius live decisions and tax-aware cost calculations, directly where you shop.
 >
 > It doesn't just tell you where to buy. It tells you whether you should buy, from whom, and why.
 >
@@ -400,3 +408,69 @@ Implementation: expose a structured action enum (INVESTIGATE, COMPARE_ALTERNATIV
 Submission: one captain submits via standard AI Agents Berlin submission by Friday 27 November, 19:45 CET. Include a demo or runnable prototype judges can open, and a short model-and-use note naming the actual models exactly as listed in Token Factory and identifying where each live call makes a decision. Create NEBIUS.md with actual model IDs and observed traces after testing; do not claim unrun tests. Confirm cross-challenge submission procedure separately if necessary.
 
 Prioritize actual live inference and uncertainty handling (60/100 points) before visual polish. Keep internal submission target 19:25.
+
+
+## 17. Chrome browser extension — primary frontend (P0)
+
+The extension replaces the planned Streamlit UI. Reuse the existing backend and agent logic; do not duplicate them. This section supersedes earlier frontend and task allocation proposals.
+
+### Architecture and user flow
+
+- Chrome Manifest V3, side panel, vanilla HTML/CSS/JS; no bundler or Web Store publishing required for the hackathon.
+- User clicks the extension icon, then explicitly selects "Scan this page". Use `activeTab` and `scripting` with an appropriate user gesture to read a minimal product context from the current page; if unavailable, offer a manual product query. The side panel is also usable without any page context.
+- Prefer document title, canonical URL, product-specific JSON-LD name/model (when present) and optionally displayed product price. Send only the minimum context required; show the editable query before submitting. Never automatically collect browser history, checkout fields, cookies, account details or whole-page contents.
+- Select buyer profile (private / German VAT-eligible business), optional budget, and confirm the scan. Use chrome.storage.local for non-sensitive preferences only.
+- Backend performs real idealo product search and matching, Tavily investigation, deterministic calculations, and live Nebius-selected action. Render comparison cards, gross versus effective costs, VAT status, risk flags, source links, uncertainty and observable execution trace.
+- User chooses an offer link to open in a new tab; no automatic checkout, order or payment. Validate URLs to allow only HTTP(S). No remote script execution or unsanitized HTML rendering; use textContent for untrusted strings.
+- Development-time Norma check remains separate from the runtime. Include least-privilege browser permissions, secret isolation and unsafe DOM handling in governance review where supported.
+
+### Minimal API contract (agree first)
+
+`POST /api/scan` on a FastAPI server bound to 127.0.0.1:8000. Request JSON:
+
+```json
+{
+  "query": "Apple MacBook Air M2",
+  "page_url": "https://example.com/product",
+  "buyer_type": "business_vat_eligible",
+  "budget_eur": null
+}
+```
+
+Page URL is optional; remove sensitive query parameters and fragments before transmission. Treat all inputs and page data as untrusted. Do not fetch arbitrary internal URLs; validate public destinations and redirects if fetching is required. Validate buyer type and monetary fields server-side.
+
+Response JSON: `product`, `offers` (section 5 contract), `decision` (action, selected_offer_id or null, reason, evidence_ids), `trace` (actual provider/model ID, tool calls, selected action and status), `mode` (live/replay/fixture), and `warnings`. Return readable errors, preserve partial findings and mark unknown values. Use a single request/response initially with a visible loading state; add incremental progress only if time allows. No simulated live trace.
+
+Use `GET /health` for connectivity. Extension requests originate from the extension context, not arbitrary page scripts; narrowly scope host permissions to the loopback backend. Bind only to loopback, restrict allowed origins to the development extension ID and implement a local session token if needed to prevent unintended callers triggering paid API requests. Do not put provider credentials in the extension. Keep idealo OAuth, Tavily and Nebius keys on the backend. No permissive wildcard CORS.
+
+### Minimum files and install
+
+`extension/manifest.json`, `background.js`, `sidepanel.html`, `sidepanel.js`, `sidepanel.css`. Use the Chrome sidePanel API with supported Chrome versions; a toolbar action opens the panel. Request only sidePanel, activeTab, scripting, storage as needed and narrowly scoped localhost host permissions. Page extraction can be an injected function via scripting; no persistent all-sites content script.
+
+Start backend using `uvicorn backend.main:app --host 127.0.0.1 --port 8000` once implemented. Open `chrome://extensions`, enable Developer mode, select Load unpacked and choose `extension/`. Document reproducible installation and startup steps in README. Judge should be able to open the runnable prototype or see a live demo. If browser context extraction fails, manual query in the side panel remains the P0 fallback.
+
+### Revised schedule (CET, planning baseline 16:19)
+
+| Time | Engineer A: Backend | Engineer B: Browser UI / governance |
+|---|---|---|
+| 16:19–16:35 | Freeze API contract; verify provider authentication | Manifest, side panel shell; timebox Norma setup |
+| 16:35–17:20 | idealo/Tavily integration, Nebius live action, cost gates | Editable query, profile, explicit context capture, mocked API |
+| 17:20–17:45 | Wire API, errors, real evidence and trace | Real API connection, comparison cards, sources and trace |
+| 17:45–18:10 | Run both cases, fix critical integration issues | Browser demo, actual Norma check evidence if available |
+| 18:10–18:30 | Joint end-to-end testing and demo backup | Joint testing and setup instructions |
+| 18:30–19:00 | Feature freeze; model/use note and submission artifacts | Feature freeze; demo script and screenshots |
+| 19:00–19:25 | Rehearse and submit together | Rehearse and submit together |
+| 19:25–19:45 | Submission buffer; critical fixes only | Submission buffer; critical fixes only |
+
+### Additional acceptance criteria
+
+- [ ] Unpacked extension installs and opens on a shopping page.
+- [ ] User can explicitly capture product context or enter a manual query and correct variant.
+- [ ] Side panel uses the actual backend, with no provider credentials in browser code.
+- [ ] Both buyer profiles, evidence, VAT uncertainty and effective costs render correctly.
+- [ ] Routine and conflicting cases demonstrate actual Nebius-selected actions and trace.
+- [ ] Seller link is user-controlled; permissions are minimal and remote content is rendered safely.
+- [ ] Setup documented; no Web Store publication required.
+- [ ] Existing idealo, Tavily, Nebius and Norma challenge requirements remain in force.
+
+Pitch: "VendorScan is an agentic shopping copilot that protects you from bad deals, hidden fees and unreliable vendors — directly in your browser." Demonstrate the same two stories on a real shopping page with the side panel open. Clearly label fixtures and replay. Prioritize a working live scan over automatic page detection or visual polish.
