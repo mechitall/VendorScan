@@ -1,0 +1,102 @@
+{
+ "_label": "LIVE SNAPSHOT for demo replay. Captured from the idealo MCP and Tavily; not edited.",
+ "captured_at": "2026-11-27T15:20:19+00:00",
+ "query": "RedMagic Astra 2",
+ "variants": [
+  "Redmagic Astra 2 Gaming 512GB silber",
+  "Redmagic Astra 2 Gaming 256GB silber",
+  "Redmagic Astra 2 Gaming 256GB schwarz"
+ ],
+ "product": {
+  "itemType": "PRODUCT",
+  "siteId": 1,
+  "name": "Redmagic Astra 2 Gaming",
+  "nameDelta": "512GB silber",
+  "price": "899,00 €",
+  "imageUrl": "https://cdn.idealo.com/images/product/214218295/de_DE/0/mobil.jpg",
+  "url": "https://www.idealo.de/preisvergleich/OffersOfProduct/214218295_-astra-2-gaming-512gb-silber-redmagic.html",
+  "totalOfferCount": 2
+ },
+ "offers": [
+  {
+   "key": "2e562e0d3d3b6247a11facf1278b8e10",
+   "price": "1.307,98 €",
+   "basePrice": null,
+   "shop": {
+    "shopId": "26895",
+    "merchantId": "82044986",
+    "name": "kaufland.de",
+    "merchantName": "Insta24",
+    "rating": {
+     "count": null,
+     "avg": null
+    },
+    "isMarketplace": true
+   },
+   "payments": [
+    {
+     "costCode": "INV",
+     "name": "Rechnung"
+    },
+    {
+     "costCode": "PP",
+     "name": "PayPal"
+    },
+    {
+     "costCode": "DD",
+     "name": "Lastschrift"
+    },
+    {
+     "costCode": "SUW",
+     "name": "Sofort."
+    },
+    {
+     "costCode": "CBC",
+     "name": "Kreditkarte"
+    },
+    {
+     "costCode": "CIA",
+     "name": "Vorkasse"
+    }
+   ],
+   "showPaymentDisclaimer": false,
+   "delivery": {
+    "deliveryText": "Mi. 02.12.–Do. 03.12.2026",
+    "deliveryStatus": "MEDIUM",
+    "earlyDeliveryDate": "2026-12-02",
+    "lateDeliveryDate": "2026-12-03"
+   },
+   "freeReturnDays": 14,
+   "relocatorUrl": "https://www.idealo.de/relocator/relocate?offerKey=2e562e0d3d3b6247a11facf1278b8e10&categoryId=3747&pos=2&price=1307.98&productid=214218295&sid=26895&type=offer&media=ipc-public-mcp",
+   "minShippingCost": "0,00 €",
+   "hasAlwaysFreeShipping": true,
+   "cheapestTotalPriceOffer": false,
+   "freshness": "2026-11-27T14:17:36.018Z"
+  }
+ ],
+ "restock": {
+  "product_name": "Redmagic Astra 2 Gaming 512GB silber",
+  "normal_price": null,
+  "lowest_current_price": null,
+  "premium": null,
+  "restock_signal": false,
+  "successor_signal": true,
+  "summary": "The sources do not provide specific information about the restock status of the Redmagic Astra 2 Gaming 512GB silber model in the EU. They mention the product's specifications, availability in Korea, and general store information but do not detail any EU-specific restock events or current stock status.",
+  "evidence": [
+   {
+    "field": "successor",
+    "status": "ambiguous",
+    "url": "https://9to5google.com/2026/06/30/redmagic-astra-2-gaming-tablet-china-launch-specs-details",
+    "quote": "Redmagic Astra 2 gaming tablet launches globally on July 17 Rounding things out, Redmagic OS 11.5 runs the show, based on Android 16. There’s no word on software support timelines, but there’s a bunch of AI – woo!\n\nIn China, Redmagic Gaming Tablet 5 Pro starts at 5,299 RMB with 12/256GB, 16/512GB, a",
+    "retrieved_at": "2026-11-27T15:20:19.930634Z"
+   },
+   {
+    "field": "successor",
+    "status": "ambiguous",
+    "url": "https://finance.yahoo.com/news/redmagic-astra-gaming-tablet-arrives-120000013.html",
+    "quote": "a with Snapdragon 8 Elite and 165Hz OLED - 12GB+256GB: ₩799,000\n- 16GB+512GB: ₩999,000\n- Golden Saga model: ₩1,399,000\n\nLaunch Promotion (Jan 6–13, 2026, official store)\n\n- ₩50,000 off all models: ₩749,000 / ₩949,000 / ₩1,349,000\n- Free 80W charger (approx. ₩50,000 value) [...] With USB-C (USB 3.2 G",
+    "retrieved_at": "2026-11-27T15:20:19.930634Z"
+   }
+  ]
+ }
+}

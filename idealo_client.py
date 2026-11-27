@@ -54,24 +54,31 @@ class IdealoClient:
             page = await self.call('get_product_offers', offset=offset,
                                    **self.product_args(product))
             offers.extend(page['offers'])
-            offset = page.get('nextOffset', 0)
-            if not offset:
+            offset = page.get('nextOffset') or 0
+            if offset <= 0:  # idealo marks the last page with 0, -1 or no nextOffset
+                offset = 0
                 break
         return {'offers': offers, 'nextOffset': offset, 'message': page.get('message')}
 
 
 @asynccontextmanager
 async def connect(token=None, country='DE'):
+    """Connect to idealo. Uses IDEALO_ACCESS_TOKEN if set, else browser OAuth (cached)."""
+    import httpx
     from mcp import ClientSession
-    from mcp.client.streamable_http import streamablehttp_client
+    from mcp.client.streamable_http import streamable_http_client
 
     token = token or os.environ.get('IDEALO_ACCESS_TOKEN')
-    if not token:
-        raise RuntimeError('Set IDEALO_ACCESS_TOKEN to a valid idealo OAuth access token; see IDEALO.md')
-    async with streamablehttp_client(URL, headers={'Authorization': f'Bearer {token}'}) as (read, write, _):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-            yield IdealoClient(session, country)
+    if token:
+        http = httpx.AsyncClient(headers={'Authorization': f'Bearer {token}'}, timeout=30)
+    else:
+        from vendorscan.idealo_auth import oauth_provider
+        http = httpx.AsyncClient(auth=oauth_provider(), timeout=30)
+    async with http:
+        async with streamable_http_client(URL, http_client=http) as (read, write, _):
+            async with ClientSession(read, write) as session:
+                await session.initialize()
+                yield IdealoClient(session, country)
 
 
 async def smoke(query, index):
