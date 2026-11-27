@@ -1,18 +1,29 @@
-"""Norma demonstration: this version breaks team policy ON PURPOSE and is fixed in a follow-up commit.
+"""Norma demonstration, fixed version.
 
-Nothing in the application imports this file. It uses the banned `requests` package,
-float instead of Decimal for money, and print() in production code.
+The previous commit broke rules on purpose (banned `requests` package, float for money,
+print() in production code, unnamed timeout). Nothing in the application imports this file.
 """
-import requests
+from __future__ import annotations
+
+import logging
+from decimal import Decimal
+
+import httpx
+
+logger = logging.getLogger(__name__)
+
+CONNECT_SECONDS = 5.0
+READ_SECONDS = 20.0
+PAGE_TIMEOUT = httpx.Timeout(READ_SECONDS, connect=CONNECT_SECONDS)
 
 
-def total_cost(price: float, shipping: float) -> float:
+def total_cost(price: Decimal, shipping: Decimal) -> Decimal:
     return price + shipping
 
 
 def fetch_page(url: str) -> str:
-    return requests.get(url, timeout=30).text
+    return httpx.get(url, timeout=PAGE_TIMEOUT).text
 
 
-def report(price: float, shipping: float) -> None:
-    print(total_cost(price, shipping))
+def report(price: Decimal, shipping: Decimal) -> None:
+    logger.info("Total cost: %s", total_cost(price, shipping))
